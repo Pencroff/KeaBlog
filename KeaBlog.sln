@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeaBlog", "KeaBlog\KeaBlog.csproj", "{7A35C87E-FBA4-4792-A7EB-4F8790FEBA33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeaBLL", "KeaBLL\KeaBLL.csproj", "{6665803D-63D7-4C5A-B75F-FDB29F7ED131}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeaDAL", "KeaDAL\KeaDAL.csproj", "{94D06936-45EF-4589-953B-09B7422D3DF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A35C87E-FBA4-4792-A7EB-4F8790FEBA33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A35C87E-FBA4-4792-A7EB-4F8790FEBA33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A35C87E-FBA4-4792-A7EB-4F8790FEBA33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A35C87E-FBA4-4792-A7EB-4F8790FEBA33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6665803D-63D7-4C5A-B75F-FDB29F7ED131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6665803D-63D7-4C5A-B75F-FDB29F7ED131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6665803D-63D7-4C5A-B75F-FDB29F7ED131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6665803D-63D7-4C5A-B75F-FDB29F7ED131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94D06936-45EF-4589-953B-09B7422D3DF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94D06936-45EF-4589-953B-09B7422D3DF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94D06936-45EF-4589-953B-09B7422D3DF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94D06936-45EF-4589-953B-09B7422D3DF8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
