@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KeaBLL
 {
-    public class Class1
+    public class PostOperations
     {
     }
 }
