@@ -20,6 +20,7 @@
     <CatalogPropertiesFile>Properties\Database.sqlsettings</CatalogPropertiesFile>
     <LoadSqlClrTypes>True</LoadSqlClrTypes>
     <RootNamespace>Database.Kea</RootNamespace>
+    <PreviousProjectVersion>4.0</PreviousProjectVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>.\sql\release\</OutputPath>
@@ -57,6 +58,7 @@
     <Folder Include="Scripts\Post-Deployment" />
     <Folder Include="Data Generation Plans" />
     <Folder Include="Schema Comparisons" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <PropertiesFile Include="Properties\Database.sqlsettings">
@@ -74,5 +76,8 @@
     <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql">
       <SubType>Code</SubType>
     </PostDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
 </Project>
