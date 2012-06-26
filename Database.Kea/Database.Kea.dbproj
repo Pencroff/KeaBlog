@@ -80,4 +80,93 @@
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="KeaDb_log.sqlfile.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="KeaDb.sqlfile.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_EntriesInTags_Tags.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_EntriesInTags_Entries.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_Entries_auth_Users.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_auth_UsersInRoles_Users.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_auth_UsersInRoles_Roles.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Users.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Roles.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_EntriesInTags.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Tags.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Entries.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_auth_UsersInRoles.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="sp_UserRolesGet.proc.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="sp_UserByLoginGet.proc.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="sp_InsertEntries.proc.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
+    <Build Include="auth_Users.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="auth_Roles.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="EntriesInTags.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Tags.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Entries.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="auth_UsersInRoles.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="AutoCreatedLocal.route.sql">
+      <SubType>Code</SubType>
+    </Build>
+  </ItemGroup>
 </Project>

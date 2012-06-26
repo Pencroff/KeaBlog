@@ -10,6 +10,7 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
 
 namespace KeaDAL
 {
@@ -30,5 +31,81 @@ namespace KeaDAL
         public DbSet<auth_Users> auth_Users { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<Tag> Tags { get; set; }
+    
+        public virtual int sp_InsertEntries(string title, string entryUrl, Nullable<System.Guid> authorId, string shortContent, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> created, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription)
+        {
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var entryUrlParameter = entryUrl != null ?
+                new ObjectParameter("entryUrl", entryUrl) :
+                new ObjectParameter("entryUrl", typeof(string));
+    
+            var authorIdParameter = authorId.HasValue ?
+                new ObjectParameter("authorId", authorId) :
+                new ObjectParameter("authorId", typeof(System.Guid));
+    
+            var shortContentParameter = shortContent != null ?
+                new ObjectParameter("shortContent", shortContent) :
+                new ObjectParameter("shortContent", typeof(string));
+    
+            var fullContentParameter = fullContent != null ?
+                new ObjectParameter("fullContent", fullContent) :
+                new ObjectParameter("fullContent", typeof(string));
+    
+            var visibleParameter = visible.HasValue ?
+                new ObjectParameter("visible", visible) :
+                new ObjectParameter("visible", typeof(bool));
+    
+            var createdParameter = created.HasValue ?
+                new ObjectParameter("created", created) :
+                new ObjectParameter("created", typeof(System.DateTime));
+    
+            var modifiedParameter = modified.HasValue ?
+                new ObjectParameter("modified", modified) :
+                new ObjectParameter("modified", typeof(System.DateTime));
+    
+            var seoKeywordsParameter = seoKeywords != null ?
+                new ObjectParameter("seoKeywords", seoKeywords) :
+                new ObjectParameter("seoKeywords", typeof(string));
+    
+            var seoDescriptionParameter = seoDescription != null ?
+                new ObjectParameter("seoDescription", seoDescription) :
+                new ObjectParameter("seoDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertEntries", titleParameter, entryUrlParameter, authorIdParameter, shortContentParameter, fullContentParameter, visibleParameter, createdParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter);
+        }
+    
+        public virtual ObjectResult<string> sp_UserRolesGet(string login)
+        {
+            var loginParameter = login != null ?
+                new ObjectParameter("login", login) :
+                new ObjectParameter("login", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_UserRolesGet", loginParameter);
+        }
+    
+        public virtual ObjectResult<auth_Users> sp_UserByLoginGet(string login)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(auth_Users).Assembly);
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("login", login) :
+                new ObjectParameter("login", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<auth_Users>("sp_UserByLoginGet", loginParameter);
+        }
+    
+        public virtual ObjectResult<auth_Users> sp_UserByLoginGet(string login, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(auth_Users).Assembly);
+    
+            var loginParameter = login != null ?
+                new ObjectParameter("login", login) :
+                new ObjectParameter("login", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<auth_Users>("sp_UserByLoginGet", mergeOption, loginParameter);
+        }
     }
 }
