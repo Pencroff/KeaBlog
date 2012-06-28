@@ -150,6 +150,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\layout.css" />
+    <Content Include="Content\css\screen.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -204,6 +206,50 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\yaml\add-ons\accessible-tabs\jquery.tabs.js" />
+    <Content Include="Content\yaml\add-ons\accessible-tabs\tabs.css" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\external_link.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\hcalendar.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\hcard.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-geo.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hatom.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-haudio.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-add.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-download.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-add.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-download.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hresume.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-rel-tag.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\icon-xfn.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-child.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-me.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-parent.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-small.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-spouse.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart-met.png" />
+    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart.png" />
+    <Content Include="Content\yaml\add-ons\microformats\microformats.css" />
+    <Content Include="Content\yaml\add-ons\syncheight\jquery.syncheight.js" />
+    <Content Include="Content\yaml\core\base.css" />
+    <Content Include="Content\yaml\core\base.min.css" />
+    <Content Include="Content\yaml\core\iehacks.css" />
+    <Content Include="Content\yaml\core\iehacks.min.css" />
+    <Content Include="Content\yaml\core\js\yaml-focusfix.js" />
+    <Content Include="Content\yaml\forms\gray-theme.css" />
+    <Content Include="Content\yaml\navigation\hlist.css" />
+    <Content Include="Content\yaml\navigation\vlist.css" />
+    <Content Include="Content\yaml\print\print.css" />
+    <Content Include="Content\yaml\screen\grid-960-12.css" />
+    <Content Include="Content\yaml\screen\grid-960-16.css" />
+    <Content Include="Content\yaml\screen\screen-FULLPAGE-layout.css" />
+    <Content Include="Content\yaml\screen\screen-PAGE-layout.css" />
+    <Content Include="Content\yaml\screen\typography.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
@@ -259,7 +305,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout_original.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +343,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
