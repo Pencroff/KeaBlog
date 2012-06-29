@@ -26,7 +26,6 @@ namespace KeaBlog
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new string[] { "KeaBlog.Controllers" }
             );
-            //ControllerBuilder.Current.DefaultNamespaces.Add("KeaBlog.Controllers");
         }
     }
 }
