@@ -41,6 +41,10 @@
     <Reference Include="Elmah.Mvc">
       <HintPath>..\packages\Elmah.MVC.2.0.0\lib\net40\Elmah.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MiniProfiler">
       <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
@@ -67,9 +71,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0-rc\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -142,16 +143,66 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EntryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Providers\FormsAuthenticationService.cs" />
+    <Compile Include="Service\Providers\KeaMembershipProvider.cs" />
+    <Compile Include="Service\Providers\KeaMembershipService.cs" />
+    <Compile Include="Service\Providers\KeaRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\layout.css" />
-    <Content Include="Content\css\screen.css" />
+    <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Content\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\less\accordion.less" />
+    <Content Include="Content\less\alerts.less" />
+    <Content Include="Content\less\bootstrap.less" />
+    <Content Include="Content\less\breadcrumbs.less" />
+    <Content Include="Content\less\button-groups.less" />
+    <Content Include="Content\less\buttons.less" />
+    <Content Include="Content\less\carousel.less" />
+    <Content Include="Content\less\close.less" />
+    <Content Include="Content\less\code.less" />
+    <Content Include="Content\less\component-animations.less" />
+    <Content Include="Content\less\dropdowns.less" />
+    <Content Include="Content\less\forms.less" />
+    <Content Include="Content\less\grid.less" />
+    <Content Include="Content\less\hero-unit.less" />
+    <Content Include="Content\less\labels-badges.less" />
+    <Content Include="Content\less\layouts.less" />
+    <Content Include="Content\less\mixins.less" />
+    <Content Include="Content\less\modals.less" />
+    <Content Include="Content\less\navbar.less" />
+    <Content Include="Content\less\navs.less" />
+    <Content Include="Content\less\pager.less" />
+    <Content Include="Content\less\pagination.less" />
+    <Content Include="Content\less\popovers.less" />
+    <Content Include="Content\less\progress-bars.less" />
+    <Content Include="Content\less\reset.less" />
+    <Content Include="Content\less\responsive-1200px-min.less" />
+    <Content Include="Content\less\responsive-767px-max.less" />
+    <Content Include="Content\less\responsive-768px-979px.less" />
+    <Content Include="Content\less\responsive-navbar.less" />
+    <Content Include="Content\less\responsive-utilities.less" />
+    <Content Include="Content\less\responsive.less" />
+    <Content Include="Content\less\scaffolding.less" />
+    <Content Include="Content\less\sprites.less" />
+    <Content Include="Content\less\tables.less" />
+    <Content Include="Content\less\thumbnails.less" />
+    <Content Include="Content\less\tooltip.less" />
+    <Content Include="Content\less\type.less" />
+    <Content Include="Content\less\utilities.less" />
+    <Content Include="Content\less\variables.less" />
+    <Content Include="Content\less\wells.less" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -206,50 +257,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\yaml\add-ons\accessible-tabs\jquery.tabs.js" />
-    <Content Include="Content\yaml\add-ons\accessible-tabs\tabs.css" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\external_link.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\hcalendar.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\hcard.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-geo.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hatom.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-haudio.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-add.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar-download.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcalendar.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-add.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard-download.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hcard.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-hresume.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-rel-tag.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\icon-xfn.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-child.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague-met.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-colleague.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend-met.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-friend.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-me.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-parent.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-small.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-spouse.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart-met.png" />
-    <Content Include="Content\yaml\add-ons\microformats\icons\xfn\xfn-sweetheart.png" />
-    <Content Include="Content\yaml\add-ons\microformats\microformats.css" />
-    <Content Include="Content\yaml\add-ons\syncheight\jquery.syncheight.js" />
-    <Content Include="Content\yaml\core\base.css" />
-    <Content Include="Content\yaml\core\base.min.css" />
-    <Content Include="Content\yaml\core\iehacks.css" />
-    <Content Include="Content\yaml\core\iehacks.min.css" />
-    <Content Include="Content\yaml\core\js\yaml-focusfix.js" />
-    <Content Include="Content\yaml\forms\gray-theme.css" />
-    <Content Include="Content\yaml\navigation\hlist.css" />
-    <Content Include="Content\yaml\navigation\vlist.css" />
-    <Content Include="Content\yaml\print\print.css" />
-    <Content Include="Content\yaml\screen\grid-960-12.css" />
-    <Content Include="Content\yaml\screen\grid-960-16.css" />
-    <Content Include="Content\yaml\screen\screen-FULLPAGE-layout.css" />
-    <Content Include="Content\yaml\screen\screen-PAGE-layout.css" />
-    <Content Include="Content\yaml\screen\typography.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
@@ -266,6 +273,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -345,6 +353,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutBootstrap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayoutBootstrap.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Entry\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Entry\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Entry\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Entry\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Entry\Delete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

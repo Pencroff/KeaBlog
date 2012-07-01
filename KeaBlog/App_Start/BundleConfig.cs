@@ -7,6 +7,14 @@ namespace KeaBlog
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/bootstrap/css/bootstrap.css",
+                                        "~/Content/bootstrap/css/bootstrap-responsive.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/css/fonts").Include("~/Content/css/fonts.css"));
+
+            /////////////////////////////
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.*"));
 

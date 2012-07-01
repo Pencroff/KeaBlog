@@ -1,41 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using KeaBlog.Models;
+using KeaBlog.Service.Providers;
 
 namespace KeaBlog.Controllers
 {
-
-    [Authorize]
     public class AccountController : Controller
     {
 
-        //
-        // GET: /Account/Login
+        // This constructor is used by the MVC framework to instantiate the controller using
+        // the default forms authentication and membership providers.
 
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public AccountController()
+            : this(null, null)
         {
-            ViewBag.ReturnUrl = returnUrl;
+        }
+
+        // This constructor is not used by the MVC framework but is instead provided for ease
+        // of unit testing this type. See the comments at the end of this file for more
+        // information.
+        public AccountController(IFormsAuthentication formsAuth, IMembershipService service)
+        {
+            FormsAuth = formsAuth ?? new FormsAuthenticationService();
+            MembershipService = service ?? new KeaMembershipService();
+        }
+
+        public IFormsAuthentication FormsAuth
+        {
+            get;
+            private set;
+        }
+
+        public IMembershipService MembershipService
+        {
+            get;
+            private set;
+        }
+
+        //
+        // GET: /Account/LogOn
+
+        public ActionResult Login()
+        {
             return View();
         }
 
         //
-        // POST: /Account/Login
+        // POST: /Account/LogOn
 
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
-                if (Membership.ValidateUser(model.UserName, model.Password))
+                if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                    if (Url.IsLocalUrl(returnUrl))
+                    if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
+                        && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
                         return Redirect(returnUrl);
                     }
@@ -59,7 +82,7 @@ namespace KeaBlog.Controllers
 
         public ActionResult LogOff()
         {
-            FormsAuthentication.SignOut();
+            FormsAuth.SignOut();
 
             return RedirectToAction("Index", "Home");
         }
@@ -67,7 +90,6 @@ namespace KeaBlog.Controllers
         //
         // GET: /Account/Register
 
-        [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
@@ -76,7 +98,6 @@ namespace KeaBlog.Controllers
         //
         // POST: /Account/Register
 
-        [AllowAnonymous]
         [HttpPost]
         public ActionResult Register(RegisterModel model)
         {
@@ -84,11 +105,11 @@ namespace KeaBlog.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
+                createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
+                    FormsAuth.SignIn(model.UserName, false /* createPersistentCookie */);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -104,6 +125,7 @@ namespace KeaBlog.Controllers
         //
         // GET: /Account/ChangePassword
 
+        [Authorize]
         public ActionResult ChangePassword()
         {
             return View();
@@ -112,6 +134,7 @@ namespace KeaBlog.Controllers
         //
         // POST: /Account/ChangePassword
 
+        [Authorize]
         [HttpPost]
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
@@ -123,8 +146,8 @@ namespace KeaBlog.Controllers
                 bool changePasswordSucceeded;
                 try
                 {
-                    MembershipUser currentUser = Membership.GetUser(User.Identity.Name, userIsOnline: true);
-                    changePasswordSucceeded = currentUser.ChangePassword(model.OldPassword, model.NewPassword);
+                    changePasswordSucceeded = MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                    
                 }
                 catch (Exception)
                 {
@@ -151,11 +174,6 @@ namespace KeaBlog.Controllers
         public ActionResult ChangePasswordSuccess()
         {
             return View();
-        }
-
-        private IEnumerable<string> GetErrorsFromModelState()
-        {
-            return ModelState.SelectMany(x => x.Value.Errors.Select(error => error.ErrorMessage));
         }
 
         #region Status Codes

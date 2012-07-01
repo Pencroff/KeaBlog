@@ -9,7 +9,17 @@
           <EntitySet Name="auth_Roles" EntityType="KeaContext.Store.auth_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="auth_Users" EntityType="KeaContext.Store.auth_Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="auth_UsersInRoles" EntityType="KeaContext.Store.auth_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Categories" EntityType="KeaContext.Store.Categories" store:Type="Tables" store:Schema="dbo" store:Name="Categories">
+            <DefiningQuery>SELECT 
+      [Categories].[Id] AS [Id], 
+      [Categories].[Name] AS [Name], 
+      [Categories].[Description] AS [Description], 
+      [Categories].[Created] AS [Created], 
+      [Categories].[Modified] AS [Modified]
+      FROM [dbo].[Categories] AS [Categories]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Entries" EntityType="KeaContext.Store.Entries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EntriesInCategories" EntityType="KeaContext.Store.EntriesInCategories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EntriesInTags" EntityType="KeaContext.Store.EntriesInTags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tags" EntityType="KeaContext.Store.Tags" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_auth_UsersInRoles_Roles" Association="KeaContext.Store.FK_auth_UsersInRoles_Roles">
@@ -61,6 +71,22 @@
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'KeaDb.dbo.Categories' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Created" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Modified" Type="datetime" />
+        </EntityType>
         <EntityType Name="Entries">
           <Key>
             <PropertyRef Name="Id" />
@@ -76,6 +102,14 @@
           <Property Name="Modified" Type="datetime" />
           <Property Name="SEOKeywords" Type="nvarchar" MaxLength="128" />
           <Property Name="SEODescription" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="EntriesInCategories">
+          <Key>
+            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="EntryId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="EntriesInTags">
           <Key>
@@ -177,64 +211,31 @@
     <edmx:ConceptualModels>
       <Schema Namespace="KeaDAL" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="KeaContext" annotation:LazyLoadingEnabled="false">
-          <EntitySet Name="auth_Roles" EntityType="KeaDAL.auth_Roles" />
-          <EntitySet Name="auth_Users" EntityType="KeaDAL.auth_Users" />
           <EntitySet Name="Entries" EntityType="KeaDAL.Entry" />
           <EntitySet Name="Tags" EntityType="KeaDAL.Tag" />
-          <AssociationSet Name="auth_UsersInRoles" Association="KeaDAL.auth_UsersInRoles">
-            <End Role="auth_Roles" EntitySet="auth_Roles" />
-            <End Role="auth_Users" EntitySet="auth_Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Entries_auth_Users" Association="KeaDAL.FK_Entries_auth_Users">
-            <End Role="auth_Users" EntitySet="auth_Users" />
-            <End Role="Entry" EntitySet="Entries" />
-          </AssociationSet>
           <AssociationSet Name="EntriesInTags" Association="KeaDAL.EntriesInTags">
             <End Role="Entry" EntitySet="Entries" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
-          <FunctionImport Name="sp_InsertEntries">
-            <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="entryUrl" Mode="In" Type="String" />
-            <Parameter Name="authorId" Mode="In" Type="Guid" />
-            <Parameter Name="shortContent" Mode="In" Type="String" />
-            <Parameter Name="fullContent" Mode="In" Type="String" />
-            <Parameter Name="visible" Mode="In" Type="Boolean" />
-            <Parameter Name="created" Mode="In" Type="DateTime" />
-            <Parameter Name="modified" Mode="In" Type="DateTime" />
-            <Parameter Name="seoKeywords" Mode="In" Type="String" />
-            <Parameter Name="seoDescription" Mode="In" Type="String" />
+          <FunctionImport Name="UserRolesGet" ReturnType="Collection(String)">
+          <Parameter Name="login" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_UserRolesGet" ReturnType="Collection(String)">
-            <Parameter Name="login" Mode="In" Type="String" />
+          <FunctionImport Name="UserByLoginGet" EntitySet="Auth_User" ReturnType="Collection(KeaDAL.Auth_User)">
+          <Parameter Name="login" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_UserByLoginGet" EntitySet="auth_Users" ReturnType="Collection(KeaDAL.auth_Users)">
-            <Parameter Name="login" Mode="In" Type="String" />
-          </FunctionImport>
+          <EntitySet Name="Categories" EntityType="KeaDAL.Category" />
+          <EntitySet Name="EntriesInCategories" EntityType="KeaDAL.EntriesInCategory" />
+          <EntitySet Name="Auth_Role" EntityType="KeaDAL.Auth_Role" />
+          <EntitySet Name="Auth_User" EntityType="KeaDAL.Auth_User" />
+          <AssociationSet Name="FK_Entries_auth_Users" Association="KeaDAL.FK_Entries_auth_Users">
+            <End Role="auth_Users" EntitySet="Auth_User" />
+            <End Role="Entry" EntitySet="Entries" />
+          </AssociationSet>
+          <AssociationSet Name="auth_UsersInRoles" Association="KeaDAL.auth_UsersInRoles">
+            <End Role="auth_Roles" EntitySet="Auth_Role" />
+            <End Role="auth_Users" EntitySet="Auth_User" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="auth_Roles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="auth_Users" Relationship="KeaDAL.auth_UsersInRoles" FromRole="auth_Roles" ToRole="auth_Users" />
-        </EntityType>
-        <EntityType Name="auth_Users">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Login" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Name="PassHash" Type="String" Nullable="false" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Name="PassSalt" Type="String" Nullable="false" MaxLength="16" Unicode="true" FixedLength="false" />
-          <Property Name="Name" Type="String" MaxLength="64" Unicode="true" FixedLength="false" />
-          <Property Name="Phone" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="128" Unicode="true" FixedLength="true" />
-          <Property Name="Address" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="auth_Roles" Relationship="KeaDAL.auth_UsersInRoles" FromRole="auth_Users" ToRole="auth_Roles" />
-          <NavigationProperty Name="Entries" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="auth_Users" ToRole="Entry" />
-        </EntityType>
         <EntityType Name="Entry">
           <Key>
             <PropertyRef Name="Id" />
@@ -250,8 +251,8 @@
           <Property Name="Modified" Type="DateTime" />
           <Property Name="SEOKeywords" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
           <Property Name="SEODescription" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
-          <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="Entry" ToRole="auth_Users" />
           <NavigationProperty Name="Tags" Relationship="KeaDAL.EntriesInTags" FromRole="Entry" ToRole="Tag" />
+          <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="Entry" ToRole="auth_Users" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -263,12 +264,56 @@
           <Property Name="Modified" Type="DateTime" />
           <NavigationProperty Name="Entries" Relationship="KeaDAL.EntriesInTags" FromRole="Tag" ToRole="Entry" />
         </EntityType>
-        <Association Name="auth_UsersInRoles">
-          <End Role="auth_Roles" Type="KeaDAL.auth_Roles" Multiplicity="*" />
-          <End Role="auth_Users" Type="KeaDAL.auth_Users" Multiplicity="*" />
+        <Association Name="EntriesInTags">
+          <End Type="KeaDAL.Entry" Role="Entry" Multiplicity="*" />
+          <End Type="KeaDAL.Tag" Role="Tag" Multiplicity="*" />
         </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Description" />
+            <PropertyRef Name="Created" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Created" Nullable="false" />
+          <Property Type="DateTime" Name="Modified" />
+        </EntityType>
+        <EntityType Name="EntriesInCategory">
+          <Key>
+            <PropertyRef Name="EntryId" />
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Type="Int32" Name="EntryId" Nullable="false" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Auth_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Auth_User" Relationship="KeaDAL.auth_UsersInRoles" FromRole="auth_Roles" ToRole="auth_Users" />
+        </EntityType>
+        <EntityType Name="Auth_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PassHash" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PassSalt" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Name" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="128" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Address" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Entries" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="auth_Users" ToRole="Entry" />
+          <NavigationProperty Name="Auth_Role" Relationship="KeaDAL.auth_UsersInRoles" FromRole="auth_Users" ToRole="auth_Roles" />
+        </EntityType>
         <Association Name="FK_Entries_auth_Users">
-          <End Type="KeaDAL.auth_Users" Role="auth_Users" Multiplicity="0..1" />
+          <End Type="KeaDAL.Auth_User" Role="auth_Users" Multiplicity="0..1" />
           <End Type="KeaDAL.Entry" Role="Entry" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="auth_Users">
@@ -279,9 +324,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EntriesInTags">
-          <End Type="KeaDAL.Entry" Role="Entry" Multiplicity="*" />
-          <End Type="KeaDAL.Tag" Role="Tag" Multiplicity="*" />
+        <Association Name="auth_UsersInRoles">
+          <End Type="KeaDAL.Auth_Role" Role="auth_Roles" Multiplicity="*" />
+          <End Type="KeaDAL.Auth_User" Role="auth_Users" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -289,28 +334,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="KeaContextStoreContainer" CdmEntityContainer="KeaContext">
-          <EntitySetMapping Name="auth_Roles">
-            <EntityTypeMapping TypeName="KeaDAL.auth_Roles">
-              <MappingFragment StoreEntitySet="auth_Roles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="auth_Users">
-            <EntityTypeMapping TypeName="KeaDAL.auth_Users">
-              <MappingFragment StoreEntitySet="auth_Users">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="PassHash" ColumnName="PassHash" />
-                <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Entries">
             <EntityTypeMapping TypeName="KeaDAL.Entry">
               <MappingFragment StoreEntitySet="Entries">
@@ -338,14 +361,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="auth_UsersInRoles" TypeName="KeaDAL.auth_UsersInRoles" StoreEntitySet="auth_UsersInRoles">
-            <EndProperty Name="auth_Roles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="auth_Users">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <AssociationSetMapping Name="EntriesInTags" TypeName="KeaDAL.EntriesInTags" StoreEntitySet="EntriesInTags">
             <EndProperty Name="Tag">
               <ScalarProperty Name="Id" ColumnName="TagId" />
@@ -354,9 +369,57 @@
               <ScalarProperty Name="Id" ColumnName="EntryId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_InsertEntries" FunctionName="KeaContext.Store.sp_InsertEntries" />
-          <FunctionImportMapping FunctionImportName="sp_UserRolesGet" FunctionName="KeaContext.Store.sp_UserRolesGet" />
-          <FunctionImportMapping FunctionImportName="sp_UserByLoginGet" FunctionName="KeaContext.Store.sp_UserByLoginGet" />
+          <FunctionImportMapping FunctionImportName="UserRolesGet" FunctionName="KeaContext.Store.sp_UserRolesGet" />
+          <FunctionImportMapping FunctionImportName="UserByLoginGet" FunctionName="KeaContext.Store.sp_UserByLoginGet" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KeaDAL.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntriesInCategories">
+            <EntityTypeMapping TypeName="KeaDAL.EntriesInCategory">
+              <MappingFragment StoreEntitySet="EntriesInCategories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="EntryId" ColumnName="EntryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auth_Role">
+            <EntityTypeMapping TypeName="KeaDAL.Auth_Role">
+              <MappingFragment StoreEntitySet="auth_Roles">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auth_User">
+            <EntityTypeMapping TypeName="KeaDAL.Auth_User">
+              <MappingFragment StoreEntitySet="auth_Users">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PassSalt" ColumnName="PassSalt" />
+                <ScalarProperty Name="PassHash" ColumnName="PassHash" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="auth_UsersInRoles" TypeName="KeaDAL.auth_UsersInRoles" StoreEntitySet="auth_UsersInRoles">
+            <EndProperty Name="auth_Users">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="auth_Roles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -379,21 +442,23 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="KeaModel">
-        <EntityTypeShape EntityType="KeaDAL.auth_Roles" Width="1.5" PointX="0.75" PointY="1.5" Height="1.4033821614583331" IsExpanded="true" />
-        <EntityTypeShape EntityType="KeaDAL.auth_Users" Width="1.5" PointX="3" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="KeaDAL.Entry" Width="1.5" PointX="5.875" PointY="3" Height="3.5186979166666656" IsExpanded="true" />
         <EntityTypeShape EntityType="KeaDAL.Tag" Width="1.5" PointX="8.75" PointY="2.875" Height="1.9802864583333335" IsExpanded="true" />
-        <AssociationConnector Association="KeaDAL.auth_UsersInRoles" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="2.2016910807291667" />
-          <ConnectorPoint PointX="3" PointY="2.2016910807291667" />
-        </AssociationConnector>
-        <AssociationConnector Association="KeaDAL.FK_Entries_auth_Users" >
-          <ConnectorPoint PointX="4.5" PointY="3.4708968098958328" />
-          <ConnectorPoint PointX="5.875" PointY="3.4708968098958328" />
-        </AssociationConnector>
         <AssociationConnector Association="KeaDAL.EntriesInTags" >
           <ConnectorPoint PointX="7.375" PointY="3.9276432291666667" />
           <ConnectorPoint PointX="8.75" PointY="3.9276432291666667" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="KeaDAL.Category" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="KeaDAL.EntriesInCategory" Width="1.5" PointX="2.75" PointY="4.75" Height="1.4033821614583317" />
+        <EntityTypeShape EntityType="KeaDAL.Auth_Role" Width="1.5" PointX="1.375" PointY="1.375" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="KeaDAL.Auth_User" Width="1.5" PointX="3.625" PointY="0.75" Height="2.9417936197916674" />
+        <AssociationConnector Association="KeaDAL.FK_Entries_auth_Users" >
+          <ConnectorPoint PointX="5.125" PointY="3.3458968098958337" />
+          <ConnectorPoint PointX="5.875" PointY="3.3458968098958337" />
+        </AssociationConnector>
+        <AssociationConnector Association="KeaDAL.auth_UsersInRoles" >
+          <ConnectorPoint PointX="2.875" PointY="2.172841796875" />
+          <ConnectorPoint PointX="3.625" PointY="2.172841796875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

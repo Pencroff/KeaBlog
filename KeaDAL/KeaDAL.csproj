@@ -47,10 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="auth_Roles.cs">
+    <Compile Include="Auth_Role.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="auth_Users.cs">
+    <Compile Include="Auth_User.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntriesInCategory.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Entry.cs">

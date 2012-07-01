@@ -1,0 +1,85 @@
+﻿@model KeaDAL.Entry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Entry</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EntryUrl)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EntryUrl)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.auth_Users.Login)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.auth_Users.Login)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShortContent)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShortContent)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FullContent)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FullContent)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Visible)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Visible)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Created)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Created)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Modified)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Modified)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SEOKeywords)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SEOKeywords)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SEODescription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SEODescription)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

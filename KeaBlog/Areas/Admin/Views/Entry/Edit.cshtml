@@ -1,0 +1,109 @@
+﻿@model KeaDAL.Entry
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Entry</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EntryUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EntryUrl)
+            @Html.ValidationMessageFor(model => model.EntryUrl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuthorId, "auth_Users")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AuthorId", String.Empty)
+            @Html.ValidationMessageFor(model => model.AuthorId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ShortContent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ShortContent)
+            @Html.ValidationMessageFor(model => model.ShortContent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FullContent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FullContent)
+            @Html.ValidationMessageFor(model => model.FullContent)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Visible)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Visible)
+            @Html.ValidationMessageFor(model => model.Visible)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Created)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Created)
+            @Html.ValidationMessageFor(model => model.Created)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Modified)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Modified)
+            @Html.ValidationMessageFor(model => model.Modified)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SEOKeywords)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SEOKeywords)
+            @Html.ValidationMessageFor(model => model.SEOKeywords)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SEODescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SEODescription)
+            @Html.ValidationMessageFor(model => model.SEODescription)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
