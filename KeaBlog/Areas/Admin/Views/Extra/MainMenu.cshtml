@@ -1,0 +1,17 @@
+﻿@model ServiceLib.Interfaces.IMenu<string>
+
+<ul class="nav">
+    @foreach (var element in Model.Items)
+    {
+        if (element == Model.ActiveItem)
+        {
+            <li class="active"><a href="#">@element</a></li>
+        }
+        else
+        {
+            <li><a href="#">@element</a></li>
+        }
+    }
+    
+    
+</ul>

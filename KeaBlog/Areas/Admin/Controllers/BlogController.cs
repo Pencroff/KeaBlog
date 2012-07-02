@@ -6,7 +6,7 @@ using KeaDAL;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {
-    public class EntryController : Controller
+    public class BlogController : Controller
     {
         private KeaContext db = new KeaContext();
 

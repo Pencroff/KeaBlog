@@ -4,7 +4,7 @@
 <head>
     <title>@ViewBag.Title</title>
     <!-- Mobile viewport optimisation -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- (en) Add your meta data here -->
     @Styles.Render("~/Content/css/fonts")
     @Styles.Render("~/Content/css/bootstrap")
@@ -46,11 +46,8 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container"> 
-                    <a class="brand" href="#">Kea Blog </br><span class="badge">Admin panel</span></a>
-                    <ul class="nav">
-                        <li class="active"><a href="#">Blog</a></li>
-                        <li><a href="#">Service</a></li>
-                    </ul>
+                    <a class="brand" href="#">Kea Blog <br /><span class="badge">Admin panel</span></a>
+                    @{ Html.RenderAction("MainMenu", "Extra"); }
                 </div>
             </div>
         </div>
