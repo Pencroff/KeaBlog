@@ -13,8 +13,14 @@
         Blog,
         Service,
         Project,
-        Settings
+        Setting
     }
 
-
+    public class MenuItem
+    {
+        public string Item { get; set; }
+        public string Controller { get; set; }
+        public string Action { get; set; }
+        public string Display { get; set; }
+    }
 }

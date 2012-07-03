@@ -4,7 +4,7 @@ using System.Web.Security;
 using KeaBlog.Models;
 using KeaBlog.Service.Providers;
 
-namespace KeaBlog.Controllers
+namespace KeaBlog.Areas.Admin.Controllers
 {
     public class AccountController : Controller
     {
