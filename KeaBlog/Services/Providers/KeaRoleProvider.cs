@@ -2,7 +2,7 @@
 using System.Web.Security;
 using KeaBLL;
 
-namespace KeaBlog.Service.Providers
+namespace KeaBlog.Services.Providers
 {
     public class KeaRoleProvider : RoleProvider
     {

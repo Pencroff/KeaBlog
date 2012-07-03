@@ -47,11 +47,8 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container"> 
-                    <a class="brand" href="#">Kea Blog</a>
-                    <ul class="nav">
-                        <li class="active"><a href="#">Blog</a></li>
-                        <li><a href="#">Service</a></li>
-                    </ul>
+                    <a class="brand" href='@Url.Action("Index", "Home")'>Kea Blog</a>
+                    @{ Html.RenderAction("MainMenu", "Extra"); }
                 </div>
             </div>
         </div>

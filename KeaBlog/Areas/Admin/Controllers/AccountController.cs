@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using KeaBlog.Models;
-using KeaBlog.Service.Providers;
+using KeaBlog.Services.Providers;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {

@@ -5,7 +5,7 @@ using KeaBLL;
 using KeaDAL;
 using ServiceLib;
 
-namespace KeaBlog.Service.Providers
+namespace KeaBlog.Services.Providers
 {
     public class KeaMembershipProvider : MembershipProvider
     {

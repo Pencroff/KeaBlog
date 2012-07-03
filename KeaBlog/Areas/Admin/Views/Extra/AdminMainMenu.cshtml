@@ -1,0 +1,16 @@
+﻿@model ServiceLib.Interfaces.IMenu<KeaBLL.General.MenuItem>
+
+<ul class="nav">
+    @foreach (var element in Model.Items)
+    {
+        if (element == Model.ActiveItem)
+        {
+            <li class="active"><a href="#">@element.Display</a></li>
+        }
+        else
+        {
+            <li><a href='@Url.Action(element.Action, element.Controller)'>@element.Display</a></li>
+        }
+    }
+    
+</ul>

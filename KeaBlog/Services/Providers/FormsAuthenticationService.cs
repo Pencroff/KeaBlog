@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Security;
 
-namespace KeaBlog.Service.Providers
+namespace KeaBlog.Services.Providers
 {
     public interface IFormsAuthentication
     {
