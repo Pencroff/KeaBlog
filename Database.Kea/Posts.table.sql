@@ -1,4 +1,4 @@
-﻿/*CREATE TABLE [dbo].[Entries] (
+﻿CREATE TABLE [dbo].[Posts] (
     [Id]             INT              IDENTITY (1, 1) NOT NULL,
     [Title]          NVARCHAR (256)   NOT NULL,
     [EntryUrl]       NVARCHAR (256)   NOT NULL,
@@ -10,5 +10,5 @@
     [Modified]       DATETIME         NULL,
     [SEOKeywords]    NVARCHAR (128)   NULL,
     [SEODescription] NVARCHAR (256)   NULL
-);*/
+);
 

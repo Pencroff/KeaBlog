@@ -1,5 +1,5 @@
-﻿CREATE TABLE [dbo].[EntriesInTags] (
+﻿/*CREATE TABLE [dbo].[EntriesInTags] (
     [EntryId] INT NOT NULL,
     [TagId]   INT NOT NULL
-);
+);*/
 

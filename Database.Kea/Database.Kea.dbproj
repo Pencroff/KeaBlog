@@ -168,5 +168,52 @@
     <Build Include="AutoCreatedLocal.route.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="FK_EntriesInTags_Tags_1.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_EntriesInTags_Entries_1.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_PostsInCategories_Categories.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_PostsInCategories_PostsInCategories.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_Entries_auth_Users_1.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_EntriesInTags_1.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_EntriesInCategories.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Entries_1.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PK_Categories.pkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="PostsInTags.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="PostsInCategories.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Posts.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
+    <Build Include="Categories.table.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>On</QuotedIdentifier>
+    </Build>
   </ItemGroup>
 </Project>
