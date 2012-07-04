@@ -47,10 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth_Roles.cs">
+    <Compile Include="Auth_Role.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Auth_Users.cs">
+    <Compile Include="Auth_User.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
@@ -72,6 +72,9 @@
       <DependentUpon>KeaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Post.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PostAuthor.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

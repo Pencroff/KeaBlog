@@ -12,12 +12,12 @@ using System.Collections.Generic;
 
 namespace KeaDAL
 {
-    public partial class Auth_Users
+    public partial class Auth_User
     {
-        public Auth_Users()
+        public Auth_User()
         {
-            this.Posts = new HashSet<Post>();
-            this.Auth_Roles = new HashSet<Auth_Roles>();
+            this.Post = new HashSet<Post>();
+            this.Auth_Role = new HashSet<Auth_Role>();
         }
     
         public System.Guid Id { get; set; }
@@ -29,8 +29,8 @@ namespace KeaDAL
         public string Email { get; set; }
         public string Address { get; set; }
     
-        public virtual ICollection<Post> Posts { get; set; }
-        public virtual ICollection<Auth_Roles> Auth_Roles { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
+        public virtual ICollection<Auth_Role> Auth_Role { get; set; }
     }
     
 }

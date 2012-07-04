@@ -1,4 +1,4 @@
-﻿/*CREATE PROCEDURE [dbo].[sp_InsertEntries](
+﻿CREATE PROCEDURE [dbo].[sp_PostInsert](
     @title nvarchar(256),
     @entryUrl nvarchar(256),
     @authorId UNIQUEIDENTIFIER,
@@ -39,4 +39,4 @@ BEGIN
 		@seoKeywords /*{ SEOKeywords }*/,
 		@seoDescription /*{ SEODescription }*/
 	)    
-END*/
+END

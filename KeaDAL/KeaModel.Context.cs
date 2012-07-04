@@ -27,32 +27,32 @@ namespace KeaDAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Auth_Roles> Auth_Roles1 { get; set; }
-        public DbSet<Auth_Users> Auth_Users1 { get; set; }
+        public DbSet<Auth_Role> Auth_Role { get; set; }
+        public DbSet<Auth_User> Auth_User { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
     
-        public virtual ObjectResult<Auth_Users> UserByLoginGet(string login)
+        public virtual ObjectResult<Auth_User> UserByLoginGet(string login)
         {
-            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Auth_Users).Assembly);
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Auth_User).Assembly);
     
             var loginParameter = login != null ?
                 new ObjectParameter("login", login) :
                 new ObjectParameter("login", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Auth_Users>("UserByLoginGet", loginParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Auth_User>("UserByLoginGet", loginParameter);
         }
     
-        public virtual ObjectResult<Auth_Users> UserByLoginGet(string login, MergeOption mergeOption)
+        public virtual ObjectResult<Auth_User> UserByLoginGet(string login, MergeOption mergeOption)
         {
-            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Auth_Users).Assembly);
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Auth_User).Assembly);
     
             var loginParameter = login != null ?
                 new ObjectParameter("login", login) :
                 new ObjectParameter("login", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Auth_Users>("UserByLoginGet", mergeOption, loginParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Auth_User>("UserByLoginGet", mergeOption, loginParameter);
         }
     
         public virtual ObjectResult<string> UserRolesGet(string login)
@@ -62,6 +62,17 @@ namespace KeaDAL
                 new ObjectParameter("login", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UserRolesGet", loginParameter);
+        }
+    
+        public virtual ObjectResult<PostAuthor> PostAuthorByIdGet(Nullable<int> postId)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostAuthor).Assembly);
+    
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostAuthor>("PostAuthorByIdGet", postIdParameter);
         }
     }
 }

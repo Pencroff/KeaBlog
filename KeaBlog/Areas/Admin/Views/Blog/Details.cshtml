@@ -1,4 +1,4 @@
-﻿@model KeaDAL.Entry
+﻿@model KeaBlog.Areas.Admin.Models.PostAuthorViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -24,10 +24,10 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.auth_Users.Login)
+         @Html.DisplayNameFor(model => model.AuthorName)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.auth_Users.Login)
+        @Html.DisplayFor(model => model.AuthorName)
     </div>
 
     <div class="display-label">

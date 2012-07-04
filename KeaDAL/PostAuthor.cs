@@ -12,18 +12,13 @@ using System.Collections.Generic;
 
 namespace KeaDAL
 {
-    public partial class Post
+    public partial class PostAuthor
     {
-        public Post()
-        {
-            this.Categories = new HashSet<Category>();
-            this.Tags = new HashSet<Tag>();
-        }
-    
         public int Id { get; set; }
         public string Title { get; set; }
         public string EntryUrl { get; set; }
         public Nullable<System.Guid> AuthorId { get; set; }
+        public string AuthorName { get; set; }
         public string ShortContent { get; set; }
         public string FullContent { get; set; }
         public bool Visible { get; set; }
@@ -31,10 +26,6 @@ namespace KeaDAL
         public Nullable<System.DateTime> Modified { get; set; }
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
-    
-        public virtual Auth_User auth_Users { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
     }
     
 }
