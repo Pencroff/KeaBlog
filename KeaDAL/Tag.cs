@@ -16,7 +16,7 @@ namespace KeaDAL
     {
         public Tag()
         {
-            this.Entries = new HashSet<Entry>();
+            this.Posts = new HashSet<Post>();
         }
     
         public int Id { get; set; }
@@ -24,7 +24,7 @@ namespace KeaDAL
         public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
     
-        public virtual ICollection<Entry> Entries { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
     
 }

@@ -12,17 +12,17 @@ using System.Collections.Generic;
 
 namespace KeaDAL
 {
-    public partial class Auth_Role
+    public partial class Auth_Roles
     {
-        public Auth_Role()
+        public Auth_Roles()
         {
-            this.Auth_User = new HashSet<Auth_User>();
+            this.Auth_Users = new HashSet<Auth_Users>();
         }
     
         public int Id { get; set; }
         public string Role { get; set; }
     
-        public virtual ICollection<Auth_User> Auth_User { get; set; }
+        public virtual ICollection<Auth_Users> Auth_Users { get; set; }
     }
     
 }

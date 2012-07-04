@@ -12,10 +12,11 @@ using System.Collections.Generic;
 
 namespace KeaDAL
 {
-    public partial class Entry
+    public partial class Post
     {
-        public Entry()
+        public Post()
         {
+            this.Categories = new HashSet<Category>();
             this.Tags = new HashSet<Tag>();
         }
     
@@ -31,8 +32,9 @@ namespace KeaDAL
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
     
+        public virtual Auth_Users auth_Users { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
-        public virtual Auth_User auth_Users { get; set; }
     }
     
 }
