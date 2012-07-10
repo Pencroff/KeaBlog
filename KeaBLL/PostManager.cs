@@ -17,5 +17,15 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static List<PostAuthor> GetPostAutorListByPage(int startPageIndex, int endPageIndex)
+        {
+            List<PostAuthor> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.PostAuthorByPage(startPageIndex, endPageIndex).ToList();
+            }
+            return result;
+        }
     }
 }

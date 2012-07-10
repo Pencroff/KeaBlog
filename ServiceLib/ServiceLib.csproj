@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasicModel.cs" />
+    <Compile Include="CalculateOperations.cs" />
     <Compile Include="General\Pair.cs" />
     <Compile Include="Interfaces\IMenu.cs" />
     <Compile Include="Interfaces\IPagedModel.cs" />
