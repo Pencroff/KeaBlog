@@ -20,10 +20,10 @@ namespace KeaBLL
 
         public static List<PostAuthor> GetPostAutorListByPage(int startPageIndex, int endPageIndex)
         {
-            List<PostAuthor> result = null;
+            List<PostAuthor> result = new List<PostAuthor>();
             using (KeaContext context = new KeaContext())
             {
-                result = context.PostAuthorByPage(startPageIndex, endPageIndex).ToList();
+                //result = context.PostAuthorByPage(startPageIndex, endPageIndex).ToList();
             }
             return result;
         }
