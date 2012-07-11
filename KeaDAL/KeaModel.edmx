@@ -206,7 +206,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="sp_PostAuthorByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="sp_PostByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_PostDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -274,8 +274,8 @@
           <FunctionImport Name="UserRolesGet" ReturnType="Collection(String)">
           <Parameter Name="login" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="PostAuthorByIdGet" ReturnType="Collection(KeaDAL.PostAuthor)">
-            <Parameter Name="postId" Mode="In" Type="Int32" />
+          <FunctionImport Name="PostByIdGet" ReturnType="Collection(KeaDAL.PostFull)">
+          <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -365,7 +365,7 @@
           <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
           <End Type="KeaDAL.Tag" Role="Tag" Multiplicity="*" />
         </Association>
-        <ComplexType Name="PostAuthor">
+        <ComplexType Name="PostFull">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" />
@@ -471,9 +471,9 @@
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="UserByLoginGet" FunctionName="KeaContext.Store.sp_UserByLoginGet" />
           <FunctionImportMapping FunctionImportName="UserRolesGet" FunctionName="KeaContext.Store.sp_UserRolesGet" />
-          <FunctionImportMapping FunctionImportName="PostAuthorByIdGet" FunctionName="KeaContext.Store.sp_PostAuthorByIdGet">
+          <FunctionImportMapping FunctionImportName="PostByIdGet" FunctionName="KeaContext.Store.sp_PostByIdGet" >
             <ResultMapping>
-              <ComplexTypeMapping TypeName="KeaDAL.PostAuthor">
+              <ComplexTypeMapping TypeName="KeaDAL.PostFull">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
