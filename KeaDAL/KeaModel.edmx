@@ -224,6 +224,11 @@
           <Parameter Name="seoKeywords" Type="nvarchar" Mode="In" />
           <Parameter Name="seoDescription" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_PostListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="Count" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_PostUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
@@ -276,6 +281,11 @@
           </FunctionImport>
           <FunctionImport Name="PostByIdGet" ReturnType="Collection(KeaDAL.PostFull)">
           <Parameter Name="postId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PostListByPageGet" ReturnType="Collection(KeaDAL.PostShort)">
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="Count" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -379,6 +389,15 @@
           <Property Type="String" Name="SEOKeywords" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="SEODescription" Nullable="true" MaxLength="256" />
         </ComplexType>
+        <ComplexType Name="PostShort">
+          <Property Type="Int32" Name="Id" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="AuthorName" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="ShortContent" Nullable="false" MaxLength="1024" />
+          <Property Type="Boolean" Name="Visible" Nullable="false" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
+          </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -487,6 +506,19 @@
                 <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
                 <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
               </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PostListByPageGet" FunctionName="KeaContext.Store.sp_PostListByPageGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.PostShort">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="ShortContent" ColumnName="ShortContent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
         </EntityContainerMapping>

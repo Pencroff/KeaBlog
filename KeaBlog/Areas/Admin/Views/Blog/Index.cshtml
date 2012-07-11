@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KeaDAL.Post>
+﻿@model IEnumerable<KeaBlog.Areas.Admin.Models.PostViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.EntryUrl)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.auth_Users.Login)
+            @Html.DisplayNameFor(model => model.AuthorName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ShortContent)
@@ -53,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.EntryUrl)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.auth_Users.Login)
+            @Html.DisplayFor(modelItem => item.AuthorName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ShortContent)

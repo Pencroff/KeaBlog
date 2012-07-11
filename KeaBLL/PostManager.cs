@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using KeaDAL;
@@ -8,26 +9,24 @@ namespace KeaBLL
 {
     public static class PostManager
     {
-        public static PostAuthor GetPostById(int postId)
+        public static PostFull GetPostById(int postId)
         {
-            PostAuthor result = null;
+            PostFull result = null;
             using (KeaContext context = new KeaContext())
             {
-                result = context.PostAuthorByIdGet(postId).SingleOrDefault();
+                result = context.PostByIdGet(postId).SingleOrDefault();
             }
             return result;
         }
 
-        public static List<PostAuthor> GetPostListByPage(int startPageIndex, int endPageIndex, out int postCount)
+        public static List<PostShort> GetPostListByPage(int startIndex, int endIndex, out int postCount)
         {
-            List<PostAuthor> result = new List<PostAuthor>();
+            List<PostShort> result = null;
             using (KeaContext context = new KeaContext())
             {
-                postCount = 0;
-                //result = context.PostAuthorByPage(startPageIndex, endPageIndex).ToList();
-                //ObjectParameter cnt = new ObjectParameter("count", typeof(int));
-                //result = context.SearchAuthorShortPagingGet(query, startIndex, endIndex, cnt).ToList();
-                //authorCount = Convert.ToInt32(cnt.Value);
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.PostListByPageGet(startIndex, endIndex, cnt).ToList();
+                postCount = Convert.ToInt32(cnt.Value);
             }
             return result;
         }

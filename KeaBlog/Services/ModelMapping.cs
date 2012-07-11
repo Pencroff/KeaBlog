@@ -10,9 +10,15 @@ namespace KeaBlog.Services
 {
     public static class ModelMapping
     {
-        public static void PostAuthorToViewModel (PostAuthor model, PostAuthorViewModel viewModel)
+        public static void PostFullToViewModel (PostFull model, PostViewModel viewModel)
         {
-            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<PostAuthor, PostAuthorViewModel>();
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<PostFull, PostViewModel>();
+            viewModel = mapper.Map(model, viewModel);
+        }
+
+        public static void PostShortToViewModel(PostShort model, PostViewModel viewModel)
+        {
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<PostShort, PostViewModel>();
             viewModel = mapper.Map(model, viewModel);
         }
     }

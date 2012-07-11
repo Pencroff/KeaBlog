@@ -77,6 +77,9 @@
     <Compile Include="PostFull.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PostShort.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tag.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
