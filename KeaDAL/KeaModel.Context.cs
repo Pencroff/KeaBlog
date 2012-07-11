@@ -64,15 +64,15 @@ namespace KeaDAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UserRolesGet", loginParameter);
         }
     
-        public virtual ObjectResult<PostAuthor> PostAuthorByIdGet(Nullable<int> postId)
+        public virtual ObjectResult<PostFull> PostByIdGet(Nullable<int> postId)
         {
-            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostAuthor).Assembly);
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
     
             var postIdParameter = postId.HasValue ?
                 new ObjectParameter("postId", postId) :
                 new ObjectParameter("postId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostAuthor>("PostAuthorByIdGet", postIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PostByIdGet", postIdParameter);
         }
     }
 }

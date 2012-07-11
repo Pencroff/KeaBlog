@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace KeaDAL
 {
-    public partial class PostAuthor
+    public partial class PostFull
     {
         public int Id { get; set; }
         public string Title { get; set; }

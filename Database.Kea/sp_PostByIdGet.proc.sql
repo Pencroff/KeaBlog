@@ -1,4 +1,4 @@
-﻿/*CREATE PROCEDURE [dbo].[sp_PostAuthorByIdGet](
+﻿CREATE PROCEDURE [dbo].[sp_PostByIdGet](
     @postId INT
 )
 AS
@@ -17,4 +17,4 @@ BEGIN
       ,pst.[SEODescription]
   FROM [dbo].[Posts] pst, [dbo].auth_Users au 
 	WHERE pst.Id = @postId AND pst.AuthorId = au.Id
-END*/
+END
