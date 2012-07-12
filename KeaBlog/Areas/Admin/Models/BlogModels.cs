@@ -9,7 +9,7 @@ using ServiceLib;
 
 namespace KeaBlog.Areas.Admin.Models
 {
-    public class PostViewModel : BasicModel
+    public class PostViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -36,6 +36,11 @@ namespace KeaBlog.Areas.Admin.Models
             ModelMapping.PostViewModelToModel(this, post);
             PostManager.UpdatePost(post);
 
+        }
+
+        public void DeleteById(int id)
+        {
+            PostManager.DeletePostById(id);
         }
     }
 

@@ -179,5 +179,14 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostUpdate", postIdParameter, titleParameter, entryUrlParameter, shortContentParameter, fullContentParameter, visibleParameter, createdParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter);
         }
+    
+        public virtual int PostDelete(Nullable<int> postId)
+        {
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostDelete", postIdParameter);
+        }
     }
 }

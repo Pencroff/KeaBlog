@@ -48,5 +48,13 @@ namespace KeaBLL
                                    post.Visible, post.Created, post.Modified, post.SEOKeywords, post.SEODescription);
             }
         }
+
+        public static void DeletePostById(int id)
+        {
+            using (KeaContext context = new KeaContext())
+            {
+                context.PostDelete(id);
+            }
+        }
     }
 }

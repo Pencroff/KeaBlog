@@ -311,6 +311,9 @@
             <Parameter Name="seoKeywords" Mode="In" Type="String" />
             <Parameter Name="seoDescription" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PostDelete">
+            <Parameter Name="postId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -547,6 +550,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PostInsert" FunctionName="KeaContext.Store.sp_PostInsert" />
           <FunctionImportMapping FunctionImportName="PostUpdate" FunctionName="KeaContext.Store.sp_PostUpdate" />
+          <FunctionImportMapping FunctionImportName="PostDelete" FunctionName="KeaContext.Store.sp_PostDelete" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

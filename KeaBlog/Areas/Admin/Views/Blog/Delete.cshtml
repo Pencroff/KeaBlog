@@ -1,4 +1,4 @@
-﻿@model KeaDAL.Entry
+﻿@model KeaBlog.Areas.Admin.Models.PostViewModel
 
 @{
     ViewBag.Title = "Delete";
@@ -24,12 +24,12 @@
         @Html.DisplayFor(model => model.EntryUrl)
     </div>
 
-    <div class="display-label">
+@*    <div class="display-label">
          @Html.DisplayNameFor(model => model.auth_Users.Login)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.auth_Users.Login)
-    </div>
+    </div>*@
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.ShortContent)
