@@ -1,4 +1,5 @@
-﻿@model KeaDAL.Entry
+﻿@using System.Collections.Specialized
+@model KeaDAL.Post
 
 @{
     ViewBag.Title = "Create";
@@ -28,13 +29,13 @@
             @Html.ValidationMessageFor(model => model.EntryUrl)
         </div>
 
-        <div class="editor-label">
+@*        <div class="editor-label">
             @Html.LabelFor(model => model.AuthorId, "auth_Users")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("AuthorId", String.Empty)
+            @Html.DropDownList("AuthorId",new SelectList(new List<Guid>({Guid.Empty})))
             @Html.ValidationMessageFor(model => model.AuthorId)
-        </div>
+        </div>*@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ShortContent)

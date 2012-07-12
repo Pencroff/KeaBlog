@@ -30,5 +30,14 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static void InsertPost (Post post)
+        {
+            using (KeaContext context = new KeaContext())
+            {
+                context.PostInsert(post.Title, post.EntryUrl, post.AuthorId, post.ShortContent, post.FullContent,
+                                   post.Visible, post.Created, post.Modified, post.SEOKeywords, post.SEODescription);
+            }
+        }
     }
 }

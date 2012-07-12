@@ -1,7 +1,9 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using KeaBLL;
 using KeaBlog.Areas.Admin.Models;
 using KeaDAL;
 
@@ -36,31 +38,31 @@ namespace KeaBlog.Areas.Admin.Controllers
             return View(viewModel);
         }
 
-    //    //
-    //    // GET: /Entry/Create
+        //
+        // GET: /Entry/Create
 
-    //    public ActionResult Create()
-    //    {
-    //        ViewBag.AuthorId = new SelectList(db.Auth_User, "Id", "Login");
-    //        return View();
-    //    }
+        public ActionResult Create()
+        {
+            ViewBag.AuthorId = Guid.Empty;//new SelectList(db.Auth_User, "Id", "Login");
+            return View();
+        }
 
-    //    //
-    //    // POST: /Entry/Create
+        //
+        // POST: /Entry/Create
 
-    //    [HttpPost]
-    //    public ActionResult Create(Entry entry)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            db.Entries.Add(entry);
-    //            db.SaveChanges();
-    //            return RedirectToAction("Index");
-    //        }
+        [HttpPost]
+        public ActionResult Create(Post post)
+        {
+            if (ModelState.IsValid)
+            {
+                post.AuthorId = Guid.Parse("E21486DE-07F0-4E9B-BC61-B49ADEFBBCD3");
+                PostManager.InsertPost(post);
+                return RedirectToAction("Index");
+            }
 
-    //        ViewBag.AuthorId = new SelectList(db.Auth_User, "Id", "Login", entry.AuthorId);
-    //        return View(entry);
-    //    }
+            ViewBag.AuthorId = Guid.Empty;
+            return View(post);
+        }
 
     //    //
     //    // GET: /Entry/Edit/5

@@ -12,7 +12,7 @@
 )
 AS
 BEGIN
-	INSERT INTO Entries
+	INSERT INTO [dbo].Posts
 	(
 		-- Id -- this column value is auto-generated
 		Title,
