@@ -9,7 +9,7 @@ using ServiceLib;
 
 namespace KeaBlog.Areas.Admin.Models
 {
-    public class PostAuthorViewModel : BasicModel
+    public class PostViewModel : BasicModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -26,27 +26,28 @@ namespace KeaBlog.Areas.Admin.Models
 
         public void FillById (int postId)
         {
-            PostAuthor model = PostManager.GetPostAuthorById(postId);
-            ModelMapping.PostAuthorToViewModel(model, this);
+            PostFull model = PostManager.GetPostById(postId);
+            ModelMapping.PostFullToViewModel(model, this);
         }
     }
 
-    public class PostAuthorListViewModel : BasicModel
+    public class PostListViewModel : BasicModel
     {
-        public IList<PostAuthorViewModel> Posts { get; set; }
+        public IList<PostViewModel> Posts { get; set; }
 
         public void FillByIndex (int page)
         {
             // ToDo get PageSize from options/settings
             int pageSize = 10;
+            int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
-            Posts = new List<PostAuthorViewModel>();
-            PostAuthorViewModel viewModel;
-            List<PostAuthor> modelList = PostManager.GetPostAutorListByPage(StartPageIndex, EndPageIndex);
+            Posts = new List<PostViewModel>();
+            PostViewModel viewModel;
+            List<PostShort> modelList = PostManager.GetPostListByPage(StartPageIndex, EndPageIndex, out count);
             foreach (var model in modelList)
             {
-                viewModel = new PostAuthorViewModel();
-                ModelMapping.PostAuthorToViewModel(model, viewModel);
+                viewModel = new PostViewModel();
+                ModelMapping.PostShortToViewModel(model, viewModel);
                 Posts.Add(viewModel);
             }
         }

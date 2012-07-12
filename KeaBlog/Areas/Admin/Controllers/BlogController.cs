@@ -16,8 +16,10 @@ namespace KeaBlog.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var entries = db.Posts.Include(e => e.auth_Users);
-            return View(entries.ToList());
+            //var entries = db.Posts.Include(e => e.auth_Users);
+            var viewModel = new PostListViewModel();
+            viewModel.FillByIndex(1);
+            return View(viewModel.Posts);
         }
 
         //
@@ -25,7 +27,7 @@ namespace KeaBlog.Areas.Admin.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            PostAuthorViewModel viewModel = new PostAuthorViewModel();
+            PostViewModel viewModel = new PostViewModel();
             viewModel.FillById(id);
             if (viewModel.Id != id)
             {
