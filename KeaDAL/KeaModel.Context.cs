@@ -134,5 +134,50 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostInsert", titleParameter, entryUrlParameter, authorIdParameter, shortContentParameter, fullContentParameter, visibleParameter, createdParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter);
         }
+    
+        public virtual int PostUpdate(Nullable<int> postId, string title, string entryUrl, string shortContent, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> created, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription)
+        {
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("title", title) :
+                new ObjectParameter("title", typeof(string));
+    
+            var entryUrlParameter = entryUrl != null ?
+                new ObjectParameter("entryUrl", entryUrl) :
+                new ObjectParameter("entryUrl", typeof(string));
+    
+            var shortContentParameter = shortContent != null ?
+                new ObjectParameter("shortContent", shortContent) :
+                new ObjectParameter("shortContent", typeof(string));
+    
+            var fullContentParameter = fullContent != null ?
+                new ObjectParameter("fullContent", fullContent) :
+                new ObjectParameter("fullContent", typeof(string));
+    
+            var visibleParameter = visible.HasValue ?
+                new ObjectParameter("visible", visible) :
+                new ObjectParameter("visible", typeof(bool));
+    
+            var createdParameter = created.HasValue ?
+                new ObjectParameter("created", created) :
+                new ObjectParameter("created", typeof(System.DateTime));
+    
+            var modifiedParameter = modified.HasValue ?
+                new ObjectParameter("modified", modified) :
+                new ObjectParameter("modified", typeof(System.DateTime));
+    
+            var seoKeywordsParameter = seoKeywords != null ?
+                new ObjectParameter("seoKeywords", seoKeywords) :
+                new ObjectParameter("seoKeywords", typeof(string));
+    
+            var seoDescriptionParameter = seoDescription != null ?
+                new ObjectParameter("seoDescription", seoDescription) :
+                new ObjectParameter("seoDescription", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostUpdate", postIdParameter, titleParameter, entryUrlParameter, shortContentParameter, fullContentParameter, visibleParameter, createdParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter);
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model KeaDAL.Entry
+﻿@model KeaBlog.Areas.Admin.Models.PostViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -30,13 +30,13 @@
             @Html.ValidationMessageFor(model => model.EntryUrl)
         </div>
 
-        <div class="editor-label">
+@*        <div class="editor-label">
             @Html.LabelFor(model => model.AuthorId, "auth_Users")
         </div>
         <div class="editor-field">
             @Html.DropDownList("AuthorId", String.Empty)
             @Html.ValidationMessageFor(model => model.AuthorId)
-        </div>
+        </div>*@
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ShortContent)

@@ -39,5 +39,14 @@ namespace KeaBLL
                                    post.Visible, post.Created, post.Modified, post.SEOKeywords, post.SEODescription);
             }
         }
+
+        public static void UpdatePost(Post post)
+        {
+            using (KeaContext context = new KeaContext())
+            {
+                context.PostUpdate(post.Id, post.Title, post.EntryUrl, post.ShortContent, post.FullContent,
+                                   post.Visible, post.Created, post.Modified, post.SEOKeywords, post.SEODescription);
+            }
+        }
     }
 }

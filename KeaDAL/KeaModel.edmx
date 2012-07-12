@@ -299,6 +299,18 @@
             <Parameter Name="seoKeywords" Mode="In" Type="String" />
             <Parameter Name="seoDescription" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PostUpdate">
+            <Parameter Name="postId" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="entryUrl" Mode="In" Type="String" />
+            <Parameter Name="shortContent" Mode="In" Type="String" />
+            <Parameter Name="fullContent" Mode="In" Type="String" />
+            <Parameter Name="visible" Mode="In" Type="Boolean" />
+            <Parameter Name="created" Mode="In" Type="DateTime" />
+            <Parameter Name="modified" Mode="In" Type="DateTime" />
+            <Parameter Name="seoKeywords" Mode="In" Type="String" />
+            <Parameter Name="seoDescription" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -534,6 +546,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PostInsert" FunctionName="KeaContext.Store.sp_PostInsert" />
+          <FunctionImportMapping FunctionImportName="PostUpdate" FunctionName="KeaContext.Store.sp_PostUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

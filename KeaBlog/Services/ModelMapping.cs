@@ -21,5 +21,11 @@ namespace KeaBlog.Services
             var mapper = ObjectMapperManager.DefaultInstance.GetMapper<PostShort, PostViewModel>();
             viewModel = mapper.Map(model, viewModel);
         }
+
+        public static void PostViewModelToModel(PostViewModel viewModel, Post model)
+        {
+            var mapper = ObjectMapperManager.DefaultInstance.GetMapper<PostViewModel, Post>();
+            model = mapper.Map(viewModel, model);
+        }
     }
 }

@@ -29,6 +29,14 @@ namespace KeaBlog.Areas.Admin.Models
             PostFull model = PostManager.GetPostById(postId);
             ModelMapping.PostFullToViewModel(model, this);
         }
+
+        public void SaveToDb()
+        {
+            Post post = new Post();
+            ModelMapping.PostViewModelToModel(this, post);
+            PostManager.UpdatePost(post);
+
+        }
     }
 
     public class PostListViewModel : BasicModel

@@ -64,35 +64,33 @@ namespace KeaBlog.Areas.Admin.Controllers
             return View(post);
         }
 
-    //    //
-    //    // GET: /Entry/Edit/5
+        //
+        // GET: /Entry/Edit/5
 
-    //    public ActionResult Edit(int id = 0)
-    //    {
-    //        Entry entry = db.Entries.Find(id);
-    //        if (entry == null)
-    //        {
-    //            return HttpNotFound();
-    //        }
-    //        ViewBag.AuthorId = new SelectList(db.Auth_User, "Id", "Login", entry.AuthorId);
-    //        return View(entry);
-    //    }
+        public ActionResult Edit(int id = 0)
+        {
+            PostViewModel viewModel = new PostViewModel();
+            viewModel.FillById(id);
+            if (viewModel.Id != id)
+            {
+                return HttpNotFound();
+            }
+            return View(viewModel);
+        }
 
-    //    //
-    //    // POST: /Entry/Edit/5
+        //
+        // POST: /Entry/Edit/5
 
-    //    [HttpPost]
-    //    public ActionResult Edit(Entry entry)
-    //    {
-    //        if (ModelState.IsValid)
-    //        {
-    //            db.Entry(entry).State = EntityState.Modified;
-    //            db.SaveChanges();
-    //            return RedirectToAction("Index");
-    //        }
-    //        ViewBag.AuthorId = new SelectList(db.Auth_User, "Id", "Login", entry.AuthorId);
-    //        return View(entry);
-    //    }
+        [HttpPost]
+        public ActionResult Edit(PostViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.SaveToDb();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
 
     //    //
     //    // GET: /Entry/Delete/5
