@@ -9,13 +9,14 @@ using KeaDAL;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {
+    [Authorize]
     public class BlogController : Controller
     {
 
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
             var viewModel = new PostListViewModel();
-            viewModel.FillByIndex(1);
+            viewModel.FillByPage(id);
             return View(viewModel.Posts);
         }
         

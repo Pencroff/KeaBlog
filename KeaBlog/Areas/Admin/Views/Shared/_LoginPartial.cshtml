@@ -1,0 +1,16 @@
+﻿<ul class="nav pull-right">
+@if (Request.IsAuthenticated) {
+    
+    <li><p class="navbar-text">Hello,</p></li>
+    <li style="padding-top: 3px;">@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Change password" })</li>
+    <li><p class="navbar-text">!</p></li>
+    <li>@Html.ActionLink("Log off", "LogOff", "Account")</li>
+}
+else
+{
+    @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+    <li>
+        <p class="navbar-text">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</p>
+    </li>
+}
+</ul>

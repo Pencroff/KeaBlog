@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ServiceController : Controller
     {
         //

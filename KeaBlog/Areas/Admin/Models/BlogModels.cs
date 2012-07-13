@@ -48,7 +48,7 @@ namespace KeaBlog.Areas.Admin.Models
     {
         public IList<PostViewModel> Posts { get; set; }
 
-        public void FillByIndex (int page)
+        public void FillByPage (int page)
         {
             // ToDo get PageSize from options/settings
             int pageSize = 10;

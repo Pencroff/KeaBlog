@@ -48,21 +48,23 @@
                 <div class="container"> 
                     <a class="brand" href='@Url.Action("Index", "Home", new {Area = "Admin"})'>Kea Blog <br /><span class="badge">Admin panel</span></a>
                     @{ Html.RenderAction("AdminMainMenu", "Extra"); }
+                    @Html.Partial("_LoginPartial")
                 </div>
             </div>
         </div>
         <div id="wrap">
             <div id="main" class="container">
-                <div class="row">
+                @RenderBody()
+                @*<div class="row">
                     <div class="span8">
-                        @RenderBody()
+                        
                     </div>
                     <div class="span4">
                         <div class="well">
                             @RenderSection("featured", required: false)
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="footer" style="background-color:#ddd">
