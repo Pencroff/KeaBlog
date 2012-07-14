@@ -4,84 +4,71 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Список постов</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "Blog", new { @class = "btn btn-info btn-mini" })
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EntryUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FullContent)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Visible)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Modified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEOKeywords)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SEODescription)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EntryUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuthorName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShortContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullContent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Visible)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEOKeywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SEODescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+<table class="table table-striped table-bordered table-fix">
+    <thead>
+        <tr>
+            <th style="width: 4%">
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th style="width: auto">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th style="width: 5%">
+                @Html.DisplayNameFor(model => model.Visible)
+            </th>
+            <th style="width: 7%">
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th style="width: 7%">
+                @Html.DisplayNameFor(model => model.Modified)
+            </th>
+            <th style="width: 10%">
+                @Html.DisplayNameFor(model => model.AuthorName)
+            </th>
+            <th style="width: 13%">
+                Action / Действия
+            </th>
+        </tr>        
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td style="text-align: center">
+                    @if (item.Visible)
+                    {
+                        <i class="icon-ok"></i>   
+                    }
+                    else
+                    {
+                        <i class="icon-remove"></i>
+                    }
+                </td>
+                <td>
+                    @item.Created.ToShortDateString()
+                </td>
+                <td>
+                    @item.Modified.GetValueOrDefault().ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-mini" })&nbsp;&nbsp;
+                    @Html.ActionLink("View", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-mini" })&nbsp;&nbsp;
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-mini" })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>

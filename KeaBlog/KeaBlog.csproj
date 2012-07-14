@@ -183,6 +183,7 @@
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\alerts.less" />

@@ -1,0 +1,10 @@
+﻿/* File Created: July 14, 2012 */
+
+/* for use fix table width */
+.table-fix {
+    table-layout: fixed;
+}
+
+.fix-table th, fix-table td {
+     overflow: hidden;
+}
