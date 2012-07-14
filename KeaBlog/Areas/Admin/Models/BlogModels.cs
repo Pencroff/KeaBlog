@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using KeaBLL;
 using KeaBlog.Services;
 using KeaDAL;
@@ -16,7 +17,9 @@ namespace KeaBlog.Areas.Admin.Models
         public string EntryUrl { get; set; }
         public Nullable<System.Guid> AuthorId { get; set; }
         public string AuthorName { get; set; }
+        [AllowHtml]
         public string ShortContent { get; set; }
+        [AllowHtml]
         public string FullContent { get; set; }
         public bool Visible { get; set; }
         public System.DateTime Created { get; set; }
