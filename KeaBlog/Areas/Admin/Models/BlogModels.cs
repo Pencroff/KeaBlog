@@ -17,9 +17,8 @@ namespace KeaBlog.Areas.Admin.Models
         public string EntryUrl { get; set; }
         public Nullable<System.Guid> AuthorId { get; set; }
         public string AuthorName { get; set; }
-        [AllowHtml]
         public string ShortContent { get; set; }
-        [AllowHtml]
+        //[AllowHtml]
         public string FullContent { get; set; }
         public bool Visible { get; set; }
         public System.DateTime Created { get; set; }
@@ -36,6 +35,10 @@ namespace KeaBlog.Areas.Admin.Models
         public void SaveToDb()
         {
             Post post = new Post();
+            if (this.ShortContent == null)
+            {
+                this.ShortContent = this.FullContent;
+            }
             ModelMapping.PostViewModelToModel(this, post);
             PostManager.UpdatePost(post);
 

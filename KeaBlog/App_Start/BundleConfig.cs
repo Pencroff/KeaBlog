@@ -13,6 +13,8 @@ namespace KeaBlog
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/wysibb").Include("~/Scripts/WysiBB/jquery.wysibb.js"));
+
             bundles.Add(new StyleBundle("~/Content/css/fonts").Include("~/Content/css/fonts.css"));
 
             /////////////////////////////

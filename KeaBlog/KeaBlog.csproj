@@ -226,6 +226,7 @@
     <Content Include="Content\less\variables.less" />
     <Content Include="Content\less\wells.less" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\theme.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -280,6 +281,26 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\WysiBB\themes\default\icons.png" />
+    <Content Include="Content\WysiBB\themes\default\icons_old.png" />
+    <Content Include="Content\WysiBB\themes\default\imgpreview.png" />
+    <Content Include="Content\WysiBB\themes\default\img\icons.png" />
+    <Content Include="Content\WysiBB\themes\default\img\icons_old.png" />
+    <Content Include="Content\WysiBB\themes\default\img\imgpreview.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm1.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm2.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm3.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm4.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm5.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm6.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm7.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm8.png" />
+    <Content Include="Content\WysiBB\themes\default\img\smiles\sm9.png" />
+    <Content Include="Content\WysiBB\themes\default\img\vert.png" />
+    <Content Include="Content\WysiBB\themes\default\img\wysibb.png" />
+    <Content Include="Content\WysiBB\themes\default\theme.css" />
+    <Content Include="Content\WysiBB\themes\default\vert.png" />
+    <Content Include="Content\WysiBB\themes\default\wysibb.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
@@ -300,6 +321,8 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
+    <Content Include="Scripts\WysiBB\jquery.wysibb.js" />
+    <Content Include="Scripts\WysiBB\jquery.wysibb.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

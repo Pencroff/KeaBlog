@@ -38,7 +38,7 @@
         </div>*@
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ShortContent)
+            @Html.LabelFor(model => model.ShortContent) 
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ShortContent)
@@ -49,7 +49,7 @@
             @Html.LabelFor(model => model.FullContent)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.FullContent)
+            @Html.TextAreaFor(model => model.FullContent)
             @Html.ValidationMessageFor(model => model.FullContent)
         </div>
 
@@ -103,6 +103,12 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/wysibb")
+    <script>
+        $(document).ready(function () {
+            $("textarea").wysibb();
+        });
+</script>
 }

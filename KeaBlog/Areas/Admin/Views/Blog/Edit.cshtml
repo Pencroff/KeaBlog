@@ -4,106 +4,132 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Редактирование @Model.Title</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm("Edit", "Blog", FormMethod.Post, new { @class = "well form-horizontal" }))
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>Entry</legend>
+        <legend class="span3">Статья / пост</legend>
 
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.AuthorId)
+        @Html.HiddenFor(model => model.Created)
+        @Html.HiddenFor(model => model.Visible)
+        
+        <div class="span5 offset2">
+            <div class="control-group">
+                <label class = "control-label" for = "inputModified">Публикация</label>
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.Modified, new { @class = "input-xlarge", id = "inputModified" })
+                    @Html.ValidationMessageFor(model => model.Modified)
+                    <p class="help-block">Дата и время публикации статьи / поста</p>
+                </div> 
+            </div>
+        </div>
+        <button class="btn btn-success active" id="BtnVisible" data-toggle="button" type="button" value="@Model.Visible" btntext = "Опубликовать " trueIcon = "<i class='icon-ok icon-white'>" falseIcon = "<i class='icon-remove'></i>"></button>
+        <div class="control-group">
+            <label class = "control-label" for = "inputTitle">Заголовок</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge span10", id = "inputTitle" })
+                @Html.ValidationMessageFor(model => model.Title)
+                <p class="help-block">Название статьи / поста</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputUrl">Url поста</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.EntryUrl, new { @class = "input-xlarge span10", id = "inputUrl" })
+                @Html.ValidationMessageFor(model => model.EntryUrl)
+                <p class="help-block">ЧПУ URL для статьи (уникально для всех статей)</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputContent">Контент</label>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.FullContent, new { @class = "span10 textarea", id = "inputContent", style = "min-height: 250px" })
+                @Html.ValidationMessageFor(model => model.FullContent)
+                <p class="help-block">Контент статьи / поста</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputSEODescription">SEO</label>
+            <div class="controls">
+                <div class="pull-left">
+                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span5", id = "inputSEODescription" })    
+                    @Html.ValidationMessageFor(model => model.SEODescription)
+                    <p class="help-block">Описание статьи для Head</p>
+                </div>
+                <div class="pull-right">
+                    @Html.TextAreaFor(model => model.SEOKeywords, new { @class = "span5", id = "inputSEOKeywords" })
+                    @Html.ValidationMessageFor(model => model.SEOKeywords)
+                    <p class="help-block">Ключевые слова для Head</p>
+                </div>
+                
+            </div>
+        </div>    
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Title)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Title)
-            @Html.ValidationMessageFor(model => model.Title)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EntryUrl)
+        <div class="pull-left">
+            <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EntryUrl)
-            @Html.ValidationMessageFor(model => model.EntryUrl)
+        <div class="pull-right">
+            <input type="submit" value="Save" class="btn btn-primary"/>
         </div>
-
-@*        <div class="editor-label">
-            @Html.LabelFor(model => model.AuthorId, "auth_Users")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("AuthorId", String.Empty)
-            @Html.ValidationMessageFor(model => model.AuthorId)
-        </div>*@
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ShortContent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ShortContent)
-            @Html.ValidationMessageFor(model => model.ShortContent)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.FullContent)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.FullContent)
-            @Html.ValidationMessageFor(model => model.FullContent)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Visible)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Visible)
-            @Html.ValidationMessageFor(model => model.Visible)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Created)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Created)
-            @Html.ValidationMessageFor(model => model.Created)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Modified)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Modified)
-            @Html.ValidationMessageFor(model => model.Modified)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SEOKeywords)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SEOKeywords)
-            @Html.ValidationMessageFor(model => model.SEOKeywords)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SEODescription)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.SEODescription)
-            @Html.ValidationMessageFor(model => model.SEODescription)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
     </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
-@section Scripts {
+@section scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/wysibb")
+    <script>
+        var myOpt = {
+            debug: false,
+            watchTxtArea: false,
+            smileAutoDetect: false,
+            themeName: 'default',
+            themePrefix: '/Content/WysiBB/themes/'
+            //перечисление настроек
+            },
+            setVisible = function (value, element) {
+                var text = element.attr('btntext'),
+                    trueIcon = element.attr('trueIcon'),
+                    falseIcon = element.attr('falseIcon');
+                element.attr('value', value);
+                if (value == "true") {
+                    element.html(text + trueIcon);
+                    if (!element.hasClass('btn-success')) {
+                        element.addClass('btn-success');
+                    }
+                } else {
+                    element.html(text + falseIcon);
+                    if (element.hasClass('btn-success')) {
+                        element.removeClass('btn-success');
+                    }
+                }
+                $('#Visible').attr('value', value);
+            },
+            toogleVisible = function () {
+                var element = $("#BtnVisible"),
+                    value = element.attr('value');
+                if (value == "true") {
+                    setVisible("false", element);
+                } else {
+                    setVisible("true", element);
+                }
+            },
+            checkVisible = function () {
+                var element = $("#BtnVisible"),
+                    value = element.attr('value');
+                setVisible(value, element);
+            };
+            $(document).ready(function () {
+                $("#BtnVisible").button('toggle');
+                $("#BtnVisible").click(toogleVisible);
+                $("#inputContent").wysibb(myOpt);
+                checkVisible();
+            });
+    </script>
 }
