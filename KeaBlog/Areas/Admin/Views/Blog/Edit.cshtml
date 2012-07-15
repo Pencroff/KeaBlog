@@ -28,7 +28,7 @@
                 </div> 
             </div>
         </div>
-        <button class="btn btn-success active" id="BtnVisible" data-toggle="button" type="button" value="@Model.Visible" btntext = "Опубликовать " trueIcon = "<i class='icon-ok icon-white'>" falseIcon = "<i class='icon-remove'></i>"></button>
+        <button class="btn" id="BtnVisible" type="button" value="@Model.Visible.ToString()" btntext = "Опубликовать " trueIcon = "<i class='icon-ok icon-white'>" falseIcon = "<i class='icon-remove'></i>"></button>
         <div class="control-group">
             <label class = "control-label" for = "inputTitle">Заголовок</label>
             <div class="controls">
@@ -100,35 +100,30 @@
                 element.attr('value', value);
                 if (value == "true") {
                     element.html(text + trueIcon);
-                    if (!element.hasClass('btn-success')) {
-                        element.addClass('btn-success');
-                    }
+                    element.attr('class', "btn btn-success active");
                 } else {
                     element.html(text + falseIcon);
-                    if (element.hasClass('btn-success')) {
-                        element.removeClass('btn-success');
-                    }
+                    element.attr('class', "btn");
                 }
                 $('#Visible').attr('value', value);
             },
             toogleVisible = function () {
                 var element = $("#BtnVisible"),
-                    value = element.attr('value');
-                if (value == "true") {
+                    value = element.attr('value').toLowerCase();
+                if (value == 'true') {
                     setVisible("false", element);
                 } else {
                     setVisible("true", element);
                 }
             },
             checkVisible = function () {
-                var element = $("#BtnVisible"),
-                    value = element.attr('value');
+                var element = $('#BtnVisible'),
+                    value = element.attr('value').toLowerCase();
                 setVisible(value, element);
             };
             $(document).ready(function () {
-                $("#BtnVisible").button('toggle');
-                $("#BtnVisible").click(toogleVisible);
-                $("#inputContent").wysibb(myOpt);
+                $('#BtnVisible').click(toogleVisible);
+                $('#inputContent').wysibb(myOpt);
                 checkVisible();
             });
     </script>
