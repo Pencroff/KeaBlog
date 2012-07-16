@@ -5,7 +5,7 @@
     {
         if (element == Model.ActiveItem)
         {
-            <li class="active"><a href="#">@element.Display</a></li>
+            <li class="active"><a href="@Url.Action(element.Action, element.Controller)">@element.Display</a></li>
         }
         else
         {

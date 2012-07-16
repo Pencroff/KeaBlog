@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Security;
 using KeaBlog.Models;
+using KeaBlog.Services;
 using KeaBlog.Services.Providers;
 
 namespace KeaBlog.Areas.Admin.Controllers
@@ -57,6 +58,8 @@ namespace KeaBlog.Areas.Admin.Controllers
                 if (MembershipService.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    MembershipUser user = MembershipService.GetUser(model.UserName);
+                    CurrentSession.UserId = user.ProviderUserKey.ToString();
                     if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/")
                         && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                     {
@@ -83,7 +86,7 @@ namespace KeaBlog.Areas.Admin.Controllers
         public ActionResult LogOff()
         {
             FormsAuth.SignOut();
-
+            CurrentSession.UserId = null;
             return RedirectToAction("Index", "Home");
         }
 

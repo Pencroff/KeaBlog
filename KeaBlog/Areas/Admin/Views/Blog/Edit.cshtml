@@ -16,14 +16,22 @@
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.AuthorId)
         @Html.HiddenFor(model => model.Created)
+        @Html.HiddenFor(model => model.Modified)
         @Html.HiddenFor(model => model.Visible)
         
-        <div class="span5 offset2">
+        <div class="span6 offset1">
             <div class="control-group">
                 <label class = "control-label" for = "inputModified">Публикация</label>
+@*                <div class="input-append">
+                <input class="span2" id="inputModified" size="16" type="text"><button class="btn" type="button">Go!</button>
+              </div>*@
                 <div class="controls">
-                    @Html.TextBoxFor(model => model.Modified, new { @class = "input-xlarge", id = "inputModified" })
-                    @Html.ValidationMessageFor(model => model.Modified)
+                    <div class="input-append">
+                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16"><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                    </div>
+                    <div class="input-append">
+                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16"><button class="btn" type="button"><i class="icon-time"></i></button>
+                    </div>
                     <p class="help-block">Дата и время публикации статьи / поста</p>
                 </div> 
             </div>
@@ -68,9 +76,7 @@
                 </div>
                 
             </div>
-        </div>    
-
-
+        </div> 
         <div class="pull-left">
             <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
         </div>
@@ -79,7 +85,6 @@
         </div>
     </fieldset>
 }
-
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")

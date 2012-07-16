@@ -33,7 +33,7 @@ namespace KeaBlog.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.AuthorId = Guid.Empty;//new SelectList(db.Auth_User, "Id", "Login");
+            //ViewBag.AuthorId = Guid.Empty;//new SelectList(db.Auth_User, "Id", "Login");
             return View();
         }
 
@@ -45,7 +45,7 @@ namespace KeaBlog.Areas.Admin.Controllers
                 // Work
                 //post.AuthorId = Guid.Parse("E21486DE-07F0-4E9B-BC61-B49ADEFBBCD3");
                 // Home
-                post.AuthorId = Guid.Parse("29A6A9E3-AF2D-4FB1-A3A5-7837DEA26003");
+                //post.AuthorId = Guid.Parse("29A6A9E3-AF2D-4FB1-A3A5-7837DEA26003");
                 PostManager.InsertPost(post);
                 return RedirectToAction("Index");
             }

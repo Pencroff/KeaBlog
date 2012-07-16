@@ -10,6 +10,7 @@ namespace KeaBlog.Services.Providers
         string GetCanonicalUsername(string userName);
         MembershipCreateStatus CreateUser(string userName, string password, string email);
         bool ChangePassword(string userName, string oldPassword, string newPassword);
+        MembershipUser GetUser(string userName);
     }
 
     public class KeaMembershipService : IMembershipService
@@ -61,6 +62,11 @@ namespace KeaBlog.Services.Providers
         {
             MembershipUser currentUser = _provider.GetUser(userName, true /* userIsOnline */);
             return currentUser.ChangePassword(oldPassword, newPassword);
+        }
+
+        public MembershipUser GetUser(string userName)
+        {
+            return _provider.GetUser(userName, true /* userIsOnline */);
         }
     }
 }
