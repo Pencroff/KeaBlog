@@ -137,6 +137,11 @@
                     showSeconds: false,
                     showMeridian: false
                 });
+                $('#PublishDate').datepicker({
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                    weekStart: 1 // Monday
+                });
                 checkVisible();
             });
     </script>
