@@ -9,9 +9,11 @@ namespace KeaBlog
         {
             bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/bootstrap/css/bootstrap.css",
                                         "~/Content/bootstrap/css/bootstrap-responsive.css",
-                                        "~/Content/css/extra.css"));
+                                        "~/Content/css/extra.css",
+                                        "~/Content/bootstrap/css/timepicker.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js",
+                                            "~/Content/bootstrap/js/bootstrap-timepicker.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/wysibb").Include("~/Scripts/WysiBB/jquery.wysibb.js"));
 

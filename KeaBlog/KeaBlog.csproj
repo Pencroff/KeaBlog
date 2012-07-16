@@ -182,10 +182,12 @@
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\js\bootstrap-timepicker.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\bootstrap\css\timepicker.css" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\bootstrap.less" />

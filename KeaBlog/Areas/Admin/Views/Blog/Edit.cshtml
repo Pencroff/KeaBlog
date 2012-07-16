@@ -27,10 +27,10 @@
               </div>*@
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16"><button class="btn" type="button"><i class="icon-calendar"></i></button>
+                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16"><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                     <div class="input-append">
-                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16"><button class="btn" type="button"><i class="icon-time"></i></button>
+                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16"><span class="add-on"><i class="icon-time"></i></span>
                     </div>
                     <p class="help-block">Дата и время публикации статьи / поста</p>
                 </div> 
@@ -129,6 +129,14 @@
             $(document).ready(function () {
                 $('#BtnVisible').click(toogleVisible);
                 $('#inputContent').wysibb(myOpt);
+                $('#PublishTime').timepicker({
+                    defaultTime: 'current',
+                    minuteStep: 15,
+                    disableFocus: true,
+                    template: 'dropdown',
+                    showSeconds: false,
+                    showMeridian: false
+                });
                 checkVisible();
             });
     </script>
