@@ -281,9 +281,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\WysiBB\themes\default\icons.png" />
-    <Content Include="Content\WysiBB\themes\default\icons_old.png" />
-    <Content Include="Content\WysiBB\themes\default\imgpreview.png" />
     <Content Include="Content\WysiBB\themes\default\img\icons.png" />
     <Content Include="Content\WysiBB\themes\default\img\icons_old.png" />
     <Content Include="Content\WysiBB\themes\default\img\imgpreview.png" />
@@ -299,8 +296,6 @@
     <Content Include="Content\WysiBB\themes\default\img\vert.png" />
     <Content Include="Content\WysiBB\themes\default\img\wysibb.png" />
     <Content Include="Content\WysiBB\themes\default\theme.css" />
-    <Content Include="Content\WysiBB\themes\default\vert.png" />
-    <Content Include="Content\WysiBB\themes\default\wysibb.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
