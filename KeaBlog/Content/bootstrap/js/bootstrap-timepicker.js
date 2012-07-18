@@ -215,6 +215,10 @@
         , update: function () {
             this.updateElement();
             this.updateWidget();
+            this.$element.trigger({
+                type: 'changeTime',
+                time: this.getTime()
+            });
         }
 
         , updateFromElementVal: function () {

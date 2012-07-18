@@ -44,11 +44,19 @@ namespace KeaBlog.Areas.Admin.Models
 
         }
         
-        public string GetModified()
+        public string GetModifiedDate()
         {
             string result = null;
             DateTime date = Modified == null ? DateTime.Now : Modified.Value;
             result = date.ToString("dd.MM.yyyy");
+            return result;
+        }
+
+        public string GetModifiedTime()
+        {
+            string result = null;
+            DateTime date = Modified == null ? DateTime.Now : Modified.Value;
+            result = date.ToString("hh:mm");
             return result;
         }
 

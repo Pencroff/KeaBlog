@@ -28,10 +28,10 @@
                 <div class="controls">
                     <div class="input-append">
                         <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16" 
-                               value="@Model.GetModified()" data-format="dd.mm.yyyy"><span class="add-on"><i class="icon-calendar"></i></span>
+                               value="@Model.GetModifiedDate()" data-format="dd.mm.yyyy"><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                     <div class="input-append">
-                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16"><span class="add-on"><i class="icon-time"></i></span>
+                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16" value="@Model.GetModifiedTime()"><span class="add-on"><i class="icon-time"></i></span>
                     </div>
                     <p class="help-block">Дата и время публикации статьи / поста</p>
                 </div> 
@@ -126,24 +126,30 @@
                 var element = $('#BtnVisible'),
                     value = element.attr('value').toLowerCase();
                 setVisible(value, element);
+            },
+            changeDateTime = function (event) {
+                var date = $("#PublishDate").val(),
+                    time = $("#PublishTime").val(),
+                    datetime = date + " " + time;
+                $("#Modified").val(datetime);
             };
             $(document).ready(function () {
                 $('#BtnVisible').click(toogleVisible);
                 $('#inputContent').wysibb(myOpt);
                 $('#PublishTime').timepicker({
-                    defaultTime: 'current',
+                    defaultTime: 'value',
                     minuteStep: 15,
                     disableFocus: false,
                     template: 'dropdown',
                     showSeconds: false,
                     showMeridian: false
-                });
+                }).on('changeTime', changeDateTime); ;
                 $('#PublishDate').datepicker({
                     format: 'dd.mm.yyyy',
                     autoclose: true,
                     language:'ru',
                     weekStart: 1 // Monday
-                });
+                }).on('changeDate', changeDateTime);
                 checkVisible();
             });
     </script>
