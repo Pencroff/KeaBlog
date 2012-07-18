@@ -77,10 +77,7 @@
 		&.active:hover,
 		&.active.disabled,
 		&.active.disabled:hover {
-			color: @red;
-			.border-radius(2px);
-			border: 1px solid @btnBorder;
-			.buttonBackground(@btnBackground, @btnBackgroundHighlight);
+			.buttonBackground(@btnBackgroundHighlight, @btnBorder);
 		}
 		span {
 			display: block;
@@ -90,9 +87,9 @@
 			float: left;
 			margin: 2px;
 			cursor: pointer;
-			.border-radius(4px);
 			&:hover {
 				background: @grayLighter;
+				.border-radius(4px);
 			}
 			&.disabled,
 			&.disabled:hover {
@@ -105,9 +102,10 @@
 			&.active.disabled,
 			&.active.disabled:hover {
 				color: @grayDark;
+				.buttonBackground(@btnBackgroundHighlight, @btnBorder);
+				height: 54px;
+				width: 47px;
 				.border-radius(4px);
-				border: 1px solid @btnBorder;
-				.buttonBackground(@btnBackground, @btnBackgroundHighlight);
 			}
 			&.old {
 				color: @grayLight;
