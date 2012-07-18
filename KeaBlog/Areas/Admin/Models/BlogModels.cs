@@ -43,6 +43,14 @@ namespace KeaBlog.Areas.Admin.Models
             PostManager.UpdatePost(post);
 
         }
+        
+        public string GetModified()
+        {
+            string result = null;
+            DateTime date = Modified == null ? DateTime.Now : Modified.Value;
+            result = date.ToString("dd.MM.yyyy");
+            return result;
+        }
 
         public void DeleteById(int id)
         {

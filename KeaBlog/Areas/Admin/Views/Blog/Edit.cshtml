@@ -27,7 +27,8 @@
               </div>*@
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16"><span class="add-on"><i class="icon-calendar"></i></span>
+                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16" 
+                               value="@Model.GetModified()" data-format="dd.mm.yyyy"><span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                     <div class="input-append">
                         <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16"><span class="add-on"><i class="icon-time"></i></span>
@@ -132,13 +133,13 @@
                 $('#PublishTime').timepicker({
                     defaultTime: 'current',
                     minuteStep: 15,
-                    disableFocus: true,
+                    disableFocus: false,
                     template: 'dropdown',
                     showSeconds: false,
                     showMeridian: false
                 });
                 $('#PublishDate').datepicker({
-                    format: 'dd-mm-yyyy',
+                    format: 'dd.mm.yyyy',
                     autoclose: true,
                     language:'ru',
                     weekStart: 1 // Monday
