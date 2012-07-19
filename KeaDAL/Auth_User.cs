@@ -16,8 +16,8 @@ namespace KeaDAL
     {
         public Auth_User()
         {
-            this.Post = new HashSet<Post>();
             this.Auth_Role = new HashSet<Auth_Role>();
+            this.Posts = new HashSet<Post>();
         }
     
         public System.Guid Id { get; set; }
@@ -29,8 +29,8 @@ namespace KeaDAL
         public string Email { get; set; }
         public string Address { get; set; }
     
-        public virtual ICollection<Post> Post { get; set; }
         public virtual ICollection<Auth_Role> Auth_Role { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
     }
     
 }

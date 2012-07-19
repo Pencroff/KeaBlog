@@ -16,7 +16,6 @@ namespace KeaDAL
     {
         public Post()
         {
-            this.Categories = new HashSet<Category>();
             this.Tags = new HashSet<Tag>();
         }
     
@@ -24,16 +23,17 @@ namespace KeaDAL
         public string Title { get; set; }
         public string EntryUrl { get; set; }
         public Nullable<System.Guid> AuthorId { get; set; }
-        public string ShortContent { get; set; }
         public string FullContent { get; set; }
         public bool Visible { get; set; }
-        public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
+        public int CategoryId { get; set; }
+        public string LinkToOriginal { get; set; }
+        public string OriginalTitle { get; set; }
     
         public virtual Auth_User auth_Users { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
     }
     

@@ -11,7 +11,6 @@
           <EntitySet Name="auth_UsersInRoles" EntityType="KeaContext.Store.auth_UsersInRoles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Categories" EntityType="KeaContext.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Posts" EntityType="KeaContext.Store.Posts" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="PostsInCategories" EntityType="KeaContext.Store.PostsInCategories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PostsInTags" EntityType="KeaContext.Store.PostsInTags" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tags" EntityType="KeaContext.Store.Tags" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_auth_UsersInRoles_Roles" Association="KeaContext.Store.FK_auth_UsersInRoles_Roles">
@@ -22,25 +21,21 @@
             <End Role="auth_Users" EntitySet="auth_Users" />
             <End Role="auth_UsersInRoles" EntitySet="auth_UsersInRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_Entries_auth_Users" Association="KeaContext.Store.FK_Entries_auth_Users">
+          <AssociationSet Name="FK_Post_auth_Users" Association="KeaContext.Store.FK_Post_auth_Users">
             <End Role="auth_Users" EntitySet="auth_Users" />
             <End Role="Posts" EntitySet="Posts" />
           </AssociationSet>
-          <AssociationSet Name="FK_EntriesInTags_Entries" Association="KeaContext.Store.FK_EntriesInTags_Entries">
+          <AssociationSet Name="FK_Posts_Categories" Association="KeaContext.Store.FK_Posts_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Posts" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostsInTags_Posts" Association="KeaContext.Store.FK_PostsInTags_Posts">
             <End Role="Posts" EntitySet="Posts" />
             <End Role="PostsInTags" EntitySet="PostsInTags" />
           </AssociationSet>
-          <AssociationSet Name="FK_EntriesInTags_Tags" Association="KeaContext.Store.FK_EntriesInTags_Tags">
+          <AssociationSet Name="FK_PostsInTags_Tags" Association="KeaContext.Store.FK_PostsInTags_Tags">
             <End Role="Tags" EntitySet="Tags" />
             <End Role="PostsInTags" EntitySet="PostsInTags" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostsInCategories_Categories" Association="KeaContext.Store.FK_PostsInCategories_Categories">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="PostsInCategories" EntitySet="PostsInCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PostsInCategories_PostsInCategories" Association="KeaContext.Store.FK_PostsInCategories_PostsInCategories">
-            <End Role="Posts" EntitySet="Posts" />
-            <End Role="PostsInCategories" EntitySet="PostsInCategories" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="auth_Roles">
@@ -78,8 +73,6 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
           <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="512" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="Modified" Type="datetime" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -89,21 +82,14 @@
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="EntryUrl" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="AuthorId" Type="uniqueidentifier" />
-          <Property Name="ShortContent" Type="nvarchar" Nullable="false" MaxLength="1024" />
           <Property Name="FullContent" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Visible" Type="bit" Nullable="false" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="Modified" Type="datetime" />
           <Property Name="SEOKeywords" Type="nvarchar" MaxLength="128" />
           <Property Name="SEODescription" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="PostsInCategories">
-          <Key>
-            <PropertyRef Name="PostId" />
-            <PropertyRef Name="CategoryId" />
-          </Key>
-          <Property Name="PostId" Type="int" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="LinkToOriginal" Type="nvarchar" MaxLength="512" />
+          <Property Name="OriginalTitle" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="PostsInTags">
           <Key>
@@ -119,8 +105,6 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="Modified" Type="datetime" />
         </EntityType>
         <Association Name="FK_auth_UsersInRoles_Roles">
           <End Role="auth_Roles" Type="KeaContext.Store.auth_Roles" Multiplicity="1" />
@@ -146,7 +130,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Entries_auth_Users">
+        <Association Name="FK_Post_auth_Users">
           <End Role="auth_Users" Type="KeaContext.Store.auth_Users" Multiplicity="0..1" />
           <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,7 +142,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EntriesInTags_Entries">
+        <Association Name="FK_Posts_Categories">
+          <End Role="Categories" Type="KeaContext.Store.Categories" Multiplicity="1" />
+          <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Posts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostsInTags_Posts">
           <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="1" />
           <End Role="PostsInTags" Type="KeaContext.Store.PostsInTags" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +166,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EntriesInTags_Tags">
+        <Association Name="FK_PostsInTags_Tags">
           <End Role="Tags" Type="KeaContext.Store.Tags" Multiplicity="1" />
           <End Role="PostsInTags" Type="KeaContext.Store.PostsInTags" Multiplicity="*" />
           <ReferentialConstraint>
@@ -179,30 +175,6 @@
             </Principal>
             <Dependent Role="PostsInTags">
               <PropertyRef Name="TagId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostsInCategories_Categories">
-          <End Role="Categories" Type="KeaContext.Store.Categories" Multiplicity="1" />
-          <End Role="PostsInCategories" Type="KeaContext.Store.PostsInCategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostsInCategories">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PostsInCategories_PostsInCategories">
-          <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="1" />
-          <End Role="PostsInCategories" Type="KeaContext.Store.PostsInCategories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Posts">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PostsInCategories">
-              <PropertyRef Name="PostId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -227,7 +199,7 @@
         <Function Name="sp_PostListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
-          <Parameter Name="Count" Type="int" Mode="InOut" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
         </Function>
         <Function Name="sp_PostUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
@@ -254,24 +226,9 @@
         <EntityContainer Name="KeaContext" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Auth_Role" EntityType="KeaDAL.Auth_Role" />
           <EntitySet Name="Auth_User" EntityType="KeaDAL.Auth_User" />
-          <EntitySet Name="Categories" EntityType="KeaDAL.Category" />
-          <EntitySet Name="Posts" EntityType="KeaDAL.Post" />
-          <EntitySet Name="Tags" EntityType="KeaDAL.Tag" />
-          <AssociationSet Name="FK_Entries_auth_Users" Association="KeaDAL.FK_Entries_auth_Users">
-            <End Role="auth_Users" EntitySet="Auth_User" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
           <AssociationSet Name="auth_UsersInRoles" Association="KeaDAL.auth_UsersInRoles">
             <End Role="auth_Roles" EntitySet="Auth_Role" />
             <End Role="auth_Users" EntitySet="Auth_User" />
-          </AssociationSet>
-          <AssociationSet Name="PostsInCategories" Association="KeaDAL.PostsInCategories">
-            <End Role="Category" EntitySet="Categories" />
-            <End Role="Post" EntitySet="Posts" />
-          </AssociationSet>
-          <AssociationSet Name="PostsInTags" Association="KeaDAL.PostsInTags">
-            <End Role="Post" EntitySet="Posts" />
-            <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
           <FunctionImport Name="UserByLoginGet" EntitySet="Auth_User" ReturnType="Collection(KeaDAL.Auth_User)">
           <Parameter Name="login" Mode="In" Type="String" />
@@ -285,7 +242,7 @@
           <FunctionImport Name="PostListByPageGet" ReturnType="Collection(KeaDAL.PostShort)">
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
-            <Parameter Name="Count" Mode="InOut" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PostInsert">
             <Parameter Name="title" Mode="In" Type="String" />
@@ -312,8 +269,23 @@
             <Parameter Name="seoDescription" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PostDelete">
-            <Parameter Name="postId" Mode="In" Type="Int32" />
+          <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Categories" EntityType="KeaDAL.Category" />
+          <EntitySet Name="Posts" EntityType="KeaDAL.Post" />
+          <EntitySet Name="Tags" EntityType="KeaDAL.Tag" />
+          <AssociationSet Name="FK_Post_auth_Users" Association="KeaDAL.FK_Post_auth_Users">
+            <End Role="Auth_User" EntitySet="Auth_User" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Posts_Categories" Association="KeaDAL.FK_Posts_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="PostsInTags" Association="KeaDAL.PostsInTags">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -335,72 +307,12 @@
           <Property Type="String" Name="Phone" MaxLength="16" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Email" MaxLength="128" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="Address" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Post" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="auth_Users" ToRole="Post" />
           <NavigationProperty Name="Auth_Role" Relationship="KeaDAL.auth_UsersInRoles" FromRole="auth_Users" ToRole="auth_Roles" />
+          <NavigationProperty Name="Posts" Relationship="KeaDAL.FK_Post_auth_Users" FromRole="Auth_User" ToRole="Post" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Created" Nullable="false" />
-          <Property Type="DateTime" Name="Modified" />
-          <NavigationProperty Name="Posts" Relationship="KeaDAL.PostsInCategories" FromRole="Category" ToRole="Post" />
-        </EntityType>
-        <EntityType Name="Post">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="AuthorId" />
-          <Property Type="String" Name="ShortContent" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="FullContent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Visible" Nullable="false" />
-          <Property Type="DateTime" Name="Created" Nullable="false" />
-          <Property Type="DateTime" Name="Modified" />
-          <Property Type="String" Name="SEOKeywords" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="SEODescription" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Entries_auth_Users" FromRole="Post" ToRole="auth_Users" />
-          <NavigationProperty Name="Categories" Relationship="KeaDAL.PostsInCategories" FromRole="Post" ToRole="Category" />
-          <NavigationProperty Name="Tags" Relationship="KeaDAL.PostsInTags" FromRole="Post" ToRole="Tag" />
-        </EntityType>
-        <EntityType Name="Tag">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="Created" Nullable="false" />
-          <Property Type="DateTime" Name="Modified" />
-          <NavigationProperty Name="Posts" Relationship="KeaDAL.PostsInTags" FromRole="Tag" ToRole="Post" />
-        </EntityType>
-        <Association Name="FK_Entries_auth_Users">
-          <End Type="KeaDAL.Auth_User" Role="auth_Users" Multiplicity="0..1" />
-          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="auth_Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Post">
-              <PropertyRef Name="AuthorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="auth_UsersInRoles">
           <End Type="KeaDAL.Auth_Role" Role="auth_Roles" Multiplicity="*" />
           <End Type="KeaDAL.Auth_User" Role="auth_Users" Multiplicity="*" />
-        </Association>
-        <Association Name="PostsInCategories">
-          <End Type="KeaDAL.Category" Role="Category" Multiplicity="*" />
-          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
-        </Association>
-        <Association Name="PostsInTags">
-          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
-          <End Type="KeaDAL.Tag" Role="Tag" Multiplicity="*" />
         </Association>
         <ComplexType Name="PostFull">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -425,6 +337,71 @@
           <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
           </ComplexType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Posts" Relationship="KeaDAL.FK_Posts_Categories" FromRole="Category" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="AuthorId" />
+          <Property Type="String" Name="FullContent" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Visible" Nullable="false" />
+          <Property Type="DateTime" Name="Modified" />
+          <Property Type="String" Name="SEOKeywords" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SEODescription" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="LinkToOriginal" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="OriginalTitle" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Post_auth_Users" FromRole="Post" ToRole="Auth_User" />
+          <NavigationProperty Name="Category" Relationship="KeaDAL.FK_Posts_Categories" FromRole="Post" ToRole="Category" />
+          <NavigationProperty Name="Tags" Relationship="KeaDAL.PostsInTags" FromRole="Post" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Posts" Relationship="KeaDAL.PostsInTags" FromRole="Tag" ToRole="Post" />
+        </EntityType>
+        <Association Name="FK_Post_auth_Users">
+          <End Type="KeaDAL.Auth_User" Role="Auth_User" Multiplicity="0..1" />
+          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auth_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Posts_Categories">
+          <End Type="KeaDAL.Category" Role="Category" Multiplicity="1" />
+          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PostsInTags">
+          <End Type="KeaDAL.Post" Role="Post" Multiplicity="*" />
+          <End Type="KeaDAL.Tag" Role="Tag" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -453,66 +430,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="KeaDAL.Category">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Posts">
-            <EntityTypeMapping TypeName="KeaDAL.Post">
-              <MappingFragment StoreEntitySet="Posts">
-                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
-                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Visible" ColumnName="Visible" />
-                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
-                <ScalarProperty Name="ShortContent" ColumnName="ShortContent" />
-                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-                <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tags">
-            <EntityTypeMapping TypeName="KeaDAL.Tag">
-              <MappingFragment StoreEntitySet="Tags">
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <AssociationSetMapping Name="auth_UsersInRoles" TypeName="KeaDAL.auth_UsersInRoles" StoreEntitySet="auth_UsersInRoles">
             <EndProperty Name="auth_Users">
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
             <EndProperty Name="auth_Roles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PostsInCategories" TypeName="KeaDAL.PostsInCategories" StoreEntitySet="PostsInCategories">
-            <EndProperty Name="Post">
-              <ScalarProperty Name="Id" ColumnName="PostId" />
-            </EndProperty>
-            <EndProperty Name="Category">
-              <ScalarProperty Name="Id" ColumnName="CategoryId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="PostsInTags" TypeName="KeaDAL.PostsInTags" StoreEntitySet="PostsInTags">
-            <EndProperty Name="Tag">
-              <ScalarProperty Name="Id" ColumnName="TagId" />
-            </EndProperty>
-            <EndProperty Name="Post">
-              <ScalarProperty Name="Id" ColumnName="PostId" />
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="UserByLoginGet" FunctionName="KeaContext.Store.sp_UserByLoginGet" />
@@ -551,6 +474,49 @@
           <FunctionImportMapping FunctionImportName="PostInsert" FunctionName="KeaContext.Store.sp_PostInsert" />
           <FunctionImportMapping FunctionImportName="PostUpdate" FunctionName="KeaContext.Store.sp_PostUpdate" />
           <FunctionImportMapping FunctionImportName="PostDelete" FunctionName="KeaContext.Store.sp_PostDelete" />
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KeaDAL.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="KeaDAL.Post">
+              <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="KeaDAL.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PostsInTags" TypeName="KeaDAL.PostsInTags" StoreEntitySet="PostsInTags">
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="Id" ColumnName="TagId" />
+            </EndProperty>
+            <EndProperty Name="Post">
+              <ScalarProperty Name="Id" ColumnName="PostId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -575,25 +541,25 @@
       <Diagram Name="KeaModel" ZoomLevel="94">
         <EntityTypeShape EntityType="KeaDAL.Auth_Role" Width="1.5" PointX="0.75" PointY="2.125" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="KeaDAL.Auth_User" Width="1.5" PointX="3" PointY="1.375" Height="2.941793619791667" />
-        <EntityTypeShape EntityType="KeaDAL.Category" Width="1.5" PointX="3" PointY="5.75" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="KeaDAL.Post" Width="1.5" PointX="5.25" PointY="1" Height="3.7109993489583317" />
-        <EntityTypeShape EntityType="KeaDAL.Tag" Width="1.5" PointX="7.5" PointY="1.875" Height="1.9802864583333317" />
-        <AssociationConnector Association="KeaDAL.FK_Entries_auth_Users" >
-          <ConnectorPoint PointX="4.5" PointY="2.8458968098958337" />
-          <ConnectorPoint PointX="5.25" PointY="2.8458968098958337" />
-        </AssociationConnector>
         <AssociationConnector Association="KeaDAL.auth_UsersInRoles" >
           <ConnectorPoint PointX="2.25" PointY="2.922841796875" />
           <ConnectorPoint PointX="3" PointY="2.922841796875" />
         </AssociationConnector>
-        <AssociationConnector Association="KeaDAL.PostsInCategories" >
-          <ConnectorPoint PointX="4.5" PointY="6.8362939453125" />
-          <ConnectorPoint PointX="6" PointY="6.8362939453125" />
-          <ConnectorPoint PointX="6" PointY="4.7109993489583317" />
+        <EntityTypeShape EntityType="KeaDAL.Category" Width="1.5" PointX="3" PointY="6" Height="1.7879850260416657" />
+        <EntityTypeShape EntityType="KeaDAL.Post" Width="1.5" PointX="5.25" PointY="0.875" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="KeaDAL.Tag" Width="1.5" PointX="7.5" PointY="2" Height="1.5956835937499996" />
+        <AssociationConnector Association="KeaDAL.FK_Post_auth_Users" >
+          <ConnectorPoint PointX="4.5" PointY="2.8458968098958328" />
+          <ConnectorPoint PointX="5.25" PointY="2.8458968098958328" />
+        </AssociationConnector>
+        <AssociationConnector Association="KeaDAL.FK_Posts_Categories" >
+          <ConnectorPoint PointX="4.5" PointY="6.8939925130208328" />
+          <ConnectorPoint PointX="6" PointY="6.8939925130208328" />
+          <ConnectorPoint PointX="6" PointY="4.77830078125" />
         </AssociationConnector>
         <AssociationConnector Association="KeaDAL.PostsInTags" >
-          <ConnectorPoint PointX="6.75" PointY="2.8651432291666659" />
-          <ConnectorPoint PointX="7.5" PointY="2.8651432291666659" />
+          <ConnectorPoint PointX="6.75" PointY="2.797841796875" />
+          <ConnectorPoint PointX="7.5" PointY="2.797841796875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
