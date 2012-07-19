@@ -245,5 +245,17 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>Off</QuotedIdentifier>
     </Build>
+    <Build Include="FK_PostsInTags_Tags.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_PostsInTags_Posts.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_Posts_Categories.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
+    <Build Include="FK_Post_auth_Users.fkey.sql">
+      <SubType>Code</SubType>
+    </Build>
   </ItemGroup>
 </Project>
