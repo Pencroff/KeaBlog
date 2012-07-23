@@ -17,11 +17,11 @@ namespace KeaDAL
         public int Id { get; set; }
         public string Title { get; set; }
         public string EntryUrl { get; set; }
-        public Nullable<System.Guid> AuthorId { get; set; }
+        public System.Guid AuthorId { get; set; }
         public string AuthorName { get; set; }
         public string FullContent { get; set; }
         public bool Visible { get; set; }
-        public Nullable<System.DateTime> Modified { get; set; }
+        public System.DateTime Modified { get; set; }
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
         public int CategoryId { get; set; }

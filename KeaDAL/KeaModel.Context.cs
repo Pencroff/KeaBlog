@@ -64,32 +64,6 @@ namespace KeaDAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UserRolesGet", loginParameter);
         }
     
-        public virtual ObjectResult<PostFull> PostByIdGet(Nullable<int> postId)
-        {
-            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
-    
-            var postIdParameter = postId.HasValue ?
-                new ObjectParameter("postId", postId) :
-                new ObjectParameter("postId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PostByIdGet", postIdParameter);
-        }
-    
-        public virtual ObjectResult<PostShort> PostListByPageGet(Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
-        {
-            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostShort).Assembly);
-    
-            var startIndexParameter = startIndex.HasValue ?
-                new ObjectParameter("startIndex", startIndex) :
-                new ObjectParameter("startIndex", typeof(int));
-    
-            var endIndexParameter = endIndex.HasValue ?
-                new ObjectParameter("endIndex", endIndex) :
-                new ObjectParameter("endIndex", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostShort>("PostListByPageGet", startIndexParameter, endIndexParameter, count);
-        }
-    
         public virtual int PostDelete(Nullable<int> postId)
         {
             var postIdParameter = postId.HasValue ?
@@ -195,6 +169,32 @@ namespace KeaDAL
                 new ObjectParameter("originalTitle", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostUpdate", postIdParameter, titleParameter, entryUrlParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
+        }
+    
+        public virtual ObjectResult<PostFull> PostByIdGet(Nullable<int> postId)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
+    
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PostByIdGet", postIdParameter);
+        }
+    
+        public virtual ObjectResult<PostShort> PostListByPageGet(Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostShort).Assembly);
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostShort>("PostListByPageGet", startIndexParameter, endIndexParameter, count);
         }
     }
 }

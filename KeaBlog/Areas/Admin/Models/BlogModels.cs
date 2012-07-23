@@ -15,48 +15,52 @@ namespace KeaBlog.Areas.Admin.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string EntryUrl { get; set; }
-        public Nullable<System.Guid> AuthorId { get; set; }
+        public System.Guid AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public string ShortContent { get; set; }
-        //[AllowHtml]
         public string FullContent { get; set; }
         public bool Visible { get; set; }
-        public System.DateTime Created { get; set; }
-        public Nullable<System.DateTime> Modified { get; set; }
+        public System.DateTime Modified { get; set; }
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string LinkToOriginal { get; set; }
+        public string OriginalTitle { get; set; }
 
         public void FillById (int postId)
         {
-            PostFull model = PostManager.GetPostById(postId);
-            ModelMapping.PostFullToViewModel(model, this);
+            PostFull post = PostManager.GetPostById(postId);
+            ModelMapping.PostFullToViewModel(post, this);
+            Modified = post.Modified.ToLocalTime();
         }
 
         public void SaveToDb()
         {
             Post post = new Post();
-            if (this.ShortContent == null)
-            {
-                this.ShortContent = this.FullContent;
-            }
             ModelMapping.PostViewModelToModel(this, post);
+            post.Modified = Modified.ToUniversalTime();
             PostManager.UpdatePost(post);
+        }
 
+        public void InsertToDb()
+        {
+            Post post = new Post();
+            ModelMapping.PostViewModelToModel(this, post);
+            post.Modified = Modified.ToUniversalTime();
+            PostManager.InsertPost(post);
         }
         
         public string GetModifiedDate()
         {
             string result = null;
-            DateTime date = Modified == null ? DateTime.Now : Modified.Value;
-            result = date.ToString("dd.MM.yyyy");
+            result = Modified.ToString("dd.MM.yyyy");
             return result;
         }
 
         public string GetModifiedTime()
         {
             string result = null;
-            DateTime date = Modified == null ? DateTime.Now : Modified.Value;
-            result = date.ToString("hh:mm");
+            result = Modified.ToString("HH:mm");
             return result;
         }
 
@@ -83,6 +87,7 @@ namespace KeaBlog.Areas.Admin.Models
             {
                 viewModel = new PostViewModel();
                 ModelMapping.PostShortToViewModel(model, viewModel);
+                viewModel.Modified = model.Modified.ToLocalTime();
                 Posts.Add(viewModel);
             }
         }

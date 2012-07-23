@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using KeaBLL;
 using KeaBlog.Areas.Admin.Models;
+using KeaBlog.Services;
 using KeaDAL;
 
 namespace KeaBlog.Areas.Admin.Controllers
@@ -33,25 +34,21 @@ namespace KeaBlog.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            //ViewBag.AuthorId = Guid.Empty;//new SelectList(db.Auth_User, "Id", "Login");
-            return View();
+            PostViewModel model = new PostViewModel();
+            model.Modified = DateTime.Now;
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Create(Post post)
+        public ActionResult Create(PostViewModel model)
         {
             if (ModelState.IsValid)
             {
-                // Work
-                //post.AuthorId = Guid.Parse("E21486DE-07F0-4E9B-BC61-B49ADEFBBCD3");
-                // Home
-                //post.AuthorId = Guid.Parse("29A6A9E3-AF2D-4FB1-A3A5-7837DEA26003");
-                PostManager.InsertPost(post);
+                model.AuthorId = Guid.Parse(CurrentSession.UserId);
+                model.InsertToDb();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.AuthorId = Guid.Empty;
-            return View(post);
+            return View(model);
         }
         
         public ActionResult Edit(int id = 0)
