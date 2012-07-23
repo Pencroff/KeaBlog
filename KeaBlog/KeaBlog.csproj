@@ -288,6 +288,7 @@
     <Content Include="Content\WysiBB\themes\default\img\icons.png" />
     <Content Include="Content\WysiBB\themes\default\img\icons_old.png" />
     <Content Include="Content\WysiBB\themes\default\img\imgpreview.png" />
+    <Content Include="Content\WysiBB\themes\default\img\loader.gif" />
     <Content Include="Content\WysiBB\themes\default\img\smiles\sm1.png" />
     <Content Include="Content\WysiBB\themes\default\img\smiles\sm2.png" />
     <Content Include="Content\WysiBB\themes\default\img\smiles\sm3.png" />
