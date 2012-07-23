@@ -188,13 +188,14 @@
           <Parameter Name="title" Type="nvarchar" Mode="In" />
           <Parameter Name="entryUrl" Type="nvarchar" Mode="In" />
           <Parameter Name="authorId" Type="uniqueidentifier" Mode="In" />
-          <Parameter Name="shortContent" Type="nvarchar" Mode="In" />
           <Parameter Name="fullContent" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="visible" Type="bit" Mode="In" />
-          <Parameter Name="created" Type="datetime" Mode="In" />
           <Parameter Name="modified" Type="datetime" Mode="In" />
           <Parameter Name="seoKeywords" Type="nvarchar" Mode="In" />
           <Parameter Name="seoDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
+          <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_PostListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
@@ -205,13 +206,14 @@
           <Parameter Name="postId" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
           <Parameter Name="entryUrl" Type="nvarchar" Mode="In" />
-          <Parameter Name="shortContent" Type="nvarchar" Mode="In" />
           <Parameter Name="fullContent" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="visible" Type="bit" Mode="In" />
-          <Parameter Name="created" Type="datetime" Mode="In" />
           <Parameter Name="modified" Type="datetime" Mode="In" />
           <Parameter Name="seoKeywords" Type="nvarchar" Mode="In" />
           <Parameter Name="seoDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
+          <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_UserByLoginGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="login" Type="nvarchar" Mode="In" />
@@ -244,30 +246,6 @@
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PostInsert">
-            <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="entryUrl" Mode="In" Type="String" />
-            <Parameter Name="authorId" Mode="In" Type="Guid" />
-            <Parameter Name="shortContent" Mode="In" Type="String" />
-            <Parameter Name="fullContent" Mode="In" Type="String" />
-            <Parameter Name="visible" Mode="In" Type="Boolean" />
-            <Parameter Name="created" Mode="In" Type="DateTime" />
-            <Parameter Name="modified" Mode="In" Type="DateTime" />
-            <Parameter Name="seoKeywords" Mode="In" Type="String" />
-            <Parameter Name="seoDescription" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PostUpdate">
-            <Parameter Name="postId" Mode="In" Type="Int32" />
-            <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="entryUrl" Mode="In" Type="String" />
-            <Parameter Name="shortContent" Mode="In" Type="String" />
-            <Parameter Name="fullContent" Mode="In" Type="String" />
-            <Parameter Name="visible" Mode="In" Type="Boolean" />
-            <Parameter Name="created" Mode="In" Type="DateTime" />
-            <Parameter Name="modified" Mode="In" Type="DateTime" />
-            <Parameter Name="seoKeywords" Mode="In" Type="String" />
-            <Parameter Name="seoDescription" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="PostDelete">
           <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -286,6 +264,32 @@
             <End Role="Post" EntitySet="Posts" />
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
+          <FunctionImport Name="PostInsert">
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="entryUrl" Mode="In" Type="String" />
+            <Parameter Name="authorId" Mode="In" Type="Guid" />
+            <Parameter Name="fullContent" Mode="In" Type="String" />
+            <Parameter Name="visible" Mode="In" Type="Boolean" />
+            <Parameter Name="modified" Mode="In" Type="DateTime" />
+            <Parameter Name="seoKeywords" Mode="In" Type="String" />
+            <Parameter Name="seoDescription" Mode="In" Type="String" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="linkToOriginal" Mode="In" Type="String" />
+            <Parameter Name="originalTitle" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PostUpdate">
+            <Parameter Name="postId" Mode="In" Type="Int32" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="entryUrl" Mode="In" Type="String" />
+            <Parameter Name="fullContent" Mode="In" Type="String" />
+            <Parameter Name="visible" Mode="In" Type="Boolean" />
+            <Parameter Name="modified" Mode="In" Type="DateTime" />
+            <Parameter Name="seoKeywords" Mode="In" Type="String" />
+            <Parameter Name="seoDescription" Mode="In" Type="String" />
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="linkToOriginal" Mode="In" Type="String" />
+            <Parameter Name="originalTitle" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -320,22 +324,25 @@
           <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" />
           <Property Type="Guid" Name="AuthorId" Nullable="true" />
           <Property Type="String" Name="AuthorName" Nullable="true" MaxLength="64" />
-          <Property Type="String" Name="ShortContent" Nullable="false" MaxLength="1024" />
           <Property Type="String" Name="FullContent" Nullable="false" />
           <Property Type="Boolean" Name="Visible" Nullable="false" />
-          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
           <Property Type="String" Name="SEOKeywords" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="SEODescription" Nullable="true" MaxLength="256" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="OriginalTitle" Nullable="true" MaxLength="128" />
         </ComplexType>
         <ComplexType Name="PostShort">
           <Property Type="Int32" Name="Id" Nullable="true" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="256" />
           <Property Type="String" Name="AuthorName" Nullable="true" MaxLength="64" />
-          <Property Type="String" Name="ShortContent" Nullable="false" MaxLength="1024" />
           <Property Type="Boolean" Name="Visible" Nullable="false" />
-          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
           <Property Type="DateTime" Name="Modified" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FullContent" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
           </ComplexType>
         <EntityType Name="Category">
           <Key>
@@ -448,13 +455,15 @@
                 <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
-                <ScalarProperty Name="ShortContent" ColumnName="ShortContent" />
                 <ScalarProperty Name="FullContent" ColumnName="FullContent" />
                 <ScalarProperty Name="Visible" ColumnName="Visible" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
                 <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -464,15 +473,14 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
-                <ScalarProperty Name="ShortContent" ColumnName="ShortContent" />
                 <ScalarProperty Name="Visible" ColumnName="Visible" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PostInsert" FunctionName="KeaContext.Store.sp_PostInsert" />
-          <FunctionImportMapping FunctionImportName="PostUpdate" FunctionName="KeaContext.Store.sp_PostUpdate" />
           <FunctionImportMapping FunctionImportName="PostDelete" FunctionName="KeaContext.Store.sp_PostDelete" />
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="KeaDAL.Category">
@@ -517,6 +525,8 @@
               <ScalarProperty Name="Id" ColumnName="PostId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="PostInsert" FunctionName="KeaContext.Store.sp_PostInsert" />
+          <FunctionImportMapping FunctionImportName="PostUpdate" FunctionName="KeaContext.Store.sp_PostUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

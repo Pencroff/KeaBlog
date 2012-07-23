@@ -27,10 +27,12 @@ BEGIN
 	SELECT subTable.[Id]
 			,p.[Title]
 			,au.Name AS [AuthorName]
-			,p.[ShortContent]
+			,p.[FullContent]
 			,p.[Visible]
-			,p.[Created]
 			,p.[Modified]
-	FROM dbo.Posts p, @tab subTable, [dbo].auth_Users au WHERE p.Id = subTable.Id AND p.AuthorId = au.Id
+			,c.Name AS [CategoryName]
+			,p.LinkToOriginal
+	FROM dbo.Posts p, @tab subTable, auth_Users au, Categories c 
+		WHERE p.Id = subTable.Id AND p.AuthorId = au.Id AND p.CategoryId = c.Id
 	
 END

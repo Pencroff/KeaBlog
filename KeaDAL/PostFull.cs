@@ -19,13 +19,15 @@ namespace KeaDAL
         public string EntryUrl { get; set; }
         public Nullable<System.Guid> AuthorId { get; set; }
         public string AuthorName { get; set; }
-        public string ShortContent { get; set; }
         public string FullContent { get; set; }
         public bool Visible { get; set; }
-        public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
         public string SEOKeywords { get; set; }
         public string SEODescription { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string LinkToOriginal { get; set; }
+        public string OriginalTitle { get; set; }
     }
     
 }

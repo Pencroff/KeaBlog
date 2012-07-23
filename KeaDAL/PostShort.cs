@@ -17,10 +17,11 @@ namespace KeaDAL
         public Nullable<int> Id { get; set; }
         public string Title { get; set; }
         public string AuthorName { get; set; }
-        public string ShortContent { get; set; }
         public bool Visible { get; set; }
-        public System.DateTime Created { get; set; }
         public Nullable<System.DateTime> Modified { get; set; }
+        public string FullContent { get; set; }
+        public string CategoryName { get; set; }
+        public string LinkToOriginal { get; set; }
     }
     
 }

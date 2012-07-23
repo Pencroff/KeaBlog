@@ -8,13 +8,15 @@ BEGIN
       ,pst.[EntryUrl]
       ,pst.[AuthorId]
       ,au.Name AS [AuthorName]
-      ,pst.[ShortContent]
       ,pst.[FullContent]
       ,pst.[Visible]
-      ,pst.[Created]
       ,pst.[Modified]
       ,pst.[SEOKeywords]
       ,pst.[SEODescription]
-  FROM [dbo].[Posts] pst, [dbo].auth_Users au 
-	WHERE pst.Id = @postId AND pst.AuthorId = au.Id
+      ,pst.[CategoryId]
+      ,c.Name AS [CategoryName]
+      ,pst.[LinkToOriginal]
+      ,pst.[OriginalTitle]
+  FROM [dbo].[Posts] pst, [dbo].auth_Users au, [dbo].Categories c
+	WHERE pst.Id = @postId AND pst.AuthorId = au.Id AND pst.CategoryId = c.Id
 END
