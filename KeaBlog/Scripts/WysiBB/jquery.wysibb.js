@@ -25,7 +25,7 @@
 			skipBodyTransform:	["code"],
 			//themePrefix:		'http://www.wysibb.com/static/theme/',
 			validTags:			["a","b","i","s","u","img","ul","ol","li","br","p","q","strike","blockquote","table","tr","td"],
-			buttons:			"bold,italic,underline,strike,sup,sub,|,fontsizeselect,fontfamilyselect,fontcolor,|,justifyleft,justifycenter,justifyright,-,link,img,table,|,bullist,numlist,quote,offtopic,code,spoiler", //default active button list
+			buttons:			"bold,italic,underline,strike,sup,sub,|,fontsizeselect,fontfamilyselect,fontcolor,|,justifyleft,justifycenter,justifyright,|,link,img,table,|,bullist,numlist,quote,offtopic,code,spoiler", //default active button list
 			allButtons:			{
 				"bold":	{
 					title:"Жирный",

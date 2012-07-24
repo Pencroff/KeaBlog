@@ -4,69 +4,99 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details @Model.Title</h2>
+<div class="page-header">
+    <h2>Details @Model.Title</h2>    
+</div>
 
-<fieldset>
-    <legend>Entry</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+<div class="row">
+    <div class="span6">
+        <h4>Title</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.Title)
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Title)
+    <div class="span6">
+        <h4>Friendly Url</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.EntryUrl)
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EntryUrl)
+</div>
+<div class="row">
+    <div class="span12">
+        <h4>Content</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.FullContent)
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EntryUrl)
+</div>
+<div class="row">
+    <div class="span1">
+        <h4>Visible</h4>
+        <div class="well well-small">
+            @if (Model.Visible)
+            {
+                <i class="icon-ok"></i>   
+            }
+            else
+            {
+                <i class="icon-remove"></i>
+            }
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AuthorName)
+    <div class="span2">
+        <h4>Publish in</h4>
+        <div class="well well-small">
+            @Model.GetModifiedDate()&nbsp;@Model.GetModifiedTime()
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AuthorName)
+    <div class="span6">
+        <h4>Category</h4>
+        <div class="well well-small">
+            @Model.CategoryName
+        </div>
     </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FullContent)
+    <div class="span3">
+        <h4>Author</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.AuthorName)
+        </div>
     </div>
-    <div class="display-field" id="content">
-        @Html.DisplayFor(model => model.FullContent)
+</div>
+<div class="row">
+    <div class="span6">
+        <h4>Title link to original</h4>
+        <div class="well well-small">
+            @Model.OriginalTitle
+        </div>
     </div>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Visible)
+    <div class="span6">
+        <h4>Link to original</h4>
+        <div class="well well-small">
+            @Model.LinkToOriginal
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Visible)
+</div>
+<div class="row">
+    <div class="span6">
+        <h4>SEO Description</h4>
+        <div class="well well-small">
+            @Model.SEODescription
+        </div>
     </div>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Modified)
+    <div class="span6">
+        <h4>SEO keywords</h4>
+        <div class="well well-small">
+            @Model.SEOKeywords
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Modified)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SEOKeywords)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SEOKeywords)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.SEODescription)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.SEODescription)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
+<div class="pull-left">
+    <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
+</div>
+<div class="pull-right">
+    <a href='@Url.Action("Edit", "Blog", new { id = Model.Id })' class = "btn btn-info"><i class="icon-edit icon-white"></i> Edit</a>
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
