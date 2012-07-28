@@ -15,8 +15,15 @@ namespace KeaBlog
                                          "~/Content/bootstrap/js/bootstrap-timepicker.js",
                                          "~/Content/bootstrap/js/bootstrap-datepicker.js",
                                          "~/Content/bootstrap/js/locales/bootstrap-datepicker.ru.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/wysibb").Include("~/Scripts/WysiBB/jquery.wysibb.js"));
+            bundles.Add(new ScriptBundle("~/bundles/wysibb").Include("~/Scripts/WysiBB/wysibb.config.js",
+                                                                     "~/Scripts/WysiBB/wysibb.presets.js",
+                                                                     "~/Scripts/WysiBB/wysibb.helpers.js",
+                                                                     "~/Scripts/WysiBB/wysibb.render.js",
+                                                                     "~/Scripts/WysiBB/jquery.wysibb.js"));
+            bundles.Add(new ScriptBundle("~/bundles/wysibb.render").Include("~/Scripts/WysiBB/wysibb.config.js",
+                                                                     "~/Scripts/WysiBB/wysibb.presets.js",
+                                                                     "~/Scripts/WysiBB/wysibb.helpers.js",
+                                                                     "~/Scripts/WysiBB/wysibb.render.js"));
 
             bundles.Add(new StyleBundle("~/Content/css/fonts").Include("~/Content/css/fonts.css"));
 

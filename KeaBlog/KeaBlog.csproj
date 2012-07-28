@@ -315,14 +315,19 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\WysiBB\jquery.wysibb.js" />
+    <Content Include="Scripts\WysiBB\jquery.wysibb.min.js" />
+    <Content Include="Scripts\WysiBB\jquery.wysibb.render.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.js" />
     <Content Include="Scripts\PagedList\PagedList.Mvc.Template.html" />
-    <Content Include="Scripts\WysiBB\jquery.wysibb.js" />
-    <Content Include="Scripts\WysiBB\jquery.wysibb.min.js" />
+    <Content Include="Scripts\WysiBB\wysibb.config.js" />
+    <Content Include="Scripts\WysiBB\wysibb.helpers.js" />
+    <Content Include="Scripts\WysiBB\wysibb.presets.js" />
+    <Content Include="Scripts\WysiBB\wysibb.render.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

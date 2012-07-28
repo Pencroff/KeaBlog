@@ -25,9 +25,7 @@
 <div class="row">
     <div class="span12">
         <h4>Content</h4>
-        <div class="well well-small">
-            @Html.DisplayFor(model => model.FullContent)
-        </div>
+        <div class="well well-small contentBB">@Html.DisplayFor(model => model.FullContent)</div>
     </div>
 </div>
 <div class="row">
@@ -100,18 +98,16 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/wysibb")
+    @Scripts.Render("~/bundles/wysibb.render")
     <script>
-        var myOpt = {
-            debug: false,
-            watchTxtArea: false,
-            smileAutoDetect: false,
-            themeName: 'default',
-            themePrefix: '/Content/WysiBB/themes/'
-        };
         $(document).ready(function () {
-
-
+            var viewElement = $('.contentBB'),
+                bbHtml = viewElement.html(),
+                html;
+            wysibb.options.themePrefix = '/Content/WysiBB/themes';
+            html = wysibb.render(bbHtml);
+            viewElement.html(html);
+            $('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
         });
     </script>
 }
