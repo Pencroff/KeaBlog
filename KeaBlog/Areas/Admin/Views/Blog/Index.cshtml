@@ -1,4 +1,5 @@
-﻿@model IEnumerable<KeaBlog.Areas.Admin.Models.PostViewModel>
+﻿@using Webdiyer.WebControls.Mvc
+@model KeaBlog.Areas.Admin.Models.PostListViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +8,7 @@
 <h2>Posts list</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Blog", new { @class = "btn btn-info btn-mini" })
+    @Html.ActionLink("Create New", "Create", "Blog", null, new { @class = "btn btn-info btn-mini" })
 </p>
 <table class="table table-striped table-bordered table-fix">
     <thead>
@@ -33,7 +34,7 @@
         </tr>        
     </thead>
     <tbody>
-        @foreach (var item in Model) {
+        @foreach (var item in Model.Posts) {
             <tr>
                 <td style="text-align: center">
                     @if (item.LinkToOriginal != null)
@@ -72,3 +73,19 @@
         }
     </tbody>
 </table>
+<div class="pagination">
+            @Html.Pager(Model.Posts, new PagerOptions
+            {
+                PageIndexParameterName = "page",
+                NumericPagerItemCount = 10,
+                AlwaysShowFirstLastPageNumber = true,
+                PagerItemWrapperFormatString = "<li>{0}</li>",
+                CurrentPagerItemWrapperFormatString = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+                ContainerTagName = "ul",
+                ShowFirstLast = false,
+                SeparatorHtml = "",
+                PrevPageText = "&larr;",
+                NextPageText = "&rarr;"
+            })   
+        </div>

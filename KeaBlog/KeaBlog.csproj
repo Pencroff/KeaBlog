@@ -377,6 +377,10 @@
       <Project>{94D06936-45EF-4589-953B-09B7422D3DF8}</Project>
       <Name>KeaDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MvcPager1.5\MvcPager.csproj">
+      <Project>{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}</Project>
+      <Name>MvcPager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{DC84C4A4-8CCD-4290-89B0-7E8DB00BB6B0}</Project>
       <Name>ServiceLib</Name>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 
 namespace KeaBlog.Services
 {
@@ -11,10 +12,28 @@ namespace KeaBlog.Services
         {
             get
             {
-                if (HttpContext.Current.Session["UserId"] != null)
-                    return HttpContext.Current.Session["UserId"].ToString();
+                var context = HttpContext.Current;
+                string userId = null;
+                if (context.Session["UserId"] != null)
+                {
+                    return context.Session["UserId"].ToString();
+                }
                 else
-                    return null;
+                {
+                    if (context.User.Identity.IsAuthenticated)
+                    {
+                        string userName = context.User.Identity.Name;
+                        var user = new Services.Providers.KeaMembershipService().GetUser(userName);
+                        if (user is MembershipUser && user.ProviderUserKey != null)
+                        {
+                            userId = user.ProviderUserKey.ToString();
+                            HttpContext.Current.Session["UserId"] = userId;
+                            return userId;
+                        }
+                        
+                    }
+                    return userId;
+                }
             }
             set
             {

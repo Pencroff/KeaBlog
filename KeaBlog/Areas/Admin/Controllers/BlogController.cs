@@ -14,11 +14,11 @@ namespace KeaBlog.Areas.Admin.Controllers
     public class BlogController : Controller
     {
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int page = 1)
         {
             var viewModel = new PostListViewModel();
-            viewModel.FillByPage(id);
-            return View(viewModel.Posts);
+            viewModel.FillByPage(page);
+            return View(viewModel);
         }
         
         public ActionResult Details(int id = 0)

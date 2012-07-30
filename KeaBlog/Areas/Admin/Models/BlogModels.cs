@@ -7,6 +7,7 @@ using KeaBLL;
 using KeaBlog.Services;
 using KeaDAL;
 using ServiceLib;
+using Webdiyer.WebControls.Mvc;
 
 namespace KeaBlog.Areas.Admin.Models
 {
@@ -72,7 +73,8 @@ namespace KeaBlog.Areas.Admin.Models
 
     public class PostListViewModel : BasicModel
     {
-        public IList<PostViewModel> Posts { get; set; }
+        //public IList<PostViewModel> Posts { get; set; }
+        public PagedList<PostViewModel> Posts { get; set; }
 
         public void FillByPage (int page)
         {
@@ -80,7 +82,7 @@ namespace KeaBlog.Areas.Admin.Models
             int pageSize = 10;
             int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
-            Posts = new List<PostViewModel>();
+            List<PostViewModel> postList = new List<PostViewModel>();
             PostViewModel viewModel;
             List<PostShort> modelList = PostManager.GetPostListByPage(StartPageIndex, EndPageIndex, out count);
             foreach (var model in modelList)
@@ -88,8 +90,9 @@ namespace KeaBlog.Areas.Admin.Models
                 viewModel = new PostViewModel();
                 ModelMapping.PostShortToViewModel(model, viewModel);
                 viewModel.Modified = model.Modified.ToLocalTime();
-                Posts.Add(viewModel);
+                postList.Add(viewModel);
             }
+            Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
         }
     }
 }

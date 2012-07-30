@@ -11,6 +11,8 @@ Project("{C8D11400-126E-41CD-887F-60BD40844F9E}") = "Database.Kea", "Database.Ke
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLib", "ServiceLib\ServiceLib.csproj", "{DC84C4A4-8CCD-4290-89B0-7E8DB00BB6B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcPager", "MvcPager1.5\MvcPager.csproj", "{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DC84C4A4-8CCD-4290-89B0-7E8DB00BB6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC84C4A4-8CCD-4290-89B0-7E8DB00BB6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC84C4A4-8CCD-4290-89B0-7E8DB00BB6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71DCE177-5227-4D7E-A5CB-298AFE33ABE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
