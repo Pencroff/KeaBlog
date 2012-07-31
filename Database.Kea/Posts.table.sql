@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Posts] (
     [Id]             INT              IDENTITY (1, 1) NOT NULL,
     [Title]          NVARCHAR (256)   NOT NULL,
-    [EntryUrl]       NVARCHAR (256)   NOT NULL,
+    [PostUrl]        NVARCHAR (256)   NOT NULL,
     [AuthorId]       UNIQUEIDENTIFIER NOT NULL,
     [FullContent]    NVARCHAR (MAX)   NULL,
     [Visible]        BIT              NOT NULL,
@@ -12,6 +12,8 @@
     [LinkToOriginal] NVARCHAR (512)   NULL,
     [OriginalTitle]  NVARCHAR (128)   NULL
 );
+
+
 
 
 

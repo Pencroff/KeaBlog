@@ -73,15 +73,15 @@ namespace KeaDAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostDelete", postIdParameter);
         }
     
-        public virtual int PostInsert(string title, string entryUrl, Nullable<System.Guid> authorId, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
+        public virtual int PostInsert(string title, string postUrl, Nullable<System.Guid> authorId, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
         {
             var titleParameter = title != null ?
                 new ObjectParameter("title", title) :
                 new ObjectParameter("title", typeof(string));
     
-            var entryUrlParameter = entryUrl != null ?
-                new ObjectParameter("entryUrl", entryUrl) :
-                new ObjectParameter("entryUrl", typeof(string));
+            var postUrlParameter = postUrl != null ?
+                new ObjectParameter("postUrl", postUrl) :
+                new ObjectParameter("postUrl", typeof(string));
     
             var authorIdParameter = authorId.HasValue ?
                 new ObjectParameter("authorId", authorId) :
@@ -119,10 +119,10 @@ namespace KeaDAL
                 new ObjectParameter("originalTitle", originalTitle) :
                 new ObjectParameter("originalTitle", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostInsert", titleParameter, entryUrlParameter, authorIdParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostInsert", titleParameter, postUrlParameter, authorIdParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
         }
     
-        public virtual int PostUpdate(Nullable<int> postId, string title, string entryUrl, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
+        public virtual int PostUpdate(Nullable<int> postId, string title, string postUrl, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
         {
             var postIdParameter = postId.HasValue ?
                 new ObjectParameter("postId", postId) :
@@ -132,9 +132,9 @@ namespace KeaDAL
                 new ObjectParameter("title", title) :
                 new ObjectParameter("title", typeof(string));
     
-            var entryUrlParameter = entryUrl != null ?
-                new ObjectParameter("entryUrl", entryUrl) :
-                new ObjectParameter("entryUrl", typeof(string));
+            var postUrlParameter = postUrl != null ?
+                new ObjectParameter("postUrl", postUrl) :
+                new ObjectParameter("postUrl", typeof(string));
     
             var fullContentParameter = fullContent != null ?
                 new ObjectParameter("fullContent", fullContent) :
@@ -168,7 +168,7 @@ namespace KeaDAL
                 new ObjectParameter("originalTitle", originalTitle) :
                 new ObjectParameter("originalTitle", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostUpdate", postIdParameter, titleParameter, entryUrlParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostUpdate", postIdParameter, titleParameter, postUrlParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
         }
     
         public virtual ObjectResult<PostFull> PostByIdGet(Nullable<int> postId)

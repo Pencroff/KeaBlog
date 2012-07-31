@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using KeaBLL;
 using KeaBlog.Services;
+using KeaBlog.Services.Validations;
 using KeaDAL;
 using ServiceLib;
 using Webdiyer.WebControls.Mvc;
@@ -15,9 +16,11 @@ namespace KeaBlog.Areas.Admin.Models
     public class PostViewModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage = "Title of article is required.")]
         public string Title { get; set; }
-        [Required]
-        public string EntryUrl { get; set; }
+        [Required(ErrorMessage = "The Friendly Url isn't empty.")]
+        [FriendlyUrlValidation]
+        public string PostUrl { get; set; }
         public System.Guid AuthorId { get; set; }
         public string AuthorName { get; set; }
         public string FullContent { get; set; }

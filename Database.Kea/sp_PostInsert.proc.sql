@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[sp_PostInsert](
     @title nvarchar(256),
-    @entryUrl nvarchar(256),
+    @postUrl nvarchar(256),
     @authorId UNIQUEIDENTIFIER,
     @fullContent NVARCHAR (MAX),
     @visible BIT,
@@ -17,7 +17,7 @@ BEGIN
 	(
 		-- Id -- this column value is auto-generated
 		Title,
-		EntryUrl,
+		PostUrl,
 		AuthorId,
 		FullContent,
 		Visible,
@@ -31,7 +31,7 @@ BEGIN
 	VALUES
 	(
 		@title /*{ Title }*/,
-		@entryUrl /*{ EntryUrl }*/,
+		@postUrl /*{ PostUrl }*/,
 		@authorId /*{ AuthorId }*/,
 		@fullContent /*{ FullContent }*/,
 		@visible /*{ Visible }*/,

@@ -173,6 +173,7 @@
     <Compile Include="Services\Providers\KeaMembershipProvider.cs" />
     <Compile Include="Services\Providers\KeaMembershipService.cs" />
     <Compile Include="Services\Providers\KeaRoleProvider.cs" />
+    <Compile Include="Services\Validations\FriendlyUrlValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
@@ -454,6 +455,7 @@
     <Content Include="Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Views\Shared\ValidationSummary.cshtml" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\timepicker.less" />
   </ItemGroup>

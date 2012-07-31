@@ -5,7 +5,7 @@ AS
 BEGIN
 	SELECT pst.[Id]
       ,pst.[Title]
-      ,pst.[EntryUrl]
+      ,pst.[PostUrl]
       ,pst.[AuthorId]
       ,au.Name AS [AuthorName]
       ,pst.[FullContent]

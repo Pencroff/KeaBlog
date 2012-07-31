@@ -22,6 +22,7 @@ namespace KeaDAL
         public System.DateTime Modified { get; set; }
         public string CategoryName { get; set; }
         public string LinkToOriginal { get; set; }
+        public string PostUrl { get; set; }
     }
     
 }

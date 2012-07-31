@@ -5,11 +5,11 @@
 }
 
 <h2>Create</h2>
-
+@{
+    Html.RenderPartial("ValidationSummary", ViewData.ModelState);
+}
 @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { @class = "well form-horizontal" }))
 {
-    ////@Html.ValidationSummary(true, "Message:")
-
     <fieldset>
         <legend class="span3">Post</legend>
 
@@ -38,15 +38,13 @@
             <label class = "control-label" for = "inputTitle">Title</label>
             <div class="controls">
                 @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge span10", id = "inputTitle" })
-                @*@Html.ValidationMessageFor(model => model.Title)*@
                 <p class="help-block">Title of article</p>
             </div>
         </div>
         <div class="control-group">
             <label class = "control-label" for = "inputUrl">Friendly Url</label>
             <div class="controls">
-                @Html.TextBoxFor(model => model.EntryUrl, new { @class = "input-xlarge span10", id = "inputUrl" })
-               @*//@Html.ValidationMessageFor(model => model.EntryUrl)*@
+                @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span10", id = "inputUrl" })
                 <p class="help-block">Friendly Url of article.</p>
             </div>
         </div>
@@ -54,7 +52,6 @@
             <label class = "control-label" for = "inputContent">Content</label>
             <div class="controls">
                 @Html.TextAreaFor(model => model.FullContent, new { @class = "span10 textarea", id = "inputContent", style = "min-height: 250px" })
-               @* //@Html.ValidationMessageFor(model => model.FullContent)*@
                 <p class="help-block">Content of article</p>
             </div>
         </div>
@@ -63,12 +60,10 @@
             <div class="controls">
                 <div class="pull-left">
                     @Html.TextBoxFor(model => model.OriginalTitle, new { @class = "span4", id = "inputOriginalTitle" })    
-                    @*//@Html.ValidationMessageFor(model => model.OriginalTitle)*@
                     <p class="help-block">Title of link (for translate)</p>
                 </div>
                 <div class="pull-right">
                     @Html.TextBoxFor(model => model.LinkToOriginal, new { @class = "span6", id = "inputLinkToOriginal" })
-                    @*//@Html.ValidationMessageFor(model => model.LinkToOriginal)*@
                     <p class="help-block">Url on original</p>
                 </div>
             </div>
@@ -77,13 +72,11 @@
             <label class = "control-label" for = "inputSEODescription">SEO</label>
             <div class="controls">
                 <div class="pull-left">
-                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span5", id = "inputSEODescription" })    
-                    @*//@Html.ValidationMessageFor(model => model.SEODescription)*@
+                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span5", id = "inputSEODescription" })
                     <p class="help-block">Article description for Head</p>
                 </div>
                 <div class="pull-right">
                     @Html.TextAreaFor(model => model.SEOKeywords, new { @class = "span5", id = "inputSEOKeywords" })
-                    @*@Html.ValidationMessageFor(model => model.SEOKeywords)*@
                     <p class="help-block">Article keywords for Head</p>
                 </div>
                 

@@ -21,7 +21,6 @@ namespace KeaDAL
     
         public int Id { get; set; }
         public string Title { get; set; }
-        public string EntryUrl { get; set; }
         public System.Guid AuthorId { get; set; }
         public string FullContent { get; set; }
         public bool Visible { get; set; }
@@ -31,6 +30,7 @@ namespace KeaDAL
         public int CategoryId { get; set; }
         public string LinkToOriginal { get; set; }
         public string OriginalTitle { get; set; }
+        public string PostUrl { get; set; }
     
         public virtual Auth_User auth_Users { get; set; }
         public virtual Category Category { get; set; }

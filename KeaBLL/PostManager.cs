@@ -35,7 +35,7 @@ namespace KeaBLL
         {
             using (KeaContext context = new KeaContext())
             {
-                context.PostInsert(post.Title, post.EntryUrl, post.AuthorId, post.FullContent,
+                context.PostInsert(post.Title, post.PostUrl, post.AuthorId, post.FullContent,
                                    post.Visible, post.Modified, post.SEOKeywords, post.SEODescription, post.CategoryId,
                                    post.LinkToOriginal, post.OriginalTitle);
             }
@@ -45,7 +45,7 @@ namespace KeaBLL
         {
             using (KeaContext context = new KeaContext())
             {
-                context.PostUpdate(post.Id, post.Title, post.EntryUrl, post.FullContent,
+                context.PostUpdate(post.Id, post.Title, post.PostUrl, post.FullContent,
                                    post.Visible, post.Modified, post.SEOKeywords, post.SEODescription,
                                    post.CategoryId, post.LinkToOriginal, post.OriginalTitle);
             }

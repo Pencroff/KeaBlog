@@ -80,7 +80,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="EntryUrl" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="PostUrl" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="AuthorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="FullContent" Type="nvarchar(max)" />
           <Property Name="Visible" Type="bit" Nullable="false" />
@@ -186,7 +186,7 @@
         </Function>
         <Function Name="sp_PostInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="title" Type="nvarchar" Mode="In" />
-          <Parameter Name="entryUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="postUrl" Type="nvarchar" Mode="In" />
           <Parameter Name="authorId" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="fullContent" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="visible" Type="bit" Mode="In" />
@@ -205,7 +205,7 @@
         <Function Name="sp_PostUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
-          <Parameter Name="entryUrl" Type="nvarchar" Mode="In" />
+          <Parameter Name="postUrl" Type="nvarchar" Mode="In" />
           <Parameter Name="fullContent" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="visible" Type="bit" Mode="In" />
           <Parameter Name="modified" Type="datetime" Mode="In" />
@@ -243,7 +243,7 @@
           </FunctionImport>
           <FunctionImport Name="PostInsert">
             <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="entryUrl" Mode="In" Type="String" />
+            <Parameter Name="postUrl" Mode="In" Type="String" />
             <Parameter Name="authorId" Mode="In" Type="Guid" />
             <Parameter Name="fullContent" Mode="In" Type="String" />
             <Parameter Name="visible" Mode="In" Type="Boolean" />
@@ -257,7 +257,7 @@
           <FunctionImport Name="PostUpdate">
             <Parameter Name="postId" Mode="In" Type="Int32" />
             <Parameter Name="title" Mode="In" Type="String" />
-            <Parameter Name="entryUrl" Mode="In" Type="String" />
+            <Parameter Name="postUrl" Mode="In" Type="String" />
             <Parameter Name="fullContent" Mode="In" Type="String" />
             <Parameter Name="visible" Mode="In" Type="Boolean" />
             <Parameter Name="modified" Mode="In" Type="DateTime" />
@@ -283,7 +283,7 @@
             <End Role="Tag" EntitySet="Tags" />
           </AssociationSet>
           <FunctionImport Name="PostByIdGet" ReturnType="Collection(KeaDAL.PostFull)">
-            <Parameter Name="postId" Mode="In" Type="Int32" />
+          <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PostListByPageGet" ReturnType="Collection(KeaDAL.PostShort)">
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
@@ -333,7 +333,6 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="AuthorId" Nullable="false" />
           <Property Type="String" Name="FullContent" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Visible" Nullable="false" />
@@ -346,6 +345,7 @@
           <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Post_auth_Users" FromRole="Post" ToRole="Auth_User" />
           <NavigationProperty Name="Category" Relationship="KeaDAL.FK_Posts_Categories" FromRole="Post" ToRole="Category" />
           <NavigationProperty Name="Tags" Relationship="KeaDAL.PostsInTags" FromRole="Post" ToRole="Tag" />
+          <Property Type="String" Name="PostUrl" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -386,7 +386,6 @@
         <ComplexType Name="PostFull">
           <Property Type="Int32" Name="Id" Nullable="false" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="256" />
-          <Property Type="String" Name="EntryUrl" Nullable="false" MaxLength="256" />
           <Property Type="Guid" Name="AuthorId" Nullable="false" />
           <Property Type="String" Name="AuthorName" Nullable="true" MaxLength="64" />
           <Property Type="String" Name="FullContent" Nullable="true" />
@@ -398,6 +397,7 @@
           <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="64" />
           <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="OriginalTitle" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="PostUrl" Nullable="false" MaxLength="256" />
         </ComplexType>
         <ComplexType Name="PostShort">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -408,6 +408,7 @@
           <Property Type="DateTime" Name="Modified" Nullable="false" Precision="23" />
           <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="64" />
           <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="PostUrl" Nullable="false" MaxLength="256" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -462,6 +463,7 @@
           <EntitySetMapping Name="Posts">
             <EntityTypeMapping TypeName="KeaDAL.Post">
               <MappingFragment StoreEntitySet="Posts">
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
                 <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -471,7 +473,6 @@
                 <ScalarProperty Name="Visible" ColumnName="Visible" />
                 <ScalarProperty Name="FullContent" ColumnName="FullContent" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-                <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -498,7 +499,6 @@
               <ComplexTypeMapping TypeName="KeaDAL.PostFull">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="EntryUrl" ColumnName="EntryUrl" />
                 <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
                 <ScalarProperty Name="FullContent" ColumnName="FullContent" />
@@ -510,6 +510,7 @@
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
                 <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -524,6 +525,7 @@
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -559,8 +561,8 @@
         <EntityTypeShape EntityType="KeaDAL.Post" Width="1.5" PointX="5.25" PointY="0.875" Height="3.9033007812499996" />
         <EntityTypeShape EntityType="KeaDAL.Tag" Width="1.5" PointX="7.5" PointY="2" Height="1.5956835937499996" />
         <AssociationConnector Association="KeaDAL.FK_Post_auth_Users" >
-          <ConnectorPoint PointX="4.5" PointY="2.8458968098958328" />
-          <ConnectorPoint PointX="5.25" PointY="2.8458968098958328" />
+          <ConnectorPoint PointX="4.5" PointY="2.8458968098958337" />
+          <ConnectorPoint PointX="5.25" PointY="2.8458968098958337" />
         </AssociationConnector>
         <AssociationConnector Association="KeaDAL.FK_Posts_Categories" >
           <ConnectorPoint PointX="4.5" PointY="6.8939925130208328" />

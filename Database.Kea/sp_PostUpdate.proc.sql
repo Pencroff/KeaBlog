@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[sp_PostUpdate](
 	@postId INT,
     @title nvarchar(256),
-    @entryUrl nvarchar(256),
+    @postUrl nvarchar(256),
     @fullContent NVARCHAR (MAX),
     @visible BIT,
     @modified DATETIME,
@@ -15,7 +15,7 @@ AS
 BEGIN
 	UPDATE [dbo].[Posts]
 	   SET [Title] = @title
-		  ,[EntryUrl] = @entryUrl
+		  ,[PostUrl] = @postUrl
 		  ,[FullContent] = @fullContent
 		  ,[Visible] = @visible
 		  ,[Modified] = @modified

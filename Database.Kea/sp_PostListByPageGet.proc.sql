@@ -26,6 +26,7 @@ BEGIN
 		
 	SELECT subTable.[Id]
 			,p.[Title]
+			,p.[PostUrl]
 			,au.Name AS [AuthorName]
 			,p.[FullContent]
 			,p.[Visible]
