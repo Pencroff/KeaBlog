@@ -45,6 +45,7 @@ namespace KeaBlog.Areas.Admin.Models
             Post post = new Post();
             ModelMapping.PostViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
+            post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.UpdatePost(post);
         }
 
@@ -53,6 +54,7 @@ namespace KeaBlog.Areas.Admin.Models
             Post post = new Post();
             ModelMapping.PostViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
+            post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.InsertPost(post);
         }
         

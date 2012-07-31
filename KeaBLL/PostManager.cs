@@ -19,6 +19,16 @@ namespace KeaBLL
             return result;
         }
 
+        public static PostFull GetPostByUrl(string postUrl)
+        {
+            PostFull result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.PostByUrlGet(postUrl).SingleOrDefault();
+            }
+            return result;
+        }
+
         public static List<PostShort> GetPostListByPage(int startIndex, int endIndex, out int postCount)
         {
             List<PostShort> result = null;

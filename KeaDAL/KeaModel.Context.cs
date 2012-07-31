@@ -196,5 +196,16 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostShort>("PostListByPageGet", startIndexParameter, endIndexParameter, count);
         }
+    
+        public virtual ObjectResult<PostFull> PostByUrlGet(string postUrl)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
+    
+            var postUrlParameter = postUrl != null ?
+                new ObjectParameter("postUrl", postUrl) :
+                new ObjectParameter("postUrl", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PostByUrlGet", postUrlParameter);
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using KeaBLL;
+using ServiceLib;
 
 namespace KeaBlog.Services.Validations
 {
@@ -7,10 +9,16 @@ namespace KeaBlog.Services.Validations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
+            string url = value.ToString();
+            url = url.ToTranslit().Slugify(256);
             if (String.IsNullOrEmpty(ErrorMessage))
             {
-                // ToDo Rosource
+                // ToDo Resource
                 ErrorMessage = "Wrong friendly url. It is not unique.";
+            }
+            if (PostManager.GetPostByUrl(url) != null)
+            {
+                return new ValidationResult(ErrorMessage);
             }
             return ValidationResult.Success;
         }

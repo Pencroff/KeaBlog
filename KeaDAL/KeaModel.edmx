@@ -181,6 +181,9 @@
         <Function Name="sp_PostByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_PostByUrlGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="postUrl" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_PostDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
@@ -289,6 +292,9 @@
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PostByUrlGet" ReturnType="Collection(KeaDAL.PostFull)">
+            <Parameter Name="postUrl" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -525,6 +531,26 @@
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PostByUrlGet" FunctionName="KeaContext.Store.sp_PostByUrlGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.PostFull">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
+                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
                 <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
               </ComplexTypeMapping>
             </ResultMapping>

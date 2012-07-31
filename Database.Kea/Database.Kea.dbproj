@@ -257,5 +257,10 @@
     <Build Include="FK_Post_auth_Users.fkey.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="sp_PostByUrlGet.proc.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
   </ItemGroup>
 </Project>
