@@ -42,6 +42,10 @@ namespace KeaBlog.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(PostViewModel model)
         {
+            if (String.IsNullOrEmpty(model.EntryUrl))
+            {
+                ModelState.AddModelError(string.Empty, "The Friendly Url isn't empty.");
+            }
             if (ModelState.IsValid)
             {
                 model.AuthorId = Guid.Parse(CurrentSession.UserId);
