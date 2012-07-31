@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using System.Web.Security;
 
-namespace KeaBlog.Models
+namespace KeaBlog.Areas.Admin.Models
 {
 
     public class ChangePasswordModel

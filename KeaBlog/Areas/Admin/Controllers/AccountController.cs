@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using System.Web.Security;
-using KeaBlog.Models;
+using KeaBlog.Areas.Admin.Models;
 using KeaBlog.Services;
 using KeaBlog.Services.Providers;
 
