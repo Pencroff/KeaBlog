@@ -36,7 +36,6 @@ namespace KeaBlog.Areas.Admin.Models
         public void FillById (int postId)
         {
             PostFull post = PostManager.GetPostById(postId);
-            //ModelMapping.PostFullToViewModel(post, this);
             ModelMapping.ModelToViewModel(post, this);
             Modified = post.Modified.ToLocalTime();
         }
@@ -44,7 +43,6 @@ namespace KeaBlog.Areas.Admin.Models
         public void SaveToDb()
         {
             Post post = new Post();
-            //ModelMapping.PostViewModelToModel(this, post);
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
@@ -54,7 +52,6 @@ namespace KeaBlog.Areas.Admin.Models
         public void InsertToDb()
         {
             Post post = new Post();
-            //ModelMapping.PostViewModelToModel(this, post);
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
@@ -97,7 +94,6 @@ namespace KeaBlog.Areas.Admin.Models
             foreach (var model in modelList)
             {
                 viewModel = new PostViewModel();
-                //ModelMapping.PostShortToViewModel(model, viewModel);
                 ModelMapping.ModelToViewModel(model, viewModel);
                 viewModel.Modified = model.Modified.ToLocalTime();
                 postList.Add(viewModel);

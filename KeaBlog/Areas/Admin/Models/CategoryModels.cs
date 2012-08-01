@@ -18,12 +18,6 @@ namespace KeaBlog.Areas.Admin.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public void FillById(int categoryId)
-        {
-            Category category = CategoryManager.GetCategoryById(categoryId);
-            ModelMapping.ModelToViewModel(category, this);
-        }
-
         public void SaveToDb()
         {
             Category category = new Category();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using KeaDAL;
+using ServiceLib;
 
 namespace KeaBLL
 {
@@ -13,24 +14,42 @@ namespace KeaBLL
             throw new NotImplementedException();
         }
 
-        public static Category GetCategoryById(int categoryId)
-        {
-            throw new NotImplementedException();
-        }
-
         public static void InsertCategory(Category category)
         {
-            throw new NotImplementedException();
+            using (KeaContext context = new KeaContext())
+            {
+                context.Categories.Add(category);
+                context.SaveChanges();
+            }
+
         }
 
         public static void UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            Category categoryDB = null;
+            using (KeaContext context = new KeaContext())
+            {
+                categoryDB = context.Categories.Find(category.Id);
+                if (categoryDB != null)
+                {
+                    ModelMapping.OneToOne(category, categoryDB);
+                    context.SaveChanges();   
+                }
+            }
         }
 
         public static void DeleteCategoryById(int categoryId)
         {
-            throw new NotImplementedException();
+            Category category = null;
+            using (KeaContext context = new KeaContext())
+            {
+                category = context.Categories.Find(categoryId);
+                if (category != null)
+                {
+                    context.Categories.Remove(category);
+                    context.SaveChanges();
+                }
+            }
         }
     }
 }
