@@ -36,14 +36,16 @@ namespace KeaBlog.Areas.Admin.Models
         public void FillById (int postId)
         {
             PostFull post = PostManager.GetPostById(postId);
-            ModelMapping.PostFullToViewModel(post, this);
+            //ModelMapping.PostFullToViewModel(post, this);
+            ModelMapping.ModelToViewModel(post, this);
             Modified = post.Modified.ToLocalTime();
         }
 
         public void SaveToDb()
         {
             Post post = new Post();
-            ModelMapping.PostViewModelToModel(this, post);
+            //ModelMapping.PostViewModelToModel(this, post);
+            ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.UpdatePost(post);
@@ -52,7 +54,8 @@ namespace KeaBlog.Areas.Admin.Models
         public void InsertToDb()
         {
             Post post = new Post();
-            ModelMapping.PostViewModelToModel(this, post);
+            //ModelMapping.PostViewModelToModel(this, post);
+            ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.InsertPost(post);
@@ -80,7 +83,6 @@ namespace KeaBlog.Areas.Admin.Models
 
     public class PostListViewModel : BasicModel
     {
-        //public IList<PostViewModel> Posts { get; set; }
         public PagedList<PostViewModel> Posts { get; set; }
 
         public void FillByPage (int page)
@@ -95,7 +97,8 @@ namespace KeaBlog.Areas.Admin.Models
             foreach (var model in modelList)
             {
                 viewModel = new PostViewModel();
-                ModelMapping.PostShortToViewModel(model, viewModel);
+                //ModelMapping.PostShortToViewModel(model, viewModel);
+                ModelMapping.ModelToViewModel(model, viewModel);
                 viewModel.Modified = model.Modified.ToLocalTime();
                 postList.Add(viewModel);
             }

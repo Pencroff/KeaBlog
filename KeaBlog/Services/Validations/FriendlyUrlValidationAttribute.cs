@@ -9,7 +9,7 @@ namespace KeaBlog.Services.Validations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            string url = value.ToString();
+            string url = value!=null?value.ToString():String.Empty;
             url = url.ToTranslit().Slugify(256);
             if (String.IsNullOrEmpty(ErrorMessage))
             {
