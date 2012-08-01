@@ -178,6 +178,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_CategoryListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_PostByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
@@ -294,7 +299,12 @@
             <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PostByUrlGet" ReturnType="Collection(KeaDAL.PostFull)">
-            <Parameter Name="postUrl" Mode="In" Type="String" />
+          <Parameter Name="postUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryListByPageGet" EntitySet="Categories" ReturnType="Collection(KeaDAL.Category)">
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -555,6 +565,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CategoryListByPageGet" FunctionName="KeaContext.Store.sp_CategoryListByPageGet" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
