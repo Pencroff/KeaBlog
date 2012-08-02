@@ -53,7 +53,7 @@
                                             NextPageText = "&rarr;"
                                         })   
 </div>
-<form action='@Url.Action("Create", "Category", new{Area="Admin"})' class="modal hide fade" id="createCategory" method="post" novalidate="novalidate">
+<form action='@Url.Action("Create", "Category", new{Area="Admin"})' class="modal hide" id="createCategory" method="post" novalidate="novalidate">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Create category</h3>
@@ -67,11 +67,11 @@
         <span class="help-block">Description of category</span>
     </div>
     <div class="modal-footer">
-        <a href="" class="btn" data-dismiss="modal">Close</a>
         <input type="submit" value="Create" class="btn btn-info">
+        <a href="" class="btn" data-dismiss="modal">Cancel</a>
     </div>
 </form>
-<form action='@Url.Action("Edit", "Category", new{Area="Admin"})' class="modal hide fade" id="editCategory" method="post" novalidate="novalidate">
+<form action='@Url.Action("Edit", "Category", new{Area="Admin"})' class="modal hide" id="editCategory" method="post" novalidate="novalidate">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Edit category</h3>
@@ -79,30 +79,31 @@
     <div class="modal-body">
         <input name="Id" type="hidden" value="0">
         <label>Category name</label>
-        <input type="text" name="Name" placeholder="Type category name…" />
-        <span class="help-block">Max length 256 letters</span>
+        <input type="text" name="Name" placeholder="Type category name…" class="span5"/>
+        <span class="help-block span5">Max length 256 letters</span>
         <label>Category description</label>
-        <input type="text" name="Description" placeholder="Type description of category…" />
-        <span class="help-block">Description of category</span>
+        <input type="text" name="Description" placeholder="Type description of category…" class="span5"/>
+        <span class="help-block span5">Description of category</span>
     </div>
     <div class="modal-footer">
-        <a href="" class="btn" data-dismiss="modal">Close</a>
         <input type="submit" value="Save" class="btn btn-info">
+        <a href="" class="btn" data-dismiss="modal">Cancel</a>
     </div>
 </form>
-<div class="modal hide" id="deleteCategory">
+<form action='@Url.Action("Delete", "Category", new{Area="Admin"})' class="modal hide" id="deleteCategory" method="post" novalidate="novalidate">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
         <h3>Delete category</h3>
     </div>
     <div class="modal-body">
-        <p>One fine body…</p>
+        <input name="categoryId" type="hidden" value="0">
+        <p name="Text" class="span5"></p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn" data-dismiss="modal">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+        <input type="submit" value="Delete" class="btn btn-danger">
+        <a href="" class="btn" data-dismiss="modal">Cancel</a>
     </div>
-</div>
+</form>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
@@ -110,13 +111,18 @@
         $('#editCategory').modal({ keyboard: false, show: false });
         $('#deleteCategory').modal({ keyboard: false, show: false });
         $('.editCategory').click(function () {
-            var data = $('tr#' + this.name),
-                name = $('tr#' + this.name + ' td[name="Name"]').text(),
+            var name = $('tr#' + this.name + ' td[name="Name"]').text(),
                 description = $('tr#' + this.name + ' td[name="Description"]').text();
             $('#editCategory input[name="Id"]').val(this.name);
             $('#editCategory input[name="Name"]').val(name);
             $('#editCategory input[name="Description"]').val(description);
             $('#editCategory').modal('show');
+        });
+        $('.deleteCategory').click(function () {
+            var name = 'Do you want to delete <strong>' + $('tr#' + this.name + ' td[name="Name"]').text() + '</strong>';
+            $('#deleteCategory input[name="categoryId"]').val(this.name);
+            $('#deleteCategory p[name="Text"]').html(name);
+            $('#deleteCategory').modal('show');
         });
     </script>
 }
