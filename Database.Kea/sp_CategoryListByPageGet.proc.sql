@@ -20,7 +20,7 @@ BEGIN
 		)
 	INSERT INTO @tab SELECT Id
     FROM 
-		PostCTE 
+		CategoryCTE 
 	WHERE 
 		RowNumber BETWEEN @startIndex AND @endIndex		
 		
