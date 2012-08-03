@@ -22,46 +22,29 @@ namespace KeaBlog.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(CategoryViewModel category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                category.DbInsert();
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Edit(CategoryViewModel category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                category.DbUpdate();
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Delete(int categoryId)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            CategoryViewModel category = new CategoryViewModel();
+            category.DeleteById(categoryId);
+            return RedirectToAction("Index");
         }
     }
 }

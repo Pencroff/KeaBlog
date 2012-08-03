@@ -35,12 +35,17 @@ namespace KeaBLL
         public static void UpdateCategory(Category category)
         {
             Category categoryDB = null;
+            string[] list = null;
             using (KeaContext context = new KeaContext())
             {
                 categoryDB = context.Categories.Find(category.Id);
                 if (categoryDB != null)
                 {
-                    ModelMapping.OneToOne(category, categoryDB);
+                    if (categoryDB.Id == 0)
+                    {
+                       list = new string[]{"Name"};
+                    }
+                    ModelMapping.OneToOne(category, categoryDB, list);
                     context.SaveChanges();   
                 }
             }
@@ -49,6 +54,10 @@ namespace KeaBLL
         public static void DeleteCategoryById(int categoryId)
         {
             Category category = null;
+            if (categoryId == 0)
+            {
+                return;
+            }
             using (KeaContext context = new KeaContext())
             {
                 category = context.Categories.Find(categoryId);

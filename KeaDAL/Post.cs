@@ -16,6 +16,7 @@ namespace KeaDAL
     {
         public Post()
         {
+            this.CategoryId = 0;
             this.Tags = new HashSet<Tag>();
         }
     

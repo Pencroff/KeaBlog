@@ -72,7 +72,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="512" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
@@ -340,7 +340,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="512" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Posts" Relationship="KeaDAL.FK_Posts_Categories" FromRole="Category" ToRole="Post" />
         </EntityType>
         <EntityType Name="Post">
@@ -355,7 +355,7 @@
           <Property Type="DateTime" Name="Modified" Nullable="false" />
           <Property Type="String" Name="SEOKeywords" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="SEODescription" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="Int32" Name="CategoryId" Nullable="false" DefaultValue="0" />
           <Property Type="String" Name="LinkToOriginal" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="OriginalTitle" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="auth_Users" Relationship="KeaDAL.FK_Post_auth_Users" FromRole="Post" ToRole="Auth_User" />

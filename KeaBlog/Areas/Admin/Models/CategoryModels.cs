@@ -18,18 +18,18 @@ namespace KeaBlog.Areas.Admin.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public void SaveToDb()
-        {
-            Category category = new Category();
-            ModelMapping.ViewModelToModel(this, category);
-            CategoryManager.UpdateCategory(category);
-        }
-
-        public void InsertToDb()
+        public void DbInsert()
         {
             Category category = new Category();
             ModelMapping.ViewModelToModel(this, category);
             CategoryManager.InsertCategory(category);
+        }
+
+        public void DbUpdate()
+        {
+            Category category = new Category();
+            ModelMapping.ViewModelToModel(this, category);
+            CategoryManager.UpdateCategory(category);
         }
 
         public void DeleteById(int categoryId)
