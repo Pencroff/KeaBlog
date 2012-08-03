@@ -270,5 +270,10 @@
     <Build Include="DF_Posts_CategoryId.defconst.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="sp_TagListByPageGet.proc.sql">
+      <SubType>Code</SubType>
+      <AnsiNulls>On</AnsiNulls>
+      <QuotedIdentifier>Off</QuotedIdentifier>
+    </Build>
   </ItemGroup>
 </Project>

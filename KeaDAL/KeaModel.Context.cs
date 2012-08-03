@@ -237,5 +237,35 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryListByPageGet", mergeOption, startIndexParameter, endIndexParameter, count);
         }
+    
+        public virtual ObjectResult<Tag> TagListByPageGet(Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagListByPageGet", startIndexParameter, endIndexParameter, count);
+        }
+    
+        public virtual ObjectResult<Tag> TagListByPageGet(Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagListByPageGet", mergeOption, startIndexParameter, endIndexParameter, count);
+        }
     }
 }

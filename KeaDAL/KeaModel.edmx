@@ -223,6 +223,11 @@
           <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
           <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_TagListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_UserByLoginGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="login" Type="nvarchar" Mode="In" />
         </Function>
@@ -302,6 +307,11 @@
           <Parameter Name="postUrl" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CategoryListByPageGet" EntitySet="Categories" ReturnType="Collection(KeaDAL.Category)">
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TagListByPageGet" EntitySet="Tags" ReturnType="Collection(KeaDAL.Tag)">
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
@@ -566,6 +576,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CategoryListByPageGet" FunctionName="KeaContext.Store.sp_CategoryListByPageGet" />
+          <FunctionImportMapping FunctionImportName="TagListByPageGet" FunctionName="KeaContext.Store.sp_TagListByPageGet" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

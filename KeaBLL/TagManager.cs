@@ -1,7 +1,67 @@
-﻿namespace KeaBLL
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Objects;
+using System.Linq;
+using KeaDAL;
+using ServiceLib;
+
+namespace KeaBLL
 {
     public static class TagManager
     {
-         
+        public static List<Tag> GetCategoryListByPage(int startIndex, int endIndex, out int count)
+        {
+            List<Tag> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.TagListByPageGet(startIndex, endIndex, cnt).ToList();
+                count = Convert.ToInt32(cnt.Value);
+            }
+            return result;
+        }
+
+        public static void InsertCategory(Category category)
+        {
+            using (KeaContext context = new KeaContext())
+            {
+                context.Categories.Add(category);
+                context.SaveChanges();
+            }
+
+        }
+
+        public static void UpdateCategory(Tag tag)
+        {
+            Tag tagDB = null;
+            string[] list = null;
+            using (KeaContext context = new KeaContext())
+            {
+                tagDB = context.Tags.Find(tag.Id);
+                if (tagDB != null)
+                {
+                    ModelMapping.OneToOne(tag, tagDB, list);
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public static void DeleteCategoryById(int tagId)
+        {
+            Tag tag = null;
+            if (tagId == 0)
+            {
+                return;
+            }
+            using (KeaContext context = new KeaContext())
+            {
+                tag = context.Tags.Find(tagId);
+                if (tag != null)
+                {
+                    context.Tags.Remove(tag);
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }
