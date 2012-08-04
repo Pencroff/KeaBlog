@@ -9,7 +9,7 @@ namespace KeaBLL
 {
     public static class TagManager
     {
-        public static List<Tag> GetCategoryListByPage(int startIndex, int endIndex, out int count)
+        public static List<Tag> GetTagListByPage(int startIndex, int endIndex, out int count)
         {
             List<Tag> result = null;
             using (KeaContext context = new KeaContext())
@@ -21,17 +21,17 @@ namespace KeaBLL
             return result;
         }
 
-        public static void InsertCategory(Category category)
+        public static void InsertTag(Tag tag)
         {
             using (KeaContext context = new KeaContext())
             {
-                context.Categories.Add(category);
+                context.Tags.Add(tag);
                 context.SaveChanges();
             }
 
         }
 
-        public static void UpdateCategory(Tag tag)
+        public static void UpdateTag(Tag tag)
         {
             Tag tagDB = null;
             string[] list = null;
@@ -46,7 +46,7 @@ namespace KeaBLL
             }
         }
 
-        public static void DeleteCategoryById(int tagId)
+        public static void DeleteTagById(int tagId)
         {
             Tag tag = null;
             if (tagId == 0)
