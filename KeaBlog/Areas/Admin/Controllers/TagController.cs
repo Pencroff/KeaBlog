@@ -7,11 +7,11 @@ using KeaBlog.Areas.Admin.Models;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class TagController : Controller
     {
         public ActionResult Index(int page = 1)
         {
-            var viewModel = new CategoryListViewModel();
+            var viewModel = new TagListViewModel();
             viewModel.FillByPage(page);
             return View(viewModel);
         }
@@ -39,9 +39,10 @@ namespace KeaBlog.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Delete(int categoryId)
         {
-            CategoryViewModel category = new CategoryViewModel();
-            category.DeleteById(categoryId);
+            TagViewModel tag = new TagViewModel();
+            tag.DeleteById(categoryId);
             return RedirectToAction("Index");
         }
+
     }
 }

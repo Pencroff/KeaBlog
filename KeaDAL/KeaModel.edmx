@@ -223,6 +223,9 @@
           <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
           <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_TagByNameGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_TagListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
@@ -315,6 +318,9 @@
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TagByNameGet" EntitySet="Tags" ReturnType="Collection(KeaDAL.Tag)">
+            <Parameter Name="tagName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -577,6 +583,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="CategoryListByPageGet" FunctionName="KeaContext.Store.sp_CategoryListByPageGet" />
           <FunctionImportMapping FunctionImportName="TagListByPageGet" FunctionName="KeaContext.Store.sp_TagListByPageGet" />
+          <FunctionImportMapping FunctionImportName="TagByNameGet" FunctionName="KeaContext.Store.sp_TagByNameGet" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

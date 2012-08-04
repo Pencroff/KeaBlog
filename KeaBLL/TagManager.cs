@@ -63,5 +63,15 @@ namespace KeaBLL
                 }
             }
         }
+
+        public static Tag GetTagByName(string tagName)
+        {
+            Tag result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.TagByNameGet(tagName).SingleOrDefault();
+            }
+            return result;
+        }
     }
 }

@@ -267,5 +267,27 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagListByPageGet", mergeOption, startIndexParameter, endIndexParameter, count);
         }
+    
+        public virtual ObjectResult<Tag> TagByNameGet(string tagName)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var tagNameParameter = tagName != null ?
+                new ObjectParameter("tagName", tagName) :
+                new ObjectParameter("tagName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagByNameGet", tagNameParameter);
+        }
+    
+        public virtual ObjectResult<Tag> TagByNameGet(string tagName, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var tagNameParameter = tagName != null ?
+                new ObjectParameter("tagName", tagName) :
+                new ObjectParameter("tagName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagByNameGet", mergeOption, tagNameParameter);
+        }
     }
 }

@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Models\BlogModels.cs" />
     <Compile Include="Areas\Admin\Models\CategoryModels.cs" />
     <Compile Include="Areas\Admin\Models\MenuModel.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Services\Providers\KeaMembershipService.cs" />
     <Compile Include="Services\Providers\KeaRoleProvider.cs" />
     <Compile Include="Services\Validations\FriendlyUrlValidationAttribute.cs" />
+    <Compile Include="Services\Validations\TagValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
