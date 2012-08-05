@@ -17,30 +17,30 @@ namespace KeaBlog.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CategoryViewModel category)
+        public ActionResult Create(TagViewModel tag)
         {
             if (ModelState.IsValid)
             {
-                category.DbInsert();
+                tag.DbInsert();
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(CategoryViewModel category)
+        public ActionResult Edit(TagViewModel tag)
         {
             if (ModelState.IsValid)
             {
-                category.DbUpdate();
+                tag.DbUpdate();
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Delete(int categoryId)
+        public ActionResult Delete(int tagId)
         {
             TagViewModel tag = new TagViewModel();
-            tag.DeleteById(categoryId);
+            tag.DeleteById(tagId);
             return RedirectToAction("Index");
         }
 

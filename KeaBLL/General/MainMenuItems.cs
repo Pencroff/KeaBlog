@@ -12,6 +12,7 @@
     {
         Blog,
         Category,
+        Tag,
         Service,
         Project,
         Setting
