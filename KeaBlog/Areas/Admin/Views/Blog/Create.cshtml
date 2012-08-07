@@ -42,10 +42,30 @@
             </div>
         </div>
         <div class="control-group">
-            <label class = "control-label" for = "inputUrl">Friendly Url</label>
+            <div class="row">
+                <div class="span6">
+                    <label class = "control-label" for = "inputUrl">Friendly Url</label>
+                    <div class="controls">
+                        @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span5", id = "inputUrl" })
+                        <p class="help-block">Friendly Url of article.</p>
+                    </div>  
+                </div>
+                <div class="span6 offset6">
+                    <label class = "control-label" for = "inputUrl">Category</label>
+                    <div class="controls">
+                        @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "span3" })
+                        @*@Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span10", id = "inputUrl" })*@
+                        <p class="help-block">Category of article.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputUrl">Category</label>
             <div class="controls">
-                @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span10", id = "inputUrl" })
-                <p class="help-block">Friendly Url of article.</p>
+                @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "span3" })
+                @*@Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span10", id = "inputUrl" })*@
+                <p class="help-block">Category of article.</p>
             </div>
         </div>
         <div class="control-group">

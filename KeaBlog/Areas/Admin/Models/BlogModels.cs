@@ -15,6 +15,8 @@ namespace KeaBlog.Areas.Admin.Models
 {
     public class PostViewModel
     {
+        public List<Category> CategoryList { get; set; }
+
         public int Id { get; set; }
         [Required(ErrorMessage = "Title of article is required.")]
         public string Title { get; set; }
@@ -38,6 +40,11 @@ namespace KeaBlog.Areas.Admin.Models
             PostFull post = PostManager.GetPostById(postId);
             ModelMapping.ModelToViewModel(post, this);
             Modified = post.Modified.ToLocalTime();
+        }
+
+        public void FillCategoryList()
+        {
+            CategoryList = CategoryManager.GetCategoryList();
         }
 
         public void DbUpdate()

@@ -36,6 +36,7 @@ namespace KeaBlog.Areas.Admin.Controllers
         {
             PostViewModel model = new PostViewModel();
             model.Modified = DateTime.Now;
+            model.FillCategoryList();
             return View(model);
         }
 
