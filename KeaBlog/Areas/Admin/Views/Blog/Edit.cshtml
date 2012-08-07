@@ -41,11 +41,20 @@
                 <p class="help-block">Title of article</p>
             </div>
         </div>
-        <div class="control-group">
-            <label class = "control-label" for = "inputUrl">Friendly Url</label>
-            <div class="controls">
-                @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xlarge span10", id = "inputUrl" })
-                <p class="help-block">Friendly Url of article</p>
+       <div class="control-group">
+            <div class="pull-left">
+                <label class = "control-label" for = "inputUrl">Friendly Url</label>
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xxlarge", id = "inputUrl" })
+                    <p class="help-block">Friendly Url of article.</p>
+                </div>
+            </div>
+            <div class="pull-right">
+                <label class = "control-label" for = "inputCategory">Category</label>
+                <div class="controls">
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "input-xlarge" })
+                    <p class="help-block">Category of article.</p>
+                </div>
             </div>
         </div>
         <div class="control-group">

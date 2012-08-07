@@ -34,29 +34,31 @@ namespace KeaBlog.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            PostViewModel model = new PostViewModel();
-            model.Modified = DateTime.Now;
-            model.FillCategoryList();
-            return View(model);
+            PostViewModel viewModel = new PostViewModel();
+            viewModel.Modified = DateTime.Now;
+            viewModel.FillCategoryList();
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(PostViewModel model)
+        public ActionResult Create(PostViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                model.AuthorId = Guid.Parse(CurrentSession.UserId);
+                viewModel.AuthorId = Guid.Parse(CurrentSession.UserId);
                 // ToDo Check unique friendly url
-                model.DbInsert();
+                viewModel.DbInsert();
                 return RedirectToAction("Index");
             }
-            return View(model);
+            viewModel.FillCategoryList();
+            return View(viewModel);
         }
         
         public ActionResult Edit(int id = 0)
         {
             PostViewModel viewModel = new PostViewModel();
             viewModel.FillById(id);
+            viewModel.FillCategoryList();
             if (viewModel.Id != id)
             {
                 return HttpNotFound();
@@ -65,15 +67,15 @@ namespace KeaBlog.Areas.Admin.Controllers
         }
         
         [HttpPost]
-        public ActionResult Edit(PostViewModel model)
+        public ActionResult Edit(PostViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                // ToDo Check unique friendly url
-                model.DbUpdate();
+                viewModel.DbUpdate();
                 return RedirectToAction("Index");
             }
-            return View(model);
+            viewModel.FillCategoryList();
+            return View(viewModel);
         }
 
         public ActionResult Delete(int id = 0)

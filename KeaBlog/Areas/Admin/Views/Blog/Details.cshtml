@@ -9,16 +9,22 @@
 </div>
 
 <div class="row">
-    <div class="span6">
+    <div class="span5">
         <h4>Title</h4>
         <div class="well well-small">
             @Html.DisplayFor(model => model.Title)
         </div>
     </div>
-    <div class="span6">
+    <div class="span4">
         <h4>Friendly Url</h4>
         <div class="well well-small">
             @Html.DisplayFor(model => model.PostUrl)
+        </div>
+    </div>
+    <div class="span3">
+        <h4>Category</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.CategoryName)
         </div>
     </div>
 </div>
