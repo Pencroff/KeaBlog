@@ -289,5 +289,19 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagByNameGet", mergeOption, tagNameParameter);
         }
+    
+        public virtual ObjectResult<Category> CategoryListGet()
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryListGet");
+        }
+    
+        public virtual ObjectResult<Category> CategoryListGet(MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryListGet", mergeOption);
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace KeaBlog.Areas.Admin.Models
     public class CategoryListViewModel : BasicModel
     {
         public PagedList<CategoryViewModel> Categories { get; set; }
+        public IList<CategoryViewModel> CategoriesAll { get; set; }
 
         public void FillByPage (int page)
         {
@@ -47,16 +48,29 @@ namespace KeaBlog.Areas.Admin.Models
             int pageSize = 10;
             int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
-            List<CategoryViewModel> categoryList = new List<CategoryViewModel>();
+            CategoriesAll = new List<CategoryViewModel>();
             CategoryViewModel viewModel;
             List<Category> modelList = CategoryManager.GetCategoryListByPage(StartPageIndex, EndPageIndex, out count);
             foreach (var model in modelList)
             {
                 viewModel = new CategoryViewModel();
                 ModelMapping.ModelToViewModel(model, viewModel);
-                categoryList.Add(viewModel);
+                CategoriesAll.Add(viewModel);
             }
-            Categories = new PagedList<CategoryViewModel>(categoryList, page, pageSize, count);
+            Categories = new PagedList<CategoryViewModel>(CategoriesAll, page, pageSize, count);
+        }
+
+        public void FillAll ()
+        {
+            CategoriesAll = new List<CategoryViewModel>();
+            CategoryViewModel viewModel;
+            List<Category> modelList = CategoryManager.GetCategoryList();
+            foreach (var model in modelList)
+            {
+                viewModel = new CategoryViewModel();
+                ModelMapping.ModelToViewModel(model, viewModel);
+                CategoriesAll.Add(viewModel);
+            }
         }
     }
 }

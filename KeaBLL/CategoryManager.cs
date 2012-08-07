@@ -68,5 +68,15 @@ namespace KeaBLL
                 }
             }
         }
+
+        public static List<Category> GetCategoryList()
+        {
+            List<Category> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.CategoryListGet().ToList();
+            }
+            return result;
+        }
     }
 }

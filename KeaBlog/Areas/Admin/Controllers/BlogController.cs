@@ -46,7 +46,7 @@ namespace KeaBlog.Areas.Admin.Controllers
             {
                 model.AuthorId = Guid.Parse(CurrentSession.UserId);
                 // ToDo Check unique friendly url
-                model.InsertToDb();
+                model.DbInsert();
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -69,7 +69,7 @@ namespace KeaBlog.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 // ToDo Check unique friendly url
-                model.SaveToDb();
+                model.DbUpdate();
                 return RedirectToAction("Index");
             }
             return View(model);

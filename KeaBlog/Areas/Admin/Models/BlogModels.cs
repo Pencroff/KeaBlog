@@ -40,7 +40,7 @@ namespace KeaBlog.Areas.Admin.Models
             Modified = post.Modified.ToLocalTime();
         }
 
-        public void SaveToDb()
+        public void DbUpdate()
         {
             Post post = new Post();
             ModelMapping.ViewModelToModel(this, post);
@@ -49,13 +49,18 @@ namespace KeaBlog.Areas.Admin.Models
             PostManager.UpdatePost(post);
         }
 
-        public void InsertToDb()
+        public void DbInsert()
         {
             Post post = new Post();
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.InsertPost(post);
+        }
+
+        public void DeleteById(int id)
+        {
+            PostManager.DeletePostById(id);
         }
         
         public string GetModifiedDate()
@@ -72,10 +77,7 @@ namespace KeaBlog.Areas.Admin.Models
             return result;
         }
 
-        public void DeleteById(int id)
-        {
-            PostManager.DeletePostById(id);
-        }
+        
     }
 
     public class PostListViewModel : BasicModel
