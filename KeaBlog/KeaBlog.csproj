@@ -188,6 +188,8 @@
     <Content Include="Content\bootstrap\js\bootstrap-timepicker.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\js\chosen.jquery.js" />
+    <Content Include="Content\bootstrap\js\chosen.jquery.min.js" />
     <Content Include="Content\bootstrap\js\locales\bootstrap-datepicker.ru.js" />
     <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
@@ -198,6 +200,7 @@
     <Content Include="Content\less\button-groups.less" />
     <Content Include="Content\less\buttons.less" />
     <Content Include="Content\less\carousel.less" />
+    <Content Include="Content\less\chosen.less" />
     <Content Include="Content\less\close.less" />
     <Content Include="Content\less\code.less" />
     <Content Include="Content\less\component-animations.less" />

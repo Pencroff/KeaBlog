@@ -37,6 +37,7 @@ namespace KeaBlog.Areas.Admin.Controllers
             PostViewModel viewModel = new PostViewModel();
             viewModel.Modified = DateTime.Now;
             viewModel.FillCategoryList();
+            viewModel.FillTagList();
             return View(viewModel);
         }
 
@@ -51,6 +52,7 @@ namespace KeaBlog.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             viewModel.FillCategoryList();
+            viewModel.FillTagList();
             return View(viewModel);
         }
         
@@ -59,6 +61,7 @@ namespace KeaBlog.Areas.Admin.Controllers
             PostViewModel viewModel = new PostViewModel();
             viewModel.FillById(id);
             viewModel.FillCategoryList();
+            viewModel.FillTagList();
             if (viewModel.Id != id)
             {
                 return HttpNotFound();
@@ -75,6 +78,7 @@ namespace KeaBlog.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             viewModel.FillCategoryList();
+            viewModel.FillTagList();
             return View(viewModel);
         }
 

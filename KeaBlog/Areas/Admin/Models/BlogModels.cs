@@ -16,6 +16,7 @@ namespace KeaBlog.Areas.Admin.Models
     public class PostViewModel
     {
         public List<Category> CategoryList { get; set; }
+        public List<Tag> TagList { get; set; }
 
         public int Id { get; set; }
         [Required(ErrorMessage = "Title of article is required.")]
@@ -34,6 +35,7 @@ namespace KeaBlog.Areas.Admin.Models
         public string CategoryName { get; set; }
         public string LinkToOriginal { get; set; }
         public string OriginalTitle { get; set; }
+        public List<int> SelectedTags { get; set; }
 
         public void FillById (int postId)
         {
@@ -45,6 +47,11 @@ namespace KeaBlog.Areas.Admin.Models
         public void FillCategoryList()
         {
             CategoryList = CategoryManager.GetCategoryList();
+        }
+
+        public void FillTagList()
+        {
+            TagList = TagManager.GetTagList();
         }
 
         public void DbUpdate()

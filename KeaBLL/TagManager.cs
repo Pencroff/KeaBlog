@@ -73,5 +73,15 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static List<Tag> GetTagList()
+        {
+            List<Tag> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.TagListGet().ToList();
+            }
+            return result;
+        }
     }
 }
