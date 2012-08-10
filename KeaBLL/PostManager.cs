@@ -4,6 +4,7 @@ using System.Data.Objects;
 using System.Linq;
 using System.Text;
 using KeaDAL;
+using ServiceLib;
 
 namespace KeaBLL
 {
@@ -67,6 +68,31 @@ namespace KeaBLL
             {
                 context.PostDelete(id);
             }
+        }
+
+        public static void PostAddTags(int idPost, IList<int> idTags)
+        {
+            string tags = idTags.EnumerableToString();
+            using (KeaContext context = new KeaContext())
+            {
+                context.PostTagsInsert(idPost, tags);
+            }
+        }
+
+        public static List<int> PostGetTags(int idPost)
+        {
+            List<int> result = null;
+            List<int?> resultTmp;
+            using (KeaContext context = new KeaContext())
+            {
+                resultTmp = context.TagListByPostGet(idPost).ToList();
+            }
+            return resultTmp.ConvertAll(new Converter<int?, int>(IntNullToInt));
+        }
+
+        private static int IntNullToInt (int? data)
+        {
+            return data.GetValueOrDefault();
         }
     }
 }

@@ -211,6 +211,10 @@
           <Parameter Name="endIndex" Type="int" Mode="In" />
           <Parameter Name="count" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="sp_PostTagsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="postId" Type="int" Mode="In" />
+          <Parameter Name="tags" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_PostUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
           <Parameter Name="title" Type="nvarchar" Mode="In" />
@@ -231,6 +235,9 @@
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
           <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_TagListByPostGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_TagListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_UserByLoginGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -325,7 +332,15 @@
           <Parameter Name="tagName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CategoryListGet" EntitySet="Categories" ReturnType="Collection(KeaDAL.Category)" />
-          <FunctionImport Name="TagListGet" EntitySet="Tags" ReturnType="Collection(KeaDAL.Tag)" />
+          <FunctionImport Name="TagListGet" EntitySet="Tags" ReturnType="Collection(KeaDAL.Tag)" >
+          </FunctionImport>
+          <FunctionImport Name="PostTagsInsert">
+            <Parameter Name="postId" Mode="In" Type="Int32" />
+            <Parameter Name="tags" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TagListByPostGet" ReturnType="Collection(Int32)">
+            <Parameter Name="postId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -590,6 +605,8 @@
           <FunctionImportMapping FunctionImportName="TagByNameGet" FunctionName="KeaContext.Store.sp_TagByNameGet" />
           <FunctionImportMapping FunctionImportName="CategoryListGet" FunctionName="KeaContext.Store.sp_CategoryListGet" />
           <FunctionImportMapping FunctionImportName="TagListGet" FunctionName="KeaContext.Store.sp_TagListGet" />
+          <FunctionImportMapping FunctionImportName="PostTagsInsert" FunctionName="KeaContext.Store.sp_PostTagsInsert" />
+          <FunctionImportMapping FunctionImportName="TagListByPostGet" FunctionName="KeaContext.Store.sp_TagListByPostGet" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

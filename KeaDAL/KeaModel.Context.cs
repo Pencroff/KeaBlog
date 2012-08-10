@@ -317,5 +317,27 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagListGet", mergeOption);
         }
+    
+        public virtual int PostTagsInsert(Nullable<int> postId, string tags)
+        {
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            var tagsParameter = tags != null ?
+                new ObjectParameter("tags", tags) :
+                new ObjectParameter("tags", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostTagsInsert", postIdParameter, tagsParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> TagListByPostGet(Nullable<int> postId)
+        {
+            var postIdParameter = postId.HasValue ?
+                new ObjectParameter("postId", postId) :
+                new ObjectParameter("postId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("TagListByPostGet", postIdParameter);
+        }
     }
 }

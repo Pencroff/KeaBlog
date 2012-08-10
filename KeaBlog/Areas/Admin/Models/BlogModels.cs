@@ -15,6 +15,8 @@ namespace KeaBlog.Areas.Admin.Models
 {
     public class PostViewModel
     {
+        private List<int> _selectedTags;
+
         public List<Category> CategoryList { get; set; }
         public List<Tag> TagList { get; set; }
 
@@ -35,13 +37,18 @@ namespace KeaBlog.Areas.Admin.Models
         public string CategoryName { get; set; }
         public string LinkToOriginal { get; set; }
         public string OriginalTitle { get; set; }
-        public List<int> SelectedTags { get; set; }
+        public List<int> SelectedTags
+        {
+            get { return _selectedTags ?? (_selectedTags = new List<int>()); } 
+            set { _selectedTags = value; }
+        }
 
         public void FillById (int postId)
         {
             PostFull post = PostManager.GetPostById(postId);
             ModelMapping.ModelToViewModel(post, this);
             Modified = post.Modified.ToLocalTime();
+            SelectedTags = PostManager.PostGetTags(postId);
         }
 
         public void FillCategoryList()
@@ -61,6 +68,7 @@ namespace KeaBlog.Areas.Admin.Models
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.UpdatePost(post);
+            PostManager.PostAddTags(Id, SelectedTags);
         }
 
         public void DbInsert()
@@ -70,6 +78,7 @@ namespace KeaBlog.Areas.Admin.Models
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
             PostManager.InsertPost(post);
+            PostManager.PostAddTags(Id, SelectedTags);
         }
 
         public void DeleteById(int id)

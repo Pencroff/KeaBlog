@@ -67,7 +67,7 @@
         <div class="control-group">
             <label class = "control-label" for = "inputTag">Tags</label>
             <div class="controls">
-                @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name"), new { @class = "span10 chzn-select", Multiple = "multiple" })
+                @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name", Model.SelectedTags), new { @class = "span10 chzn-select", Multiple = "multiple" })
                 <p class="help-block">Tags of article</p>
             </div>
         </div>

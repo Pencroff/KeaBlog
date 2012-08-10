@@ -102,7 +102,7 @@ namespace ServiceLib
             return result;
         }
 
-        public static string EnumerableToString(this IEnumerable<string> enumerable, string delimiter = ",")
+        public static string EnumerableToString<T>(this IEnumerable<T> enumerable, string delimiter = ",")
         {
             string result = string.Join(delimiter, enumerable);
             return result;
