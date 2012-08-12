@@ -28,6 +28,7 @@ namespace KeaDAL
         public string LinkToOriginal { get; set; }
         public string OriginalTitle { get; set; }
         public string PostUrl { get; set; }
+        public string TagsJson { get; set; }
     }
     
 }

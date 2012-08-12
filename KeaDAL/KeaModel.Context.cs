@@ -73,7 +73,7 @@ namespace KeaDAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostDelete", postIdParameter);
         }
     
-        public virtual int PostInsert(string title, string postUrl, Nullable<System.Guid> authorId, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
+        public virtual ObjectResult<Nullable<decimal>> PostInsert(string title, string postUrl, Nullable<System.Guid> authorId, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)
         {
             var titleParameter = title != null ?
                 new ObjectParameter("title", title) :
@@ -119,7 +119,7 @@ namespace KeaDAL
                 new ObjectParameter("originalTitle", originalTitle) :
                 new ObjectParameter("originalTitle", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PostInsert", titleParameter, postUrlParameter, authorIdParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("PostInsert", titleParameter, postUrlParameter, authorIdParameter, fullContentParameter, visibleParameter, modifiedParameter, seoKeywordsParameter, seoDescriptionParameter, categoryIdParameter, linkToOriginalParameter, originalTitleParameter);
         }
     
         public virtual int PostUpdate(Nullable<int> postId, string title, string postUrl, string fullContent, Nullable<bool> visible, Nullable<System.DateTime> modified, string seoKeywords, string seoDescription, Nullable<int> categoryId, string linkToOriginal, string originalTitle)

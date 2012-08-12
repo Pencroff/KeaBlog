@@ -155,7 +155,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PostsInTags_Posts">
-          <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="1" />
+          <End Role="Posts" Type="KeaContext.Store.Posts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PostsInTags" Type="KeaContext.Store.PostsInTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Posts">
@@ -167,7 +169,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PostsInTags_Tags">
-          <End Role="Tags" Type="KeaContext.Store.Tags" Multiplicity="1" />
+          <End Role="Tags" Type="KeaContext.Store.Tags" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PostsInTags" Type="KeaContext.Store.PostsInTags" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Tags">
@@ -178,6 +182,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_TagsByPostIdJson" ReturnType="nvarchar(max)" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="postId" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_CategoryListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
@@ -266,7 +273,7 @@
           <FunctionImport Name="PostDelete">
           <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PostInsert">
+          <FunctionImport Name="PostInsert" ReturnType="Collection(Decimal)">
             <Parameter Name="title" Mode="In" Type="String" />
             <Parameter Name="postUrl" Mode="In" Type="String" />
             <Parameter Name="authorId" Mode="In" Type="Guid" />
@@ -339,7 +346,7 @@
             <Parameter Name="tags" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="TagListByPostGet" ReturnType="Collection(Int32)">
-            <Parameter Name="postId" Mode="In" Type="Int32" />
+          <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -449,6 +456,7 @@
           <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="OriginalTitle" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="PostUrl" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="TagsJson" Nullable="true" />
         </ComplexType>
         <ComplexType Name="PostShort">
           <Property Type="Int32" Name="Id" Nullable="true" />
@@ -562,6 +570,7 @@
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
                 <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
                 <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+                <ScalarProperty Name="TagsJson" ColumnName="TagsJson" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

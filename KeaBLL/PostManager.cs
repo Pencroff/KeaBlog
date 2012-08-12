@@ -42,14 +42,16 @@ namespace KeaBLL
             return result;
         }
 
-        public static void InsertPost (Post post)
+        public static int InsertPost (Post post)
         {
+            decimal? result = null;
             using (KeaContext context = new KeaContext())
             {
-                context.PostInsert(post.Title, post.PostUrl, post.AuthorId, post.FullContent,
+                result = context.PostInsert(post.Title, post.PostUrl, post.AuthorId, post.FullContent,
                                    post.Visible, post.Modified, post.SEOKeywords, post.SEODescription, post.CategoryId,
-                                   post.LinkToOriginal, post.OriginalTitle);
+                                   post.LinkToOriginal, post.OriginalTitle).SingleOrDefault();
             }
+            return (int?)result ?? 0;
         }
 
         public static void UpdatePost(Post post)

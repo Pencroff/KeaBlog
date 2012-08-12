@@ -47,7 +47,6 @@ namespace KeaBlog.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 viewModel.AuthorId = Guid.Parse(CurrentSession.UserId);
-                // ToDo Check unique friendly url
                 viewModel.DbInsert();
                 return RedirectToAction("Index");
             }

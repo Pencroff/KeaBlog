@@ -13,7 +13,6 @@ namespace KeaBlog.Controllers
             IMenu<MenuItem> model = new MenuModel();
             model.Items = MainMenuManager.GetMainMenuList();
             model.ActiveItem = null;
-            // ToDo do not use check recuest
             foreach (var item in model.Items)
             {
                 if (Request.Path.Contains(item.Item))

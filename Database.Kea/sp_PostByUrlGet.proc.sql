@@ -17,6 +17,7 @@ BEGIN
       ,c.Name AS [CategoryName]
       ,pst.[LinkToOriginal]
       ,pst.[OriginalTitle]
+      ,dbo.fn_TagsByPostIdJson( pst.[Id])AS TagsJson
   FROM [dbo].[Posts] pst, [dbo].auth_Users au, [dbo].Categories c
 	WHERE pst.[PostUrl] = @postUrl AND pst.AuthorId = au.Id AND pst.CategoryId = c.Id
 END

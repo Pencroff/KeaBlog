@@ -8,6 +8,7 @@ using KeaBLL;
 using KeaBlog.Services;
 using KeaBlog.Services.Validations;
 using KeaDAL;
+using Newtonsoft.Json;
 using ServiceLib;
 using Webdiyer.WebControls.Mvc;
 
@@ -37,6 +38,7 @@ namespace KeaBlog.Areas.Admin.Models
         public string CategoryName { get; set; }
         public string LinkToOriginal { get; set; }
         public string OriginalTitle { get; set; }
+        public List<Tag> Tags { get; set; }
         public List<int> SelectedTags
         {
             get { return _selectedTags ?? (_selectedTags = new List<int>()); } 
@@ -48,7 +50,16 @@ namespace KeaBlog.Areas.Admin.Models
             PostFull post = PostManager.GetPostById(postId);
             ModelMapping.ModelToViewModel(post, this);
             Modified = post.Modified.ToLocalTime();
-            SelectedTags = PostManager.PostGetTags(postId);
+            if (post.TagsJson != null)
+            {
+                Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
+                SelectedTags = Tags.Select(item => item.Id).ToList();
+            }
+            else
+            {
+                Tags = new List<Tag>();
+                SelectedTags = new List<int>();
+            }
         }
 
         public void FillCategoryList()
@@ -73,12 +84,16 @@ namespace KeaBlog.Areas.Admin.Models
 
         public void DbInsert()
         {
+            int id;
             Post post = new Post();
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
-            PostManager.InsertPost(post);
-            PostManager.PostAddTags(Id, SelectedTags);
+            id = PostManager.InsertPost(post);
+            if (id != 0)
+            {
+                PostManager.PostAddTags(id, SelectedTags);
+            }
         }
 
         public void DeleteById(int id)

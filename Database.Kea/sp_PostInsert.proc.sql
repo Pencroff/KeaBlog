@@ -41,5 +41,6 @@ BEGIN
 		@categoryId /*{ CategoryId }*/,
 		@linkToOriginal /*{ LinkToOriginal }*/,
 		@originalTitle /*{ OriginalTitle }*/
-	)    
+	)   
+	SELECT SCOPE_IDENTITY() 
 END

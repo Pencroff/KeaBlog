@@ -1,4 +1,5 @@
-﻿@model KeaBlog.Areas.Admin.Models.PostViewModel
+﻿@using KeaDAL
+@model KeaBlog.Areas.Admin.Models.PostViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -64,6 +65,17 @@
         <h4>Author</h4>
         <div class="well well-small">
             @Html.DisplayFor(model => model.AuthorName)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <h4>Tags</h4>
+        <div class="well well-small">
+            @foreach(Tag tag in Model.Tags)
+            {
+                <span class="label label-info">@tag.Name</span>
+            }
         </div>
     </div>
 </div>

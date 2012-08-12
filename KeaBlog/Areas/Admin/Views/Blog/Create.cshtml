@@ -65,6 +65,13 @@
             </div>
         </div>
         <div class="control-group">
+            <label class = "control-label" for = "inputTag">Tags</label>
+            <div class="controls">
+                @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name"), new { @class = "span10 chzn-select", Multiple = "multiple" })
+                <p class="help-block">Tags of article</p>
+            </div>
+        </div>
+        <div class="control-group">
             <label class = "control-label" for = "inputLink">Link</label>
             <div class="controls">
                 <div class="pull-left">
@@ -95,7 +102,7 @@
             <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
         </div>
         <div class="pull-right">
-            <input type="submit" value="Save" class="btn btn-primary"/>
+            <input type="submit" value="Create" class="btn btn-primary"/>
         </div>
     </fieldset>
 }
@@ -145,24 +152,25 @@
                     datetime = date + " " + time;
                 $("#Modified").val(datetime);
             };
-        $(document).ready(function () {
-            $('#BtnVisible').click(toogleVisible);
-            $('#inputContent').wysibb(myOpt);
-            $('#PublishTime').timepicker({
-                defaultTime: 'value',
-                minuteStep: 15,
-                disableFocus: false,
-                template: 'dropdown',
-                showSeconds: false,
-                showMeridian: false
-            }).on('changeTime', changeDateTime); ;
-            $('#PublishDate').datepicker({
-                format: 'dd.mm.yyyy',
-                autoclose: true,
-                language: 'ru',
-                weekStart: 1 // Monday
-            }).on('changeDate', changeDateTime);
-            checkVisible();
+            $(document).ready(function () {
+                $(".chzn-select").chosen();
+                $('#BtnVisible').click(toogleVisible);
+                $('#inputContent').wysibb(myOpt);
+                $('#PublishTime').timepicker({
+                    defaultTime: 'value',
+                    minuteStep: 15,
+                    disableFocus: false,
+                    template: 'dropdown',
+                    showSeconds: false,
+                    showMeridian: false
+                }).on('changeTime', changeDateTime); ;
+                $('#PublishDate').datepicker({
+                    format: 'dd.mm.yyyy',
+                    autoclose: true,
+                    language: 'ru',
+                    weekStart: 1 // Monday
+                }).on('changeDate', changeDateTime);
+                checkVisible();
         });
     </script>
 }

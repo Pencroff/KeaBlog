@@ -3,8 +3,8 @@
     public enum MainMenu
     {
         Blog,
-        Service,
-        Project,
+        //Service,
+        //Project,
         Contact
     }
 
@@ -13,8 +13,8 @@
         Blog,
         Category,
         Tag,
-        Service,
-        Project,
+        //Service,
+        //Project,
         Setting
     }
 
