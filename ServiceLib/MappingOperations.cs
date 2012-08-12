@@ -12,9 +12,9 @@ namespace ServiceLib
             U result;
             result = ObjectMapperManager.DefaultInstance.GetMapper<T, U>().Map(param);
             return result;
-        }
-         
+        }     
     }
+
 
     public static class ModelMapping
     {

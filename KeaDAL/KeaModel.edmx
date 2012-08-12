@@ -12,6 +12,7 @@
           <EntitySet Name="Categories" EntityType="KeaContext.Store.Categories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Posts" EntityType="KeaContext.Store.Posts" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PostsInTags" EntityType="KeaContext.Store.PostsInTags" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Settings" EntityType="KeaContext.Store.Settings" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Tags" EntityType="KeaContext.Store.Tags" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_auth_UsersInRoles_Roles" Association="KeaContext.Store.FK_auth_UsersInRoles_Roles">
             <End Role="auth_Roles" EntitySet="auth_Roles" />
@@ -98,6 +99,14 @@
           </Key>
           <Property Name="PostId" Type="int" Nullable="false" />
           <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Description" Type="nvarchar" MaxLength="512" />
+          <Property Name="Value" Type="nvarchar" MaxLength="64" />
         </EntityType>
         <EntityType Name="Tags">
           <Key>
@@ -348,6 +357,7 @@
           <FunctionImport Name="TagListByPostGet" ReturnType="Collection(Int32)">
           <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Settings" EntityType="KeaDAL.Setting" />
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -469,6 +479,14 @@
           <Property Type="String" Name="LinkToOriginal" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="PostUrl" Nullable="false" MaxLength="256" />
         </ComplexType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Value" MaxLength="64" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -616,6 +634,15 @@
           <FunctionImportMapping FunctionImportName="TagListGet" FunctionName="KeaContext.Store.sp_TagListGet" />
           <FunctionImportMapping FunctionImportName="PostTagsInsert" FunctionName="KeaContext.Store.sp_PostTagsInsert" />
           <FunctionImportMapping FunctionImportName="TagListByPostGet" FunctionName="KeaContext.Store.sp_TagListByPostGet" />
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="KeaDAL.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -660,6 +687,7 @@
           <ConnectorPoint PointX="6.75" PointY="2.797841796875" />
           <ConnectorPoint PointX="7.5" PointY="2.797841796875" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="KeaDAL.Setting" Width="1.5" PointX="10.25" PointY="2" Height="1.5956835937499996" />
         </Diagram>
     </Diagrams>
   </Designer>
