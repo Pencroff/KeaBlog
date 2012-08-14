@@ -124,8 +124,7 @@ namespace KeaBlog.Areas.Admin.Models
 
         public void FillByPage (int page)
         {
-            // ToDo get PageSize from options/settings
-            int pageSize = 10;
+            int pageSize = SettingManager.ReadSetting<int>("Page Size");
             int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
             List<PostViewModel> postList = new List<PostViewModel>();

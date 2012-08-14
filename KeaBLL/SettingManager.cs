@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using KeaDAL;
 using ServiceLib;
 
@@ -6,7 +8,7 @@ namespace KeaBLL
 {
     public static class SettingManager
     {
-        public static T ReadSetting<T> (string setting) where T:struct 
+        public static T ReadSetting<T> (string setting)
         {
             Setting innerSetting = null;
             string innerResult = null;
@@ -32,10 +34,9 @@ namespace KeaBLL
             return result;
         }
 
-        public static void WriteSetting<T>(string setting, T value) where T : struct
+        public static void WriteSetting(string setting, string value)
         {
             Setting innerSetting = null;
-            string innerValue = value.ToString();
             try
             {
                 using (KeaContext context = new KeaContext())
@@ -43,8 +44,9 @@ namespace KeaBLL
                     innerSetting = context.Settings.Find(setting);
                     if (innerSetting != null)
                     {    
-                        innerSetting.Value = innerValue;
-                        CacheManager.SetValue(setting, innerValue);
+                        innerSetting.Value = value;
+                        CacheManager.SetValue(setting, value);
+                        context.SaveChanges();
                     }
                     else
                     {
@@ -53,6 +55,16 @@ namespace KeaBLL
                 }
             }
             catch (Exception) { }
+        }
+
+        public static List<Setting> GetSettingList()
+        {
+            List<Setting> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.Settings.ToList();
+            }
+            return result;
         }
     }
 }

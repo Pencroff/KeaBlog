@@ -159,6 +159,7 @@
     <Compile Include="Areas\Admin\Models\MenuModel.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\Models\SettingModels.cs" />
     <Compile Include="Areas\Admin\Models\TagModels.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
