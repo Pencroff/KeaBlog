@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KeaBlog.Areas.Admin.Models;
 
 namespace KeaBlog.Controllers
 {
     public class BlogController : Controller
     {
-        //
-        // GET: /Blog/
+        public ActionResult Index(int page = 1)
+        {
+            PostListViewModel viewModel = new PostListViewModel();
+            viewModel.FillByPage(page);
+            return View(viewModel);
+        }
 
-        public ActionResult Index()
+        public ActionResult Post(string date, string url)
         {
             return View();
         }
