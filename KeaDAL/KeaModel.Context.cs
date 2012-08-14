@@ -340,5 +340,20 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("TagListByPostGet", postIdParameter);
         }
+    
+        public virtual ObjectResult<PostShort> PublicPostListByPageGet(Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostShort).Assembly);
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostShort>("PublicPostListByPageGet", startIndexParameter, endIndexParameter, count);
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace KeaBlog.Areas.Admin.Controllers
         public ActionResult Index(int page = 1)
         {
             var viewModel = new PostListViewModel();
-            viewModel.FillByPage(page);
+            viewModel.FillByPageAll(page);
             return View(viewModel);
         }
         

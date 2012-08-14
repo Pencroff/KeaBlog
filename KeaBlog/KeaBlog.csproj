@@ -366,8 +366,6 @@
     <Content Include="Areas\Admin\Views\Account\ChangePasswordSuccess.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
@@ -466,8 +464,13 @@
     <Content Include="Areas\Admin\Views\Shared\ValidationSummary.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
+    <Content Include="Views\Extra\Column.cshtml" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\timepicker.less" />
+    <Content Include="Views\Shared\_TwoColRightLayout.cshtml" />
+    <Content Include="Views\Blog\Post.cshtml" />
+    <Content Include="Views\Extra\Footer.cshtml" />
+    <Content Include="Views\Shared\_ContentAloneLayout.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

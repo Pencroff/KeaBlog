@@ -96,5 +96,17 @@ namespace KeaBLL
         {
             return data.GetValueOrDefault();
         }
+
+        public static List<PostShort> GetPublicPostListByPage(int startIndex, int endIndex, out int postCount)
+        {
+            List<PostShort> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.PublicPostListByPageGet(startIndex, endIndex, cnt).ToList();
+                postCount = Convert.ToInt32(cnt.Value);
+            }
+            return result;
+        }
     }
 }

@@ -122,7 +122,7 @@ namespace KeaBlog.Areas.Admin.Models
     {
         public PagedList<PostViewModel> Posts { get; set; }
 
-        public void FillByPage (int page)
+        public void FillByPageAll (int page)
         {
             int pageSize = SettingManager.ReadSetting<int>("Page Size");
             int count;
@@ -130,6 +130,24 @@ namespace KeaBlog.Areas.Admin.Models
             List<PostViewModel> postList = new List<PostViewModel>();
             PostViewModel viewModel;
             List<PostShort> modelList = PostManager.GetPostListByPage(StartPageIndex, EndPageIndex, out count);
+            foreach (var model in modelList)
+            {
+                viewModel = new PostViewModel();
+                ModelMapping.ModelToViewModel(model, viewModel);
+                viewModel.Modified = model.Modified.ToLocalTime();
+                postList.Add(viewModel);
+            }
+            Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+        }
+
+        public void FillByPagePublic(int page)
+        {
+            int pageSize = SettingManager.ReadSetting<int>("Page Size Public");
+            int count;
+            CalculateOperations.CalculatePageIndex(this, page, pageSize);
+            List<PostViewModel> postList = new List<PostViewModel>();
+            PostViewModel viewModel;
+            List<PostShort> modelList = PostManager.GetPublicPostListByPage(StartPageIndex, EndPageIndex, out count);
             foreach (var model in modelList)
             {
                 viewModel = new PostViewModel();

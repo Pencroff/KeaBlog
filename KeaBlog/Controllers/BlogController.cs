@@ -12,7 +12,7 @@ namespace KeaBlog.Controllers
         public ActionResult Index(int page = 1)
         {
             PostListViewModel viewModel = new PostListViewModel();
-            viewModel.FillByPage(page);
+            viewModel.FillByPagePublic(page);
             return View(viewModel);
         }
 

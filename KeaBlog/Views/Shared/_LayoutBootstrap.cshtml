@@ -57,18 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="span9">
-                        @RenderBody()
-                    </div>
-                    <div class="span3">
-                        <div class="well">
-                            @RenderSection("featured", required: false)
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @RenderBody()
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")
             @RenderSection("scripts", required: false)
@@ -81,7 +70,7 @@
             <div class="push"></div>
         </div>
         <div class="footer well well-small">
-            Footer
+            @{ Html.RenderAction("Footer", "Extra"); }
         </div>
     </body>
 </html>

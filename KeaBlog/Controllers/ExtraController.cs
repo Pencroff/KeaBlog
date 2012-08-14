@@ -22,5 +22,15 @@ namespace KeaBlog.Controllers
             }
             return PartialView(model);
         }
+
+        public ActionResult Column()
+        {
+            return PartialView();
+        }
+
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
     }
 }

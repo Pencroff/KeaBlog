@@ -244,6 +244,11 @@
           <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
           <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_PublicPostListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_TagByNameGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tagName" Type="nvarchar" Mode="In" />
         </Function>
@@ -358,6 +363,11 @@
           <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Settings" EntityType="KeaDAL.Setting" />
+          <FunctionImport Name="PublicPostListByPageGet" ReturnType="Collection(KeaDAL.PostShort)">
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -643,6 +653,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PublicPostListByPageGet" FunctionName="KeaContext.Store.sp_PublicPostListByPageGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.PostShort">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
