@@ -151,6 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\ExtraController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
@@ -465,6 +466,7 @@
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
     <Content Include="Views\Extra\Column.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\timepicker.less" />
     <Content Include="Views\Shared\_TwoColRightLayout.cshtml" />
