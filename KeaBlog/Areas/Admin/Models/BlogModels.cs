@@ -147,12 +147,22 @@ namespace KeaBlog.Areas.Admin.Models
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
             List<PostViewModel> postList = new List<PostViewModel>();
             PostViewModel viewModel;
-            List<PostShort> modelList = PostManager.GetPublicPostListByPage(StartPageIndex, EndPageIndex, out count);
+            List<PostFull> modelList = PostManager.GetPublicPostListByPage(StartPageIndex, EndPageIndex, out count);
             foreach (var model in modelList)
             {
                 viewModel = new PostViewModel();
                 ModelMapping.ModelToViewModel(model, viewModel);
                 viewModel.Modified = model.Modified.ToLocalTime();
+                if (model.TagsJson != null)
+                {
+                    viewModel.Tags = JsonConvert.DeserializeObject<List<Tag>>(model.TagsJson);
+                    viewModel.SelectedTags = viewModel.Tags.Select(item => item.Id).ToList();
+                }
+                else
+                {
+                    viewModel.Tags = new List<Tag>();
+                    viewModel.SelectedTags = new List<int>();
+                }
                 postList.Add(viewModel);
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);

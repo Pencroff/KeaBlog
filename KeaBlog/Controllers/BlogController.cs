@@ -21,5 +21,10 @@ namespace KeaBlog.Controllers
             return View();
         }
 
+        public ActionResult Tag(string date, string url)
+        {
+            return RedirectToAction("Post");
+        }
+
     }
 }

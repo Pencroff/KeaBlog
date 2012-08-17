@@ -1,0 +1,27 @@
+﻿@model KeaBlog.Areas.Admin.Models.PostViewModel
+
+<h2>@Model.Title @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h2>
+<div class="row">
+    <div class="span9 well-small">
+        <div class="span7">
+            @if(Model.SelectedTags.Count!=0)
+            {
+                foreach (var tag in Model.Tags)
+                {
+                    <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })'><span class="badge badge-success">@tag.Name</span></a>
+                }   
+            }    
+        </div>
+        <div class="span2 offset7">
+            @Model.GetModifiedDate()
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        @Model.FullContent        
+    </div>    
+</div>
+
+
+

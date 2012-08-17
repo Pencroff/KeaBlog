@@ -473,6 +473,7 @@
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Extra\Footer.cshtml" />
     <Content Include="Views\Shared\_ContentAloneLayout.cshtml" />
+    <Content Include="Views\Blog\_PostViewShort.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,6 +1,14 @@
-﻿@{
+﻿@using KeaBlog.Areas.Admin.Models
+@using Webdiyer.WebControls.Mvc
+@model KeaBlog.Areas.Admin.Models.PostListViewModel
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_TwoColRightLayout.cshtml";
 }
 
-<h2>Blog: posts list</h2>
+@{
+    foreach (PostViewModel viewModel in Model.Posts)
+    {
+        Html.RenderPartial("_PostViewShort", viewModel);
+    }
+}

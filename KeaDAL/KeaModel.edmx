@@ -363,7 +363,7 @@
           <Parameter Name="postId" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Settings" EntityType="KeaDAL.Setting" />
-          <FunctionImport Name="PublicPostListByPageGet" ReturnType="Collection(KeaDAL.PostShort)">
+          <FunctionImport Name="PublicPostListByPageGet" ReturnType="Collection(KeaDAL.PostFull)">
             <Parameter Name="startIndex" Mode="In" Type="Int32" />
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
@@ -655,16 +655,22 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="PublicPostListByPageGet" FunctionName="KeaContext.Store.sp_PublicPostListByPageGet">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="KeaDAL.PostShort">
+              <ComplexTypeMapping TypeName="KeaDAL.PostFull">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
                 <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
                 <ScalarProperty Name="FullContent" ColumnName="FullContent" />
                 <ScalarProperty Name="Visible" ColumnName="Visible" />
                 <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
+                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
                 <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+                <ScalarProperty Name="TagsJson" ColumnName="TagsJson" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

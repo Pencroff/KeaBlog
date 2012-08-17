@@ -97,9 +97,9 @@ namespace KeaBLL
             return data.GetValueOrDefault();
         }
 
-        public static List<PostShort> GetPublicPostListByPage(int startIndex, int endIndex, out int postCount)
+        public static List<PostFull> GetPublicPostListByPage(int startIndex, int endIndex, out int postCount)
         {
-            List<PostShort> result = null;
+            List<PostFull> result = null;
             using (KeaContext context = new KeaContext())
             {
                 ObjectParameter cnt = new ObjectParameter("count", typeof(int));

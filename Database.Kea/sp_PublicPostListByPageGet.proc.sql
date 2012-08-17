@@ -24,15 +24,20 @@ BEGIN
 	WHERE 
 		RowNumber BETWEEN @startIndex AND @endIndex
 	SELECT subTable.[Id]
-			,p.[Title]
-			,p.[PostUrl]
-			,au.Name AS [AuthorName]
-			,p.[FullContent]
-			,p.[Visible]
-			,p.[Modified]
-			,c.Name AS [CategoryName]
-			,p.LinkToOriginal
-	FROM dbo.Posts p, @tab subTable, auth_Users au, Categories c 
-		WHERE p.Id = subTable.Id AND p.AuthorId = au.Id AND p.CategoryId = c.Id
-	
+      ,pst.[Title]
+      ,pst.[PostUrl]
+      ,pst.[AuthorId]
+      ,au.Name AS [AuthorName]
+      ,pst.[FullContent]
+      ,pst.[Visible]
+      ,pst.[Modified]
+      ,pst.[SEOKeywords]
+      ,pst.[SEODescription]
+      ,pst.[CategoryId]
+      ,c.Name AS [CategoryName]
+      ,pst.[LinkToOriginal]
+      ,pst.[OriginalTitle]
+      ,dbo.fn_TagsByPostIdJson( pst.[Id])AS TagsJson
+  FROM [dbo].[Posts] pst, @tab subTable, [dbo].auth_Users au, [dbo].Categories c
+	WHERE pst.Id = subTable.Id AND pst.AuthorId = au.Id AND pst.CategoryId = c.Id	
 END
