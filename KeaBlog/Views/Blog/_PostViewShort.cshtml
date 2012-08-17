@@ -1,28 +1,34 @@
 ﻿@model KeaBlog.Areas.Admin.Models.PostViewModel
 
-<h2>@Model.Title @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h2>
+<div class="page-header">
+    <h1>@Model.Title  @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h1>
+</div>
 <div class="row">
     <div class="span9 well-small">
         <div class="row">
-            <div class="span3">
+            <div class="span8">
                 @if(Model.SelectedTags.Count!=0)
                 {
+                    <span class="label label-success"><i class="icon-tag icon-white"></i></span>
                     foreach (var tag in Model.Tags)
                     {
-                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })'><span class="badge badge-success">@tag.Name</span></a>
-                    }   
+                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
+                    }
                 }    
             </div>
-            <div class="span3 offset4">
-                @Model.GetModifiedDate()
+            <div class="span1">
+                <strong>@Model.GetModifiedDate()</strong>
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="span9">
+    <div class="span9 ">
         @Model.FullContent        
-    </div>    
+    </div>
+</div>
+<div class="row">
+    <div class="offset7 span2 well-small"><a class="btn btn-success pull-right">Read post fully →</a></div>
 </div>
 
 

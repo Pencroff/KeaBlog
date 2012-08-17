@@ -467,6 +467,7 @@
     <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
     <Content Include="Views\Extra\Column.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Extra\Footer.cshtml" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\timepicker.less" />
     <Content Include="Views\Shared\_TwoColRightLayout.cshtml" />

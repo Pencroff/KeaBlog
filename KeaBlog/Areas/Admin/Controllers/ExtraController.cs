@@ -26,5 +26,10 @@ namespace KeaBlog.Areas.Admin.Controllers
             }
             return PartialView(model);
         }
+
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
     }
 }
