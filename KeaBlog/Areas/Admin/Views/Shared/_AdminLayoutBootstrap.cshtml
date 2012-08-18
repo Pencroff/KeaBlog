@@ -10,7 +10,7 @@
     <style type="text/css">
         html, body { height: 100%; }
         body { padding-top: 60px;}
-        .wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0px auto -90px; }
+        .wrapper { min-height: 100%; height: auto !important; height: 100%; margin: 0px auto -60px; }
         .footer, .push { height: 60px; width: auto;}
     </style>
     @Styles.Render("~/Content/css/fonts")
@@ -42,6 +42,7 @@
             <div class="container">
                 @RenderBody()
             </div>
+            <div class="push"></div>
         </div>
         <div class="footer well well-small">
             @{ Html.RenderAction("Footer", "Extra"); }
