@@ -23,9 +23,11 @@ namespace KeaBlog.Controllers
             return View(viewModel);
         }
 
-        public ActionResult Tag(string date, string url)
+        public ActionResult Tag(string tag, int page = 1)
         {
-            return RedirectToAction("Post");
+            PostListViewModel viewModel = new PostListViewModel();
+            viewModel.FillByTagPagePublic(tag, page);
+            return View("Index", viewModel);
         }
 
     }

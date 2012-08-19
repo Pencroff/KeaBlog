@@ -208,5 +208,10 @@ namespace KeaBlog.Areas.Admin.Models
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
         }
+
+        public void FillByTagPagePublic(string tag, int page)
+        {
+            
+        }
     }
 }
