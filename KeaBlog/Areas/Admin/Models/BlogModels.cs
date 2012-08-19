@@ -115,7 +115,48 @@ namespace KeaBlog.Areas.Admin.Models
             return result;
         }
 
-        
+
+        public string GetCutContent()
+        {
+            string result = FullContent;
+            int cutIndex = result.IndexOf("[cut]", StringComparison.InvariantCulture);
+            if (cutIndex != -1)
+            {
+                result = result.Substring(0, cutIndex) + "...";
+            }
+            return result;
+        }
+
+        public string GetFullContent()
+        {
+            string result = FullContent;
+            result = result.Replace("[cut]", "");
+            return result;
+        }
+
+        public void FillByUrl(string url)
+        {
+            PostFull post = PostManager.GetPostByUrl(url);
+            ModelMapping.ModelToViewModel(post, this);
+            Modified = post.Modified.ToLocalTime();
+            if (post.TagsJson != null)
+            {
+                Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
+                SelectedTags = Tags.Select(item => item.Id).ToList();
+            }
+            else
+            {
+                Tags = new List<Tag>();
+                SelectedTags = new List<int>();
+            }
+        }
+
+        public string GetModifiedDateUrl()
+        {
+            string result = null;
+            result = Modified.ToString("yyyy-MM-dd");
+            return result;
+        }
     }
 
     public class PostListViewModel : BasicModel

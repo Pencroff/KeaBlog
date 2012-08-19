@@ -21,12 +21,22 @@ wysibb.options = {
     themeName:			'default',
     skipBodyTransform:	["code"],
     themePrefix:		'themes',
-    validTags:			["a","b","i","s","u","img","ul","ol","li","br","p","q","strike","blockquote","table","tr","td"],
-    buttons:			"bold,italic,underline,strike,sup,sub,|,fontsizeselect,fontfamilyselect,fontcolor,|,justifyleft,justifycenter,justifyright,|,link,img,table,|,bullist,numlist,quote,offtopic,code,spoiler", //default active button list
+    validTags:			["a","b","i","s","u","img","ul","ol","li","br","p","q","strike","blockquote","table","tr","td","cut"],
+    buttons:			"bold,italic,underline,strike,sup,sub,|,fontsizeselect,fontfamilyselect,fontcolor,|,justifyleft,justifycenter,justifyright,|,link,img,table,|,bullist,numlist,quote,offtopic,code,spoiler,|,cut", //default active button list
     allButtons:			{
         "wbbConvertation": {
             htmlToBB: {'span.tab': "%(this).html()%"},
             bbToHTML: {'\n':'<br/>','\\s\\s\\s\\s':'<span class="tab">&nbsp;&nbsp;&nbsp;&nbsp;</span>'}
+        },
+        "cut": {
+            title: "Cut текста",
+            buttonHTML: '<span class="ve-tlb-code"></span>',
+            command: 'new NativeCommand("Cut")',
+            bbName: "cut",
+            bbOpen: "[cut]",
+            bbClose: " ",
+            htmlToBB: { 'hr': '[cut]' },
+            bbToHTML: { '[cut]': '<hr/>' }
         },
         "bold":	{
             title:"Жирный",

@@ -21,9 +21,16 @@ namespace KeaBlog
             );
 
             routes.MapRoute(
-                "BlogRoute",
+                "BlogTagRoute",
                 "Tags/{*tag}",
                 new { Controller = "Blog", action = "Tag" },
+                namespaces: new string[] { "KeaBlog.Controllers" }
+            );
+
+            routes.MapRoute(
+                "BlogPostRoute",
+                "Post/{date}/{*url}",
+                new { Controller = "Blog", action = "Post" },
                 namespaces: new string[] { "KeaBlog.Controllers" }
             );
 

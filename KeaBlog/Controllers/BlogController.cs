@@ -18,7 +18,9 @@ namespace KeaBlog.Controllers
 
         public ActionResult Post(string date, string url)
         {
-            return View();
+            PostViewModel viewModel = new PostViewModel();
+            viewModel.FillByUrl(url);
+            return View(viewModel);
         }
 
         public ActionResult Tag(string date, string url)

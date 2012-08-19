@@ -5,4 +5,33 @@
     Layout = "~/Views/Shared/_TwoColRightLayout.cshtml";
 }
 
-<h2>Post</h2>
+<div class="page-header">
+    <h1>@Model.Title  @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h1>
+</div>
+<div class="row">
+    <div class="span9 contentBB">@Model.GetFullContent()</div>
+</div>
+<div class="row">
+    <div class="span9 well-small">
+        <div class="row">
+            <div class="span8">
+                @if(Model.SelectedTags.Count!=0)
+                {
+                    <span class="label label-success"><i class="icon-tag icon-white"></i></span>
+                    foreach (var tag in Model.Tags)
+                    {
+                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
+                    }
+                }    
+            </div>
+            <div class="span1">
+                <strong>@Model.GetModifiedDate()</strong>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span9">
+        <div class="well">Comments</div>
+    </div>
+</div>

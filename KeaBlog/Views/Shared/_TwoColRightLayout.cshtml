@@ -4,11 +4,27 @@
 }
 <div class="container">
     <div class="row">
-        <div class="span9">
-            @RenderBody()
-        </div>
+        <div class="span9">@RenderBody()</div>
         <div class="span3">
             @{ Html.RenderAction("Column", "Extra"); }
         </div>
     </div>
 </div>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/wysibb.render")
+    <script>
+        $(document).ready(function () {
+            var renderElements = $('.contentBB'),
+                viewElement, bbHtml, html;
+            wysibb.options.themePrefix = '/Content/WysiBB/themes';
+            renderElements.each(function (index) {
+                viewElement = $(this);
+                bbHtml = viewElement.html();
+                html = wysibb.render(bbHtml);
+                viewElement.html(html);
+            });
+            $('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
+        });
+    </script>
+}
