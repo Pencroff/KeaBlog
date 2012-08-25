@@ -1,3 +1,10 @@
-﻿    <div class="well">
+﻿  @*  <div class="well">
         Some extra content
-    </div>
+    </div>*@
+@model Dictionary<string, object>
+@{
+    foreach (KeyValuePair<string, object> valuePair in Model)
+    {
+        Html.RenderPartial(valuePair.Key, valuePair.Value);
+    }
+}

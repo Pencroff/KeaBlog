@@ -56,6 +56,9 @@
     <Compile Include="Category.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoryTop.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="KeaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +88,9 @@
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tag.cs">
+      <DependentUpon>KeaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TagTop.cs">
       <DependentUpon>KeaModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

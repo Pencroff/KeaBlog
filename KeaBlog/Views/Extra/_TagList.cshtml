@@ -1,0 +1,9 @@
+﻿@model List<KeaDAL.TagTop>
+
+<div class="well">
+    <h5>Tags</h5>
+    @foreach(var tag in Model)
+    {
+        <a href="#">@tag.Name (@tag.Count)</a>
+    }
+</div>

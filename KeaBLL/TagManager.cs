@@ -21,6 +21,16 @@ namespace KeaBLL
             return result;
         }
 
+        public static List<TagTop> GetTagListTop(int? countTop = null)
+        {
+            List<TagTop> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.TagListTopGet(countTop).ToList();
+            }
+            return result;
+        }
+
         public static void InsertTag(Tag tag)
         {
             using (KeaContext context = new KeaContext())

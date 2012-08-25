@@ -200,6 +200,9 @@
           <Parameter Name="count" Type="int" Mode="InOut" />
         </Function>
         <Function Name="sp_CategoryListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_CategoryListTopGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryTop" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_PostByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
@@ -261,6 +264,9 @@
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_TagListGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_TagListTopGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagTop" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_UserByLoginGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="login" Type="nvarchar" Mode="In" />
         </Function>
@@ -368,6 +374,12 @@
             <Parameter Name="endIndex" Mode="In" Type="Int32" />
             <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="CategoryListTopGet" ReturnType="Collection(KeaDAL.CategoryTop)">
+          <Parameter Name="categoryTop" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TagListTopGet" ReturnType="Collection(KeaDAL.TagTop)">
+            <Parameter Name="tagTop" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
           <Key>
@@ -414,7 +426,7 @@
           <Property Type="Guid" Name="AuthorId" Nullable="false" />
           <Property Type="String" Name="FullContent" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Visible" Nullable="false" />
-          <Property Type="DateTime" Name="Modified" Nullable="false" />
+          <Property Type="DateTime" Name="Modified" Nullable="false" Precision="3" />
           <Property Type="String" Name="SEOKeywords" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="SEODescription" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="CategoryId" Nullable="false" DefaultValue="0" />
@@ -497,6 +509,16 @@
           <Property Type="String" Name="Description" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Value" MaxLength="64" FixedLength="false" Unicode="true" />
         </EntityType>
+        <ComplexType Name="CategoryTop">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="Count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TagTop">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="64" />
+          <Property Type="Int32" Name="Count" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -671,6 +693,24 @@
                 <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
                 <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
                 <ScalarProperty Name="TagsJson" ColumnName="TagsJson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CategoryListTopGet" FunctionName="KeaContext.Store.sp_CategoryListTopGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.CategoryTop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TagListTopGet" FunctionName="KeaContext.Store.sp_TagListTopGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.TagTop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

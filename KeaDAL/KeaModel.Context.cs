@@ -355,5 +355,27 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PublicPostListByPageGet", startIndexParameter, endIndexParameter, count);
         }
+    
+        public virtual ObjectResult<CategoryTop> CategoryListTopGet(Nullable<int> categoryTop)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(CategoryTop).Assembly);
+    
+            var categoryTopParameter = categoryTop.HasValue ?
+                new ObjectParameter("categoryTop", categoryTop) :
+                new ObjectParameter("categoryTop", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CategoryTop>("CategoryListTopGet", categoryTopParameter);
+        }
+    
+        public virtual ObjectResult<TagTop> TagListTopGet(Nullable<int> tagTop)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(TagTop).Assembly);
+    
+            var tagTopParameter = tagTop.HasValue ?
+                new ObjectParameter("tagTop", tagTop) :
+                new ObjectParameter("tagTop", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TagTop>("TagListTopGet", tagTopParameter);
+        }
     }
 }

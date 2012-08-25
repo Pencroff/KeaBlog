@@ -3,6 +3,8 @@ using KeaBLL;
 using KeaBLL.General;
 using KeaBlog.Areas.Admin.Models;
 using ServiceLib.Interfaces;
+using System.Collections.Generic;
+using KeaDAL;
 
 namespace KeaBlog.Controllers
 {
@@ -25,7 +27,12 @@ namespace KeaBlog.Controllers
 
         public ActionResult Column()
         {
-            return PartialView();
+            Dictionary<string, object> viewModel = new Dictionary<string, object>();
+            List<TagTop> tagList = TagManager.GetTagListTop();
+            viewModel.Add("_TagList", tagList);
+            //List<CategoryTop> categoryList = CategoryManager.GetCategoryListTop();
+            //viewModel.Add("_CategoryList", categoryList);
+            return PartialView(viewModel);
         }
 
         public ActionResult Footer()

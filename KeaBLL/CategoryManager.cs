@@ -22,6 +22,16 @@ namespace KeaBLL
             return result;
         }
 
+        public static List<CategoryTop> GetCategoryListTop(int? countTop = null)
+        {
+            List<CategoryTop> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.CategoryListTopGet(countTop).ToList();
+            }
+            return result;
+        }
+
         public static void InsertCategory(Category category)
         {
             using (KeaContext context = new KeaContext())
