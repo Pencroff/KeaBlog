@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using KeaBLL;
 using KeaBlog.Services;
+using KeaBlog.Services.Validations;
 using KeaDAL;
 using ServiceLib;
 using Webdiyer.WebControls.Mvc;
@@ -15,6 +16,7 @@ namespace KeaBlog.Areas.Admin.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Name of category is required.")]
+        [CategoryValidation]
         public string Name { get; set; }
         public string Description { get; set; }
 

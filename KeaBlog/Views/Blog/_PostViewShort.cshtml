@@ -2,7 +2,14 @@
 @model KeaBlog.Areas.Admin.Models.PostViewModel
 
 <div class="page-header">
-    <h1>@Model.Title  @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h1>
+    <h1>@Model.Title  @if(Model.CategoryId!=0)
+                      {
+                          <small>
+                              <a href='@Url.Action("Category", "Blog", new { category = Model.CategoryName.ToTranslit().Slugify(), id = Model.CategoryId })'>
+                                @Model.CategoryName
+                              </a>
+                          </small>
+                      }</h1>
 </div>
 <div class="row">
     <div class="span9 well-small">
@@ -13,7 +20,7 @@
                     <span class="label label-success"><i class="icon-tag icon-white"></i></span>
                     foreach (var tag in Model.Tags)
                     {
-                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
+                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name.ToTranslit().Slugify(), id = tag.Id })' class="btn btn-mini btn-success">@tag.Name</a>
                     }
                 }    
             </div>

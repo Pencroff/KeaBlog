@@ -88,5 +88,25 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static Category GetCategoryByName(string category)
+        {
+            Category result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.CategoryByNameGet(category).SingleOrDefault();
+            }
+            return result;
+        }
+
+        public static Category GetCategoryById(int categoryId)
+        {
+            Category result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.CategoryByIdGet(categoryId).SingleOrDefault();
+            }
+            return result;
+        }
     }
 }

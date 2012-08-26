@@ -352,6 +352,11 @@
     </Build>
     <Build Include="dbo\Stored Procedures\sp_TagListTopGet.sql" />
     <Build Include="dbo\Stored Procedures\sp_CategoryListTopGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_CategoryByNameGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_PublicPostListByPageTagGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_TagByIdGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_PublicPostListByPageCategoryGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_CategoryByIdGet.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

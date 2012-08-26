@@ -182,6 +182,7 @@
     <Compile Include="Services\Providers\KeaMembershipProvider.cs" />
     <Compile Include="Services\Providers\KeaMembershipService.cs" />
     <Compile Include="Services\Providers\KeaRoleProvider.cs" />
+    <Compile Include="Services\Validations\CategoryValidationAttribute.cs" />
     <Compile Include="Services\Validations\FriendlyUrlValidationAttribute.cs" />
     <Compile Include="Services\Validations\TagValidationAttribute.cs" />
   </ItemGroup>
@@ -480,6 +481,7 @@
     <Content Include="Views\Shared\_ContentAloneLayout.cshtml" />
     <Content Include="Views\Blog\_PostViewShort.cshtml" />
     <Content Include="Views\Extra\_TagList.cshtml" />
+    <Content Include="Views\Extra\_CategoryList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

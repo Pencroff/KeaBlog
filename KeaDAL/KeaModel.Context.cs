@@ -377,5 +377,109 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TagTop>("TagListTopGet", tagTopParameter);
         }
+    
+        public virtual ObjectResult<Category> CategoryByNameGet(string categoryName)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            var categoryNameParameter = categoryName != null ?
+                new ObjectParameter("categoryName", categoryName) :
+                new ObjectParameter("categoryName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryByNameGet", categoryNameParameter);
+        }
+    
+        public virtual ObjectResult<Category> CategoryByNameGet(string categoryName, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            var categoryNameParameter = categoryName != null ?
+                new ObjectParameter("categoryName", categoryName) :
+                new ObjectParameter("categoryName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryByNameGet", mergeOption, categoryNameParameter);
+        }
+    
+        public virtual ObjectResult<PostFull> PublicPostListByPageTagGet(Nullable<int> tagId, Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
+    
+            var tagIdParameter = tagId.HasValue ?
+                new ObjectParameter("tagId", tagId) :
+                new ObjectParameter("tagId", typeof(int));
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PublicPostListByPageTagGet", tagIdParameter, startIndexParameter, endIndexParameter, count);
+        }
+    
+        public virtual ObjectResult<Tag> TagByIdGet(Nullable<int> tagId)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var tagIdParameter = tagId.HasValue ?
+                new ObjectParameter("tagId", tagId) :
+                new ObjectParameter("tagId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagByIdGet", tagIdParameter);
+        }
+    
+        public virtual ObjectResult<Tag> TagByIdGet(Nullable<int> tagId, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Tag).Assembly);
+    
+            var tagIdParameter = tagId.HasValue ?
+                new ObjectParameter("tagId", tagId) :
+                new ObjectParameter("tagId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tag>("TagByIdGet", mergeOption, tagIdParameter);
+        }
+    
+        public virtual ObjectResult<Category> CategoryByIdGet(Nullable<int> categoryId)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            var categoryIdParameter = categoryId.HasValue ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryByIdGet", categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<Category> CategoryByIdGet(Nullable<int> categoryId, MergeOption mergeOption)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(Category).Assembly);
+    
+            var categoryIdParameter = categoryId.HasValue ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Category>("CategoryByIdGet", mergeOption, categoryIdParameter);
+        }
+    
+        public virtual ObjectResult<PostFull> PublicPostListByPageCategoryGet(Nullable<int> categoryId, Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
+    
+            var categoryIdParameter = categoryId.HasValue ?
+                new ObjectParameter("categoryId", categoryId) :
+                new ObjectParameter("categoryId", typeof(int));
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PublicPostListByPageCategoryGet", categoryIdParameter, startIndexParameter, endIndexParameter, count);
+        }
     }
 }

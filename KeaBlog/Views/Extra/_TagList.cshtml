@@ -1,9 +1,12 @@
-﻿@model List<KeaDAL.TagTop>
+﻿@using ServiceLib
+@model List<KeaDAL.TagTop>
 
-<div class="well">
-    <h5>Tags</h5>
-    @foreach(var tag in Model)
-    {
-        <a href="#">@tag.Name (@tag.Count)</a>
-    }
+<div class="well well-small">
+    <ul class="nav nav-list">
+        <li class="nav-header">Tags</li>
+        @foreach(var tag in Model)
+        {
+            <li><a href='@Url.Action("Tag", "Blog", new { tag = tag.Name.ToTranslit().Slugify(), id = tag.Id })'><i class="icon-tag"></i>&nbsp;@tag.Name&nbsp;(@tag.Count)</a></li>
+        }
+    </ul>
 </div>

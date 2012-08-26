@@ -1,0 +1,17 @@
+﻿@using ServiceLib
+@model List<KeaDAL.CategoryTop>
+
+<div class="well well-small">
+    <ul class="nav nav-list">
+        <li class="nav-header">Categories</li>
+        @foreach(var category in Model)
+        {
+            if (category.Id == 0)
+            {
+                continue;
+            }
+            <li><a href='@Url.Action("Category", "Blog", new { category = category.Name.ToTranslit().Slugify(), id = category.Id })'><i class="icon-certificate"></i>&nbsp;@category.Name&nbsp;(@category.Count)</a></li>
+        }
+    </ul>
+</div>
+

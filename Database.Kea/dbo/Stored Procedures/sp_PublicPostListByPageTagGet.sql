@@ -1,5 +1,6 @@
-﻿CREATE PROCEDURE [dbo].[sp_PublicPostListByPageGet](
-    @startIndex INT
+﻿CREATE PROCEDURE [dbo].[sp_PublicPostListByPageTagGet](
+    @tagId INT
+   ,@startIndex INT
    ,@endIndex INT
    ,@count INT OUT
 )
@@ -8,7 +9,7 @@ BEGIN
 	SET NOCOUNT ON;
 	DECLARE @tab TABLE (Id INT)
 	
-	SET @Count = (SELECT COUNT(Id) FROM dbo.Posts p WHERE p.Visible = 1);
+	SET @Count = (SELECT COUNT(Id) FROM dbo.Posts p, dbo.PostsInTags pit WHERE p.Visible = 1 AND pit.TagId = @tagId AND pit.PostId = p.Id);
 				  
 	WITH PostCTE ( Id
 			,RowNumber
@@ -16,7 +17,7 @@ BEGIN
 		( 
 			SELECT p.Id AS Id
 				,ROW_NUMBER() OVER (ORDER BY p.Modified DESC, p.Id)AS 'RowNumber'
-			FROM dbo.Posts p WHERE p.Visible = 1		
+			FROM dbo.Posts p, dbo.PostsInTags pit WHERE p.Visible = 1 AND pit.TagId = @tagId AND pit.PostId = p.Id		
 		)
 	INSERT INTO @tab SELECT Id
     FROM 

@@ -7,6 +7,14 @@
 }
 
 @{
+    if (Model.Category != null)
+    {
+        <div class="well well-small"><i class="icon-certificate"></i>&nbsp;@Model.Category.Name</div> 
+    }
+    if (Model.Tag != null)
+    {
+        <div class="well well-small"><i class="icon-tag"></i>&nbsp;@Model.Tag.Name</div>
+    }
     foreach (PostViewModel viewModel in Model.Posts)
     {
         Html.RenderPartial("_PostViewShort", viewModel);

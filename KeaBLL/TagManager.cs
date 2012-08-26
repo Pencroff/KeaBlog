@@ -93,5 +93,15 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static Tag GetTagById(int tagId)
+        {
+            Tag result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                result = context.TagByIdGet(tagId).SingleOrDefault();
+            }
+            return result;
+        }
     }
 }

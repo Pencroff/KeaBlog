@@ -108,5 +108,29 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static List<PostFull> GetPublicPostListByPageTag(int tagId, int startIndex, int endIndex, out int postCount)
+        {
+            List<PostFull> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.PublicPostListByPageTagGet(tagId, startIndex, endIndex, cnt).ToList();
+                postCount = Convert.ToInt32(cnt.Value);
+            }
+            return result;
+        }
+
+        public static List<PostFull> GetPublicPostListByPageCategory(int categoryId, int startIndex, int endIndex, out int postCount)
+        {
+            List<PostFull> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.PublicPostListByPageCategoryGet(categoryId, startIndex, endIndex, cnt).ToList();
+                postCount = Convert.ToInt32(cnt.Value);
+            }
+            return result;
+        }
     }
 }

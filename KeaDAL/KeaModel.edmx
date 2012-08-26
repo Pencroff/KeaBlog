@@ -194,6 +194,12 @@
         <Function Name="fn_TagsByPostIdJson" ReturnType="nvarchar(max)" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="postId" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_CategoryByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_CategoryByNameGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="sp_CategoryListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
@@ -247,10 +253,25 @@
           <Parameter Name="linkToOriginal" Type="nvarchar" Mode="In" />
           <Parameter Name="originalTitle" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_PublicPostListByPageCategoryGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryId" Type="int" Mode="In" />
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="sp_PublicPostListByPageGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="startIndex" Type="int" Mode="In" />
           <Parameter Name="endIndex" Type="int" Mode="In" />
           <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_PublicPostListByPageTagGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagId" Type="int" Mode="In" />
+          <Parameter Name="startIndex" Type="int" Mode="In" />
+          <Parameter Name="endIndex" Type="int" Mode="In" />
+          <Parameter Name="count" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="sp_TagByIdGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tagId" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_TagByNameGet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="tagName" Type="nvarchar" Mode="In" />
@@ -378,7 +399,28 @@
           <Parameter Name="categoryTop" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="TagListTopGet" ReturnType="Collection(KeaDAL.TagTop)">
-            <Parameter Name="tagTop" Mode="In" Type="Int32" />
+          <Parameter Name="tagTop" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryByNameGet" EntitySet="Categories" ReturnType="Collection(KeaDAL.Category)">
+          <Parameter Name="categoryName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PublicPostListByPageTagGet" ReturnType="Collection(KeaDAL.PostFull)">
+            <Parameter Name="tagId" Mode="In" Type="Int32" />
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TagByIdGet" EntitySet="Tags" ReturnType="Collection(KeaDAL.Tag)">
+          <Parameter Name="tagId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryByIdGet" EntitySet="Categories" ReturnType="Collection(KeaDAL.Category)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PublicPostListByPageCategoryGet" ReturnType="Collection(KeaDAL.PostFull)">
+            <Parameter Name="categoryId" Mode="In" Type="Int32" />
+            <Parameter Name="startIndex" Mode="In" Type="Int32" />
+            <Parameter Name="endIndex" Mode="In" Type="Int32" />
+            <Parameter Name="count" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Auth_Role">
@@ -711,6 +753,52 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CategoryByNameGet" FunctionName="KeaContext.Store.sp_CategoryByNameGet">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PublicPostListByPageTagGet" FunctionName="KeaContext.Store.sp_PublicPostListByPageTagGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.PostFull">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
+                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+                <ScalarProperty Name="TagsJson" ColumnName="TagsJson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TagByIdGet" FunctionName="KeaContext.Store.sp_TagByIdGet" />
+          <FunctionImportMapping FunctionImportName="CategoryByIdGet" FunctionName="KeaContext.Store.sp_CategoryByIdGet" />
+          <FunctionImportMapping FunctionImportName="PublicPostListByPageCategoryGet" FunctionName="KeaContext.Store.sp_PublicPostListByPageCategoryGet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="KeaDAL.PostFull">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="AuthorName" ColumnName="AuthorName" />
+                <ScalarProperty Name="FullContent" ColumnName="FullContent" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="SEOKeywords" ColumnName="SEOKeywords" />
+                <ScalarProperty Name="SEODescription" ColumnName="SEODescription" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="LinkToOriginal" ColumnName="LinkToOriginal" />
+                <ScalarProperty Name="OriginalTitle" ColumnName="OriginalTitle" />
+                <ScalarProperty Name="PostUrl" ColumnName="PostUrl" />
+                <ScalarProperty Name="TagsJson" ColumnName="TagsJson" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

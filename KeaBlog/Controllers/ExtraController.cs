@@ -27,11 +27,11 @@ namespace KeaBlog.Controllers
 
         public ActionResult Column()
         {
-            Dictionary<string, object> viewModel = new Dictionary<string, object>();
+            var viewModel = new Dictionary<string, object>();
+            List<CategoryTop> categoryList = CategoryManager.GetCategoryListTop();
+            viewModel.Add("_CategoryList", categoryList);
             List<TagTop> tagList = TagManager.GetTagListTop();
             viewModel.Add("_TagList", tagList);
-            //List<CategoryTop> categoryList = CategoryManager.GetCategoryListTop();
-            //viewModel.Add("_CategoryList", categoryList);
             return PartialView(viewModel);
         }
 

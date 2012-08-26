@@ -163,8 +163,13 @@ namespace KeaBlog.Areas.Admin.Models
     {
         public PagedList<PostViewModel> Posts { get; set; }
 
+        public Tag Tag { get; set; }
+        public Category Category { get; set; }
+
         public void FillByPageAll (int page)
         {
+            Tag = null;
+            Category = null;
             int pageSize = SettingManager.ReadSetting<int>("Page Size");
             int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
@@ -183,6 +188,8 @@ namespace KeaBlog.Areas.Admin.Models
 
         public void FillByPagePublic(int page)
         {
+            Tag = null;
+            Category = null;
             int pageSize = SettingManager.ReadSetting<int>("Page Size Public");
             int count;
             CalculateOperations.CalculatePageIndex(this, page, pageSize);
@@ -209,9 +216,78 @@ namespace KeaBlog.Areas.Admin.Models
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
         }
 
-        public void FillByTagPagePublic(string tag, int page)
+        public void FillByTagPagePublic(int tagId, int page)
         {
-            
+            Tag = TagManager.GetTagById(tagId);
+            Category = null;
+            if (Tag == null)
+            {
+                FillByPagePublic(page);
+            }
+            else
+            {
+                int pageSize = SettingManager.ReadSetting<int>("Page Size Public");
+                int count;
+                CalculateOperations.CalculatePageIndex(this, page, pageSize);
+                List<PostViewModel> postList = new List<PostViewModel>();
+                PostViewModel viewModel;
+                List<PostFull> modelList = PostManager.GetPublicPostListByPageTag(tagId, StartPageIndex, EndPageIndex, out count);
+                foreach (var model in modelList)
+                {
+                    viewModel = new PostViewModel();
+                    ModelMapping.ModelToViewModel(model, viewModel);
+                    viewModel.Modified = model.Modified.ToLocalTime();
+                    if (model.TagsJson != null)
+                    {
+                        viewModel.Tags = JsonConvert.DeserializeObject<List<Tag>>(model.TagsJson);
+                        viewModel.SelectedTags = viewModel.Tags.Select(item => item.Id).ToList();
+                    }
+                    else
+                    {
+                        viewModel.Tags = new List<Tag>();
+                        viewModel.SelectedTags = new List<int>();
+                    }
+                    postList.Add(viewModel);
+                }
+                Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+            }
+        }
+
+        public void FillByCategoryPagePublic(int categoryId, int page)
+        {
+            Tag = null;
+            Category = CategoryManager.GetCategoryById(categoryId);
+            if (Category == null)
+            {
+                FillByPagePublic(page);
+            }
+            else
+            {
+                int pageSize = SettingManager.ReadSetting<int>("Page Size Public");
+                int count;
+                CalculateOperations.CalculatePageIndex(this, page, pageSize);
+                List<PostViewModel> postList = new List<PostViewModel>();
+                PostViewModel viewModel;
+                List<PostFull> modelList = PostManager.GetPublicPostListByPageCategory(categoryId, StartPageIndex, EndPageIndex, out count);
+                foreach (var model in modelList)
+                {
+                    viewModel = new PostViewModel();
+                    ModelMapping.ModelToViewModel(model, viewModel);
+                    viewModel.Modified = model.Modified.ToLocalTime();
+                    if (model.TagsJson != null)
+                    {
+                        viewModel.Tags = JsonConvert.DeserializeObject<List<Tag>>(model.TagsJson);
+                        viewModel.SelectedTags = viewModel.Tags.Select(item => item.Id).ToList();
+                    }
+                    else
+                    {
+                        viewModel.Tags = new List<Tag>();
+                        viewModel.SelectedTags = new List<int>();
+                    }
+                    postList.Add(viewModel);
+                }
+                Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+            }
         }
     }
 }
