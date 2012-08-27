@@ -357,6 +357,7 @@
     <Build Include="dbo\Stored Procedures\sp_TagByIdGet.sql" />
     <Build Include="dbo\Stored Procedures\sp_PublicPostListByPageCategoryGet.sql" />
     <Build Include="dbo\Stored Procedures\sp_CategoryByIdGet.sql" />
+    <Build Include="dbo\Stored Procedures\sp_SearchPublicPostByPageQueryGet.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug.publish.xml" />

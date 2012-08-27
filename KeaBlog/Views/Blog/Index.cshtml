@@ -15,6 +15,21 @@
     {
         <div class="well well-small"><i class="icon-tag"></i>&nbsp;@Model.Tag.Name</div>
     }
+    if (Model.Query != null)
+    {
+
+            <div class="row">
+                <div class="span9">
+                    <form action='@Url.Action("Search", "Blog")' method="get" class="form-search">
+                        <div class="well well-small">                       
+                            <input type="text" class="span7" placeholder="Search" name="query" value="@Model.Query">
+                            <button type="submit" class="btn btn-success pull-right input-medium"><i class="icon-search icon-white"></i> Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    }
+    
     foreach (PostViewModel viewModel in Model.Posts)
     {
         Html.RenderPartial("_PostViewShort", viewModel);

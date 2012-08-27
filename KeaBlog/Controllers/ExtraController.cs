@@ -2,6 +2,7 @@
 using KeaBLL;
 using KeaBLL.General;
 using KeaBlog.Areas.Admin.Models;
+using KeaBlog.Models;
 using ServiceLib.Interfaces;
 using System.Collections.Generic;
 using KeaDAL;
@@ -27,11 +28,9 @@ namespace KeaBlog.Controllers
 
         public ActionResult Column()
         {
-            var viewModel = new Dictionary<string, object>();
-            List<CategoryTop> categoryList = CategoryManager.GetCategoryListTop();
-            viewModel.Add("_CategoryList", categoryList);
-            List<TagTop> tagList = TagManager.GetTagListTop();
-            viewModel.Add("_TagList", tagList);
+            var viewModel = new ColumnModel();
+            viewModel.FilCategories();
+            viewModel.FillTags();
             return PartialView(viewModel);
         }
 

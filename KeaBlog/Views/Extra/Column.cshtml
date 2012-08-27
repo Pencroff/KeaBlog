@@ -1,9 +1,9 @@
 ﻿  @*  <div class="well">
         Some extra content
     </div>*@
-@model Dictionary<string, object>
+@model KeaBlog.Models.ColumnModel
 @{
-    foreach (KeyValuePair<string, object> valuePair in Model)
+    foreach (KeyValuePair<string, object> valuePair in Model.Dictionary)
     {
         Html.RenderPartial(valuePair.Key, valuePair.Value);
     }

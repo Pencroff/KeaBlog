@@ -39,5 +39,16 @@ namespace KeaBlog.Controllers
             return View("Index", viewModel);
         }
 
+        public ActionResult Search(string query, int page = 1)
+        {
+            if (String.IsNullOrEmpty(query))
+            {
+                return RedirectToAction("Index", "Blog");
+            }
+            var viewModel = new PostListViewModel();
+            viewModel.FillByQueryPagePublic(query, page);
+            return View("Index", viewModel);
+        }
+
     }
 }

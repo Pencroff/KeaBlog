@@ -12,5 +12,8 @@
             <li><a href='@Url.Action(element.Action, element.Controller)'>@element.Display</a></li>
         }
     }
-    
 </ul>
+<form class="navbar-search form-search pull-right" action='@Url.Action("Search", "Blog")' method="get">
+    <input type="text" class="input-medium search-query" placeholder="Search" name="query">
+    <button type="submit" class="btn btn-success"><i class="icon-search icon-white"></i></button>
+</form>

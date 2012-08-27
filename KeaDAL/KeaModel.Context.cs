@@ -481,5 +481,24 @@ namespace KeaDAL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("PublicPostListByPageCategoryGet", categoryIdParameter, startIndexParameter, endIndexParameter, count);
         }
+    
+        public virtual ObjectResult<PostFull> SearchPublicPostByPageQueryGet(string query, Nullable<int> startIndex, Nullable<int> endIndex, ObjectParameter count)
+        {
+            ((IObjectContextAdapter)this).ObjectContext.MetadataWorkspace.LoadFromAssembly(typeof(PostFull).Assembly);
+    
+            var queryParameter = query != null ?
+                new ObjectParameter("query", query) :
+                new ObjectParameter("query", typeof(string));
+    
+            var startIndexParameter = startIndex.HasValue ?
+                new ObjectParameter("startIndex", startIndex) :
+                new ObjectParameter("startIndex", typeof(int));
+    
+            var endIndexParameter = endIndex.HasValue ?
+                new ObjectParameter("endIndex", endIndex) :
+                new ObjectParameter("endIndex", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PostFull>("SearchPublicPostByPageQueryGet", queryParameter, startIndexParameter, endIndexParameter, count);
+        }
     }
 }

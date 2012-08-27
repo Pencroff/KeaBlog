@@ -35,6 +35,13 @@ namespace KeaBlog
             );
 
             routes.MapRoute(
+                "BlogSearchRoute",
+                "Search/",
+                new { Controller = "Blog", action = "Search" },
+                namespaces: new string[] { "KeaBlog.Controllers" }
+            );
+
+            routes.MapRoute(
                 "BlogPostRoute",
                 "Post/{date}/{*url}",
                 new { Controller = "Blog", action = "Post" },

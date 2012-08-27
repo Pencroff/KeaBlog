@@ -132,5 +132,17 @@ namespace KeaBLL
             }
             return result;
         }
+
+        public static List<PostFull> GetPublicPostListByPageQuery(string query, int startIndex, int endIndex, out int postCount)
+        {
+            List<PostFull> result = null;
+            using (KeaContext context = new KeaContext())
+            {
+                ObjectParameter cnt = new ObjectParameter("count", typeof(int));
+                result = context.SearchPublicPostByPageQueryGet(query, startIndex, endIndex, cnt).ToList();
+                postCount = Convert.ToInt32(cnt.Value);
+            }
+            return result;
+        }
     }
 }
