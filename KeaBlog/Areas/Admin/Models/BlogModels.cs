@@ -10,11 +10,12 @@ using KeaBlog.Services.Validations;
 using KeaDAL;
 using Newtonsoft.Json;
 using ServiceLib;
+using ServiceLib.Interfaces;
 using Webdiyer.WebControls.Mvc;
 
 namespace KeaBlog.Areas.Admin.Models
 {
-    public class PostViewModel
+    public class PostViewModel : ISeoModel
     {
         private List<int> _selectedTags;
 
@@ -44,6 +45,14 @@ namespace KeaBlog.Areas.Admin.Models
             get { return _selectedTags ?? (_selectedTags = new List<int>()); } 
             set { _selectedTags = value; }
         }
+
+        #region Implementation of ISeoModel
+
+        public string SeoTitle { get { return Title; } set {} }
+        public string SeoKeywords { get { return SEOKeywords; } set { } }
+        public string SeoDescription { get { return SEODescription; } set { } }
+
+        #endregion
 
         public void FillById (int postId)
         {
@@ -215,6 +224,7 @@ namespace KeaBlog.Areas.Admin.Models
                 postList.Add(viewModel);
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+            SeoTitle = "Articles kea blog";
         }
 
         public void FillByQueryPagePublic(string query, int page)
@@ -246,6 +256,7 @@ namespace KeaBlog.Areas.Admin.Models
                 postList.Add(viewModel);
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+            SeoTitle = "Searched articles by query: '"+ query +"'";
         }
 
         public void FillByTagPagePublic(int tagId, int page)
@@ -282,6 +293,7 @@ namespace KeaBlog.Areas.Admin.Models
                     postList.Add(viewModel);
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+                SeoTitle = "Selected articles by tag: '" + Tag.Name + "'";
             }
         }
 
@@ -319,6 +331,7 @@ namespace KeaBlog.Areas.Admin.Models
                     postList.Add(viewModel);
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
+                SeoTitle = "Selected articles by category: '" + Category.Name + "'";
             }
         }
     }
