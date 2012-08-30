@@ -2,8 +2,8 @@
 {
     public interface ISeoModel
     {
-        string SeoTitle { get; set; }
-        string SeoKeywords { get; set; }
-        string SeoDescription { get; set; }
+        string TitleSeo { get; set; }
+        string KeywordsSeo { get; set; }
+        string DescriptionSeo { get; set; }
     }
 }

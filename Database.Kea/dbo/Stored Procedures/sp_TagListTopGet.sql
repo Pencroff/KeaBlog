@@ -12,7 +12,7 @@ IF (@tagTop IS NULL) OR (@tagTop = 0)
 			( 
 				SELECT pit.[TagId] AS [Id]
 					  ,Count(pit.[PostId]) AS [Count]
-				FROM PostsInTags pit GROUP BY pit.TagId 
+				FROM PostsInTags pit, Posts p WHERE p.Id = pit.PostId AND p.Visible = 1 GROUP BY pit.TagId 
 			)
 		SELECT cte.Id
 				,t.Name
@@ -30,7 +30,7 @@ ELSE
 			( 
 				SELECT pit.[TagId] AS [Id]
 					  ,Count(pit.[PostId]) AS [Count]
-				FROM PostsInTags pit GROUP BY pit.TagId 
+				FROM PostsInTags pit, Posts p WHERE p.Id = pit.PostId AND p.Visible = 1 GROUP BY pit.TagId 
 			)
 		SELECT TOP (@tagTop)cte.Id
 				,t.Name

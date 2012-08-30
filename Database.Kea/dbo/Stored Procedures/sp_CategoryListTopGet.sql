@@ -12,7 +12,7 @@ IF (@categoryTop IS NULL) OR (@categoryTop = 0)
 			( 
 				SELECT p.CategoryId AS [Id]
 					  ,Count(p.[Id]) AS [Count]
-				FROM Posts p GROUP BY p.CategoryId 
+				FROM Posts p WHERE p.Visible = 1 GROUP BY p.CategoryId 
 			)
 		SELECT cte.Id
 				,c.Name

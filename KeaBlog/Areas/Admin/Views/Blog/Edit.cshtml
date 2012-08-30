@@ -110,6 +110,7 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/wysibb")
+    <link rel="stylesheet" href="/Content/WysiBB/themes/default/wbbtheme.css" type="text/css" />
     <script>
         var myOpt = {
             debug: false,
@@ -156,7 +157,7 @@
             $(document).ready(function () {
                 $(".chzn-select").chosen();
                 $('#BtnVisible').click(toogleVisible);
-                $('#inputContent').wysibb(myOpt);
+                $('#inputContent').wysibb();
                 $('#PublishTime').timepicker({
                     defaultTime: 'value',
                     minuteStep: 15,

@@ -48,9 +48,9 @@ namespace KeaBlog.Areas.Admin.Models
 
         #region Implementation of ISeoModel
 
-        public string SeoTitle { get { return Title; } set {} }
-        public string SeoKeywords { get { return SEOKeywords; } set { } }
-        public string SeoDescription { get { return SEODescription; } set { } }
+        public string TitleSeo { get { return Title; } set {} }
+        public string KeywordsSeo { get { return SEOKeywords; } set { } }
+        public string DescriptionSeo { get { return SEODescription; } set { } }
 
         #endregion
 
@@ -224,7 +224,7 @@ namespace KeaBlog.Areas.Admin.Models
                 postList.Add(viewModel);
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
-            SeoTitle = "Articles kea blog";
+            TitleSeo = "Articles kea blog";
         }
 
         public void FillByQueryPagePublic(string query, int page)
@@ -256,7 +256,7 @@ namespace KeaBlog.Areas.Admin.Models
                 postList.Add(viewModel);
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
-            SeoTitle = "Searched articles by query: '"+ query +"'";
+            TitleSeo = "Searched articles by query: '"+ query +"'";
         }
 
         public void FillByTagPagePublic(int tagId, int page)
@@ -293,7 +293,7 @@ namespace KeaBlog.Areas.Admin.Models
                     postList.Add(viewModel);
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
-                SeoTitle = "Selected articles by tag: '" + Tag.Name + "'";
+                TitleSeo = "Selected articles by tag: '" + Tag.Name + "'";
             }
         }
 
@@ -331,7 +331,7 @@ namespace KeaBlog.Areas.Admin.Models
                     postList.Add(viewModel);
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
-                SeoTitle = "Selected articles by category: '" + Category.Name + "'";
+                TitleSeo = "Selected articles by category: '" + Category.Name + "'";
             }
         }
     }

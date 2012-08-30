@@ -18,9 +18,9 @@ namespace ServiceLib
 
         #region Implementation of ISeoModel
 
-        public string SeoTitle { get; set; }
-        public string SeoKeywords { get; set; }
-        public string SeoDescription { get; set; }
+        public string TitleSeo { get; set; }
+        public string KeywordsSeo { get; set; }
+        public string DescriptionSeo { get; set; }
 
         #endregion
     }

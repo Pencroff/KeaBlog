@@ -11,9 +11,9 @@
         {
             string defSeoKeywords = SettingManager.ReadSetting<string>("SEO Keywords");
             string defSeoDescription = SettingManager.ReadSetting<string>("SEO Description");
-        <title>@(seoModel.SeoTitle ?? "Kea blog page")</title>        
-        <meta name="keywords" content="@(seoModel.SeoKeywords ?? defSeoKeywords)">
-        <meta name="description" content="@(seoModel.SeoDescription ?? defSeoDescription)">
+        <title>@(seoModel.TitleSeo ?? "Kea blog page")</title>        
+        <meta name="keywords" content="@(seoModel.KeywordsSeo ?? defSeoKeywords)">
+        <meta name="description" content="@(seoModel.DescriptionSeo ?? defSeoDescription)">
         }
         else
         {
