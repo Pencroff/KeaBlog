@@ -109,18 +109,10 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/wysibb")
-    <link rel="stylesheet" href="/Content/WysiBB/themes/default/wbbtheme.css" type="text/css" />
+    @Scripts.Render("~/bundles/bbeditor")
+    @Styles.Render("~/Content/css/bbeditor")
     <script>
-        var myOpt = {
-            debug: false,
-            watchTxtArea: false,
-            smileAutoDetect: false,
-            autoResize: false,
-            themeName: 'default',
-            themePrefix: '/Content/WysiBB/themes'
-            },
-            setVisible = function (value, element) {
+        var setVisible = function (value, element) {
                 var text = element.attr('btntext'),
                     trueIcon = element.attr('trueIcon'),
                     falseIcon = element.attr('falseIcon');
@@ -157,6 +149,7 @@
             $(document).ready(function () {
                 $(".chzn-select").chosen();
                 $('#BtnVisible').click(toogleVisible);
+                wysibb.options.themePrefix = '/Content/BBEditor/';
                 $('#inputContent').wysibb();
                 $('#PublishTime').timepicker({
                     defaultTime: 'value',

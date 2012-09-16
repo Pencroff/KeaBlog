@@ -50,8 +50,7 @@ wysibb.render = function (bbdata) {
         bb = bb.replace(/(\(|\)|\[|\]|\.|\*|\?|\:|\\|\\)/g, "\\$1").replace(" ", "\\s+");
         bbdata = bbdata.replace(new RegExp(bb, "g"), html);
     });
-
-    if (hljs) {
+    if (typeof hljs !== 'undefined') {
         var text, result, endIndex, leftText, rightText,
             startIndex = 0;
         while (true) {
