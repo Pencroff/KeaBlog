@@ -238,6 +238,8 @@
     <Content Include="Content\bootstrap\js\locales\bootstrap-datepicker.ru.js" />
     <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\bootstrap.less" />
@@ -344,16 +346,18 @@
     <Content Include="Scripts\BBEditor\lang\ru.js" />
     <Content Include="Scripts\BBEditor\wysibb.config.bootstrap.js" />
     <Content Include="Scripts\BBEditor\wysibb.render.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.8.1.js" />
     <Content Include="Scripts\jquery-1.8.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.js" />
     <Content Include="Scripts\jquery-ui-1.8.23.min.js" />
+    <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
-    <Content Include="Scripts\less.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
