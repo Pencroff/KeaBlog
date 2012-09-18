@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\BBEditor\fatcow\img\icons.png" />
+    <Content Include="Content\BBEditor\fatcow\img\icons\cut_red.png" />
     <Content Include="Content\BBEditor\fatcow\img\icons\document_quote.png" />
     <Content Include="Content\BBEditor\fatcow\img\icons\emotion_smile.png" />
     <Content Include="Content\BBEditor\fatcow\img\icons\film.png" />

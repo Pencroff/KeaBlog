@@ -28,7 +28,7 @@ wysibb.options = (function () {
         hotkeys: true,
         showHotkeys: true,
         //END img upload config
-        buttons: "bold,italic,underline,strike,sup,sub,|,img,link,|,bullist,numlist,smilebox,|,fontcolor,fontsize,fontfamily,|,justifyleft,justifycenter,justifyright,|,quote,code,offtop,video,table",
+        buttons: "bold,italic,underline,strike,sup,sub,|,img,link,|,bullist,numlist,smilebox,|,fontcolor,fontsize,fontfamily,|,justifyleft,justifycenter,justifyright,|,quote,code,offtop,video,table,|,cut",
         allButtons: null,
         systr: {
             '<br/>': "\n"
@@ -70,6 +70,13 @@ wysibb.options = (function () {
     };
     tempOption.currentLang = wysibb.WBBLANG[tempOption.lang];
     tempOption.allButtons = {
+        cut: {
+            title: 'Cut',
+            buttonHTML: '<span class="tlb-btn-cut"></span>',
+            transform: {
+                '<hr style="height: 3px; margin: 3px; size:3px;">': "[cut]"
+            }
+        },
         bold: {
             title: tempOption.currentLang.bold,
             buttonHTML: '<span class="tlb-btn-bold"></span>',
