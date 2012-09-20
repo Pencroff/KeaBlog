@@ -397,6 +397,10 @@
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\Shared\_DisqusComments.cshtml" />
+    <Content Include="Views\Shared\_DisqusCountComments.cshtml" />
+    <Content Include="Views\Shared\_CodeYM.cshtml" />
+    <Content Include="Views\Shared\_CodeGA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

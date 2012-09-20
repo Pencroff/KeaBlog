@@ -48,7 +48,7 @@
                 <div class="modal-body">
                     <input name="Name" type="hidden" value="0">
                     <label name="NameLabel"></label>
-                    <input type="text" name="Value" class="input-xxlarge" placeholder="Type category name…" />
+                    <input type="text" name="Value" class="input-xxlarge" placeholder="Type value…" />
                     <span class="help-block" name="Description"></span>
                 </div>
                 <div class="modal-footer">
@@ -72,7 +72,7 @@
                 formDescription = form.find('span[name="Description"]'),
                 name = element.find('td[name="Name"]').text(),
                 value = element.find('td[name="Value"]').text(),
-                description = element.find('td[name="Description"]').text(),
+                description = element.find('td[name="Description"]').html(),
                 url = $(this).attr('url');
             form.find('form').attr('action', url);
             formName.val(name);
