@@ -13,6 +13,9 @@
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bbeditor.render")
+    @Styles.Render("~/Content/css/bbeditor")
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.2/styles/default.min.css" type="text/css">
+    <script src="http://yandex.st/highlightjs/7.2/highlight.min.js" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
             var renderElements = $('.contentBB'),
@@ -24,7 +27,7 @@
                 html = wysibb.render(bbHtml);
                 viewElement.html(html);
             });
-            $('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
+            //$('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
         });
     </script>
 }

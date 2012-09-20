@@ -11,6 +11,8 @@ namespace KeaBlog
                                         "~/Content/bootstrap/css/bootstrap-responsive.css",
                                         "~/Content/css/extra.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/bbeditor").Include("~/Content/BBEditor/fatcow/wbbtheme-fatcow.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js",
                                          "~/Content/bootstrap/js/bootstrap-timepicker.js",
                                          "~/Content/bootstrap/js/bootstrap-datepicker.js",
@@ -25,8 +27,6 @@ namespace KeaBlog
             bundles.Add(new ScriptBundle("~/bundles/bbeditor.render").Include("~/Scripts/BBEditor/wysibb.render.js",
                                                                      "~/Scripts/BBEditor/lang/en.js",
                                                                      "~/Scripts/BBEditor/wysibb.config.bootstrap.js"));
-            bundles.Add(new StyleBundle("~/Content/css/bbeditor").Include("~/Content/BBEditor/fatcow/wbbtheme-fatcow.css"));
-
 
             bundles.Add(new StyleBundle("~/Content/css/fonts").Include("~/Content/css/fonts.css"));
 
