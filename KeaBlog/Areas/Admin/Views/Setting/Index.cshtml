@@ -34,7 +34,7 @@
                         <td style="text-align: center">
                             <a class="btn btn-primary btn-mini editSettingBtn" name="@item.Name.Slugify()" url='@Url.Action("Edit", "Setting", new{Area="Admin"})'>Edit</a>
                         </td>
-                        <td name="Description">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td name="Description">@Html.Raw(item.Description)</td>
                     </tr>
                 }
             </tbody>
