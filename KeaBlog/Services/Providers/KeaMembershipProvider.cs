@@ -53,6 +53,8 @@ namespace KeaBlog.Services.Providers
             {
                 Auth_User authUser = new Auth_User();
                 authUser.Login = username;
+                authUser.Name = username;
+                authUser.Email = email;
                 string salt;
                 authUser.PassHash = SecurityOperations.FillPassHash(password, out salt);
                 authUser.PassSalt = salt;

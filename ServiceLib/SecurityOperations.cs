@@ -30,17 +30,17 @@ namespace ServiceLib
         public static string FillPassHash(string password, out string salt)
         {
             salt = CreateSalt();
-            return PassHashGet(password, salt);
+            return PassHashMixGet(password, salt);
         }
 
         public static string ChangePassHash(string newPassword, string passSalt)
         {
-            return PassHashGet(newPassword, passSalt);
+            return PassHashMixGet(newPassword, passSalt);
         }
 
         public static bool CheckPass (string password, string passwordHash, string salt)
         {
-            var resHash = GetHash(password);
+            var resHash = PassHashMixGet(password, salt);
             return resHash == passwordHash;
         }
 
@@ -59,10 +59,10 @@ namespace ServiceLib
             return sBuilder.ToString();
         }
 
-        private static string PassHashGet(string pass, string salt)
+        private static string PassHashMixGet(string pass, string salt)
         {
             string result;
-            result = GetHash(pass);
+            result = GetHash(salt + pass);
             return result;
         }
 

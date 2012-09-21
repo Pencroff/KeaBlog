@@ -15,7 +15,8 @@
         Tag,
         //Service,
         //Project,
-        Setting
+        Setting,
+        Errors
     }
 
     public class MenuItem

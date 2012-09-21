@@ -7,6 +7,7 @@ using KeaBlog.Areas.Admin.Models;
 
 namespace KeaBlog.Areas.Admin.Controllers
 {
+    [Authorize]
     public class TagController : Controller
     {
         public ActionResult Index(int page = 1)

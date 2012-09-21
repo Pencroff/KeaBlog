@@ -12,6 +12,7 @@ namespace KeaBlog.Areas.Admin.Controllers
 {
     public class ExtraController : Controller
     {
+        [Authorize]
         public ActionResult AdminMainMenu()
         {
             IMenu<MenuItem> model = new MenuModel();
