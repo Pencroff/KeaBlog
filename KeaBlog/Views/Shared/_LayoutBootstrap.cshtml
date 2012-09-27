@@ -78,17 +78,18 @@
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")
             @RenderSection("scripts", required: false)
-            @if (Request.IsAuthenticated)
-            {
-                <span>
-                    @MiniProfiler.RenderIncludes()
-                </span>
-            }
             <div class="push"></div>
         </div>
         <div class="footer well well-small">
             @{ Html.RenderAction("Footer", "Extra"); }
         </div>
         @Html.Partial("_CodeYM")
+        @{
+            bool useMiniProfiler = SettingManager.ReadSetting<bool>("Use MiniProfiler");
+            if (useMiniProfiler)
+            {
+                @MiniProfiler.RenderIncludes()
+            }
+        }
     </body>
 </html>

@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using KeaBLL;
 using StackExchange.Profiling;
 
 namespace KeaBlog
@@ -27,10 +28,11 @@ namespace KeaBlog
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsAuthenticated)
+            bool useMiniProfiler = SettingManager.ReadSetting<bool>("Use MiniProfiler");
+            if (useMiniProfiler)
             {
-                MiniProfiler.Start();
-            } 
+                MiniProfiler.Start();    
+            }
         }
 
         protected void Application_EndRequest()

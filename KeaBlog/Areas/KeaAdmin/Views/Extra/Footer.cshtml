@@ -1,7 +1,14 @@
 ﻿<div class="container">
     <div class="row">
-        <div class="span2 offset5">
-            Footer content kea-admin
+        <div class="span6 offset2 pagination-centered">
+            <p class="lead">ADMIN Powered by <a href="http://github.com/Pencroff/KeaBlog">Kea Blog</a> &copy; 2012 @{
+                                                                                                string year = DateTime.Now.Year.ToString();
+                                                                                                if (year != "2012")
+                                                                                                {
+                                                                                                    @Html.Raw("- " + year)
+                                                                                                }
+                                                                                                            }
+            </p>
         </div>
     </div>    
 </div>

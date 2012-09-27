@@ -21,7 +21,7 @@
                     <th style="width: auto">
                         Description
                     </th>
-                    <th style="width: 10%">
+                    <th style="width: 12%">
                         Action
                     </th>
                 </tr>        
@@ -32,8 +32,7 @@
                         <td name="Name">@Html.DisplayFor(modelItem => item.Name)</td>
                         <td name="Description">@Html.DisplayFor(modelItem => item.Description)</td>
                         <td style="text-align: center">
-                            <a class="btn btn-primary btn-mini editCategoryBtn" name="@item.Id" url='@Url.Action("Edit", "Category", new{Area="KeaAdmin"})'>Edit</a>&nbsp;&nbsp;
-                            <a class="btn btn-danger btn-mini deleteCategoryBtn" name="@item.Id">Delete</a>
+                            <a class="btn btn-primary btn-mini editCategoryBtn" name="@item.Id" url='@Url.Action("Edit", "Category", new{Area="KeaAdmin"})'>Edit</a>&nbsp;<a class="btn btn-danger btn-mini deleteCategoryBtn" name="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

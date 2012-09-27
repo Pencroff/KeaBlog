@@ -341,6 +341,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\1gb.pubxml" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\TestLocal.pubxml" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Scripts\BBEditor\jquery.wysibb.js" />
