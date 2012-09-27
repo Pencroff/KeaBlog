@@ -11,7 +11,7 @@ namespace KeaBlog
                                         "~/Content/bootstrap/css/bootstrap-responsive.css",
                                         "~/Content/css/extra.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/bbeditor").Include("~/Content/BBEditor/fatcow/wbbtheme-fatcow.css"));
+            bundles.Add(new StyleBundle("~/Content/BBEditor/fatcow/bbeditor.css").Include("~/Content/BBEditor/fatcow/wbbtheme-fatcow.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Content/bootstrap/js/bootstrap.js",
                                          "~/Content/bootstrap/js/bootstrap-timepicker.js",
