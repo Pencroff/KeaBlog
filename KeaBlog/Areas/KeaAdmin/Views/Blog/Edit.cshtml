@@ -9,16 +9,16 @@
 }
 <br />
 <div class="row well well-small">
-    @using (Html.BeginForm("Edit", "Blog", FormMethod.Post, new { @class = "" }))
+    @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { @class = "" }))
     {
         <fieldset>
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.AuthorId)
             @Html.HiddenFor(model => model.Modified)
             @Html.HiddenFor(model => model.Visible)
-            <legend>@Model.Title</legend>
+            <legend>Create</legend>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputModified">Publish in </label>
                 </div>
                 <div class="span4">
@@ -33,59 +33,59 @@
                         <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16" value="@Model.GetModifiedTime()"><span class="add-on"><i class="icon-time"></i></span>
                     </div>
                 </div>
-                <div class="span2 pagination-right">
+                <div class="span3 pagination-right">
                     <button class="btn" id="BtnVisible" type="button" value="@Model.Visible.ToString()" btntext = "Опубликовать " trueIcon = "<i class='icon-ok icon-white'>" falseIcon = "<i class='icon-remove'></i>"></button>
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputTitle">Title</label>
                 </div>
-                <div class="span10">
-                    @Html.TextBoxFor(model => model.Title, new { @class = "span10", id = "inputTitle" })
+                <div class="span11">
+                    @Html.TextBoxFor(model => model.Title, new { @class = "span11", id = "inputTitle" })
                     <p class="help-block">Title of article</p>    
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputUrl">Friendly Url</label>    
                 </div>
-                <div class="span5">                    
+                <div class="span6">                    
                     @Html.TextBoxFor(model => model.PostUrl, new { @class = "span6", id = "inputUrl" })
                     <p class="help-block">Friendly Url of article.</p>
                 </div>
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputCategory">Category</label>
                 </div>
-                <div class="span3">
-                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "span3" })
+                <div class="span4">
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "span4" })
                     <p class="help-block">Category of article.</p>
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputContent">Content</label>
                 </div>
-                <div class="span10">
-                    @Html.TextAreaFor(model => model.FullContent, new { @class = "span10 textarea", id = "inputContent", style = "min-height: 250px" })
+                <div class="span11">
+                    @Html.TextAreaFor(model => model.FullContent, new { @class = "span11 textarea", id = "inputContent", style = "min-height: 350px" })
                     <p class="help-block">Content of article</p>
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputTag">Tags</label>
                 </div>
-                <div class="span10">
-                    @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name", Model.SelectedTags), new { @class = "span10 chzn-select", Multiple = "multiple" })
+                <div class="span11">
+                    @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name", Model.SelectedTags), new { @class = "span11 chzn-select", Multiple = "multiple" })
                     <p class="help-block">Tags of article</p>
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputLink">Link</label>
                 </div>
-                <div class="span4">
-                    @Html.TextBoxFor(model => model.OriginalTitle, new { @class = "span4", id = "inputOriginalTitle" })
+                <div class="span5">
+                    @Html.TextBoxFor(model => model.OriginalTitle, new { @class = "span5", id = "inputOriginalTitle" })
                     <p class="help-block">Title of link (for translate)</p>
                 </div>
                 <div class="span6">
@@ -94,11 +94,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="span2">
+                <div class="span1">
                     <label class="pull-right" for="inputSEODescription">SEO</label>
                 </div>
-                <div class="span5">
-                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span5", id = "inputSEODescription" })
+                <div class="span6">
+                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span6", id = "inputSEODescription" })
                     <p class="help-block">Article description for Head</p>
                 </div>
                 <div class="span5">
