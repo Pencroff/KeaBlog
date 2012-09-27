@@ -78,7 +78,7 @@
             @Scripts.Render("~/bundles/jquery")
             @Scripts.Render("~/bundles/bootstrap")
             @RenderSection("scripts", required: false)
-            @if (Request.IsAuthenticated || Request.IsLocal)
+            @if (Request.IsAuthenticated)
             {
                 <span>
                     @MiniProfiler.RenderIncludes()

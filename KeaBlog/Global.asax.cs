@@ -27,7 +27,7 @@ namespace KeaBlog
 
         protected void Application_BeginRequest()
         {
-            if (Request.IsLocal || Request.IsAuthenticated)
+            if (Request.IsAuthenticated)
             {
                 MiniProfiler.Start();
             } 
