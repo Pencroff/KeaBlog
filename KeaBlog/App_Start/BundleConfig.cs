@@ -7,7 +7,7 @@ namespace KeaBlog
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/bootstrap/css/bootstrap.css",
+            bundles.Add(new StyleBundle("~/Content/bootstrap/css/bootstrap.css").Include("~/Content/bootstrap/css/bootstrap.css",
                                         "~/Content/bootstrap/css/bootstrap-responsive.css",
                                         "~/Content/css/extra.css"));
 

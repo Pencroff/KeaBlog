@@ -28,3 +28,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.dbmdl
 Database.Kea/Database.Kea.dbmdl
+KeaBlog/KeaBlog.csproj.DotSettings
+KeaBlog/App_Data/*

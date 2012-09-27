@@ -1,0 +1,173 @@
+﻿@model KeaBlog.Areas.KeaAdmin.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit @Model.Title</h2>
+@{
+    Html.RenderPartial("ValidationSummary", ViewData.ModelState);
+}
+@using (Html.BeginForm("Edit", "Blog", FormMethod.Post, new { @class = "well form-horizontal" }))
+{
+    <fieldset>
+        <legend class="span3">Post</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.AuthorId)        
+        @Html.HiddenFor(model => model.Modified)
+        @Html.HiddenFor(model => model.Visible)
+        
+        <div class="span6 offset1">
+            <div class="control-group">
+                <label class = "control-label" for = "inputModified">Publish in </label>
+                <div class="controls">
+                    <div class="input-append">
+                        <input type="text" class="input-medium" placeholder="Date" id="PublishDate" size="16" 
+                               value="@Model.GetModifiedDate()" data-format="dd.mm.yyyy"><span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
+                    <div class="input-append">
+                        <input type="text" class="input-small" placeholder="Time" id="PublishTime" size="16" value="@Model.GetModifiedTime()"><span class="add-on"><i class="icon-time"></i></span>
+                    </div>
+                    <p class="help-block">Date and time publish</p>
+                </div> 
+            </div>
+        </div>
+        <button class="btn" id="BtnVisible" type="button" value="@Model.Visible.ToString()" btntext = "Опубликовать " trueIcon = "<i class='icon-ok icon-white'>" falseIcon = "<i class='icon-remove'></i>"></button>
+        <div class="control-group">
+            <label class = "control-label" for = "inputTitle">Title</label>
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge span10", id = "inputTitle" })
+                <p class="help-block">Title of article</p>
+            </div>
+        </div>
+       <div class="control-group">
+            <div class="pull-left">
+                <label class = "control-label" for = "inputUrl">Friendly Url</label>
+                <div class="controls">
+                    @Html.TextBoxFor(model => model.PostUrl, new { @class = "input-xxlarge", id = "inputUrl" })
+                    <p class="help-block">Friendly Url of article.</p>
+                </div>
+            </div>
+            <div class="pull-right">
+                <label class = "control-label" for = "inputCategory">Category</label>
+                <div class="controls">
+                    @Html.DropDownListFor(model => model.CategoryId, new SelectList(Model.CategoryList, "Id", "Name"), new { @class = "input-xlarge" })
+                    <p class="help-block">Category of article.</p>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputContent">Content</label>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.FullContent, new { @class = "span10 textarea", id = "inputContent", style = "min-height: 250px" })
+                <p class="help-block">Content of article</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputTag">Tags</label>
+            <div class="controls">
+                @Html.ListBoxFor(m => m.SelectedTags, new MultiSelectList(Model.TagList, "Id", "Name", Model.SelectedTags), new { @class = "span10 chzn-select", Multiple = "multiple" })
+                <p class="help-block">Tags of article</p>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class = "control-label" for = "inputLink">Link</label>
+            <div class="controls">
+                <div class="pull-left">
+                    @Html.TextBoxFor(model => model.OriginalTitle, new { @class = "span4", id = "inputOriginalTitle" })    
+                    <p class="help-block">Title of link (for translate)</p>
+                </div>
+                <div class="pull-right">
+                    @Html.TextBoxFor(model => model.LinkToOriginal, new { @class = "span6", id = "inputLinkToOriginal" })
+                    <p class="help-block">Url on original</p>
+                </div>
+            </div>
+        </div> 
+        <div class="control-group">
+            <label class = "control-label" for = "inputSEODescription">SEO</label>
+            <div class="controls">
+                <div class="pull-left">
+                    @Html.TextAreaFor(model => model.SEODescription, new { @class = "span5", id = "inputSEODescription" })
+                    <p class="help-block">Article description for Head</p>
+                </div>
+                <div class="pull-right">
+                    @Html.TextAreaFor(model => model.SEOKeywords, new { @class = "span5", id = "inputSEOKeywords" })
+                    <p class="help-block">Article keywords for Head</p>
+                </div>
+                
+            </div>
+        </div> 
+        <div class="pull-left">
+            <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
+        </div>
+        <div class="pull-right">
+            <input type="submit" value="Save" class="btn btn-primary"/>
+        </div>
+    </fieldset>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bbeditor")
+    @Styles.Render("~/Content/css/bbeditor")
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.2/styles/default.min.css" type="text/css">
+    <script src="http://yandex.st/highlightjs/7.2/highlight.min.js" type="text/javascript"></script>
+    <script>
+        var setVisible = function (value, element) {
+                var text = element.attr('btntext'),
+                    trueIcon = element.attr('trueIcon'),
+                    falseIcon = element.attr('falseIcon');
+                element.attr('value', value);
+                if (value == "true") {
+                    element.html(text + trueIcon);
+                    element.attr('class', "btn btn-success active");
+                } else {
+                    element.html(text + falseIcon);
+                    element.attr('class', "btn");
+                }
+                $('#Visible').attr('value', value);
+            },
+            toogleVisible = function () {
+                var element = $("#BtnVisible"),
+                    value = element.attr('value').toLowerCase();
+                if (value == 'true') {
+                    setVisible("false", element);
+                } else {
+                    setVisible("true", element);
+                }
+            },
+            checkVisible = function () {
+                var element = $('#BtnVisible'),
+                    value = element.attr('value').toLowerCase();
+                setVisible(value, element);
+            },
+            changeDateTime = function (event) {
+                var date = $("#PublishDate").val(),
+                    time = $("#PublishTime").val(),
+                    datetime = date + " " + time;
+                $("#Modified").val(datetime);
+            };
+            $(document).ready(function () {
+                $(".chzn-select").chosen();
+                $('#BtnVisible').click(toogleVisible);
+                wysibb.options.themePrefix = '/Content/BBEditor/';
+                $('#inputContent').wysibb();
+                $('#PublishTime').timepicker({
+                    defaultTime: 'value',
+                    minuteStep: 15,
+                    disableFocus: false,
+                    template: 'dropdown',
+                    showSeconds: false,
+                    showMeridian: false
+                }).on('changeTime', changeDateTime); ;
+                $('#PublishDate').datepicker({
+                    format: 'dd.mm.yyyy',
+                    autoclose: true,
+                    language:'ru',
+                    weekStart: 1 // Monday
+                }).on('changeDate', changeDateTime);
+                checkVisible();
+            });
+    </script>
+}

@@ -1,0 +1,131 @@
+﻿@using KeaDAL
+@model KeaBlog.Areas.KeaAdmin.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="page-header">
+    <h2>Details @Model.Title</h2>    
+</div>
+
+<div class="row">
+    <div class="span5">
+        <h4>Title</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.Title)
+        </div>
+    </div>
+    <div class="span4">
+        <h4>Friendly Url</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.PostUrl)
+        </div>
+    </div>
+    <div class="span3">
+        <h4>Category</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.CategoryName)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <h4>Content</h4>
+        <div class="well well-small contentBB">@Html.DisplayFor(model => model.FullContent)</div>
+    </div>
+</div>
+<div class="row">
+    <div class="span1">
+        <h4>Visible</h4>
+        <div class="well well-small">
+            @if (Model.Visible)
+            {
+                <i class="icon-ok"></i>   
+            }
+            else
+            {
+                <i class="icon-remove"></i>
+            }
+        </div>
+    </div>
+    <div class="span2">
+        <h4>Publish in</h4>
+        <div class="well well-small">
+            @Model.GetModifiedDate()&nbsp;@Model.GetModifiedTime()
+        </div>
+    </div>
+    <div class="span6">
+        <h4>Category</h4>
+        <div class="well well-small">
+            @Model.CategoryName
+        </div>
+    </div>
+    <div class="span3">
+        <h4>Author</h4>
+        <div class="well well-small">
+            @Html.DisplayFor(model => model.AuthorName)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span12">
+        <h4>Tags</h4>
+        <div class="well well-small">
+            @foreach(Tag tag in Model.Tags)
+            {
+                <span class="label label-info">@tag.Name</span>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span6">
+        <h4>Title link to original</h4>
+        <div class="well well-small">
+            @Model.OriginalTitle
+        </div>
+    </div>
+    <div class="span6">
+        <h4>Link to original</h4>
+        <div class="well well-small">
+            @Model.LinkToOriginal
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span6">
+        <h4>SEO Description</h4>
+        <div class="well well-small">
+            @Model.SEODescription
+        </div>
+    </div>
+    <div class="span6">
+        <h4>SEO keywords</h4>
+        <div class="well well-small">
+            @Model.SEOKeywords
+        </div>
+    </div>
+</div>
+<div class="pull-left">
+    <a href='@Url.Action("Index", "Blog")' class = "btn btn-info"><i class="icon-arrow-left icon-white"></i> back to list</a>
+</div>
+<div class="pull-right">
+    <a href='@Url.Action("Edit", "Blog", new { id = Model.Id })' class = "btn btn-info"><i class="icon-edit icon-white"></i> Edit</a>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bbeditor.render")
+    <script>
+        $(document).ready(function () {
+            var viewElement = $('.contentBB'),
+                bbHtml = viewElement.html(),
+                html;
+            wysibb.options.themePrefix = '/Content/BBEditor/';
+            html = wysibb.render(bbHtml);
+            viewElement.html(html);
+            $('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
+        });
+    </script>
+}

@@ -4,91 +4,91 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    @{
-        ISeoModel seoModel = Model as ISeoModel;
-        if (seoModel != null)
-        {
-            string defSeoKeywords = SettingManager.ReadSetting<string>("SEO Keywords");
-            string defSeoDescription = SettingManager.ReadSetting<string>("SEO Description");
-        <title>@(seoModel.TitleSeo ?? "Kea blog page")</title>        
-        <meta name="keywords" content="@(seoModel.KeywordsSeo ?? defSeoKeywords)">
-        <meta name="description" content="@(seoModel.DescriptionSeo ?? defSeoDescription)">
+    <head>
+        @{
+            ISeoModel seoModel = Model as ISeoModel;
+            if (seoModel != null)
+            {
+                string defSeoKeywords = SettingManager.ReadSetting<string>("SEO Keywords");
+                string defSeoDescription = SettingManager.ReadSetting<string>("SEO Description");
+            <title>@(seoModel.TitleSeo ?? "Kea blog page")</title>        
+            <meta name="keywords" content="@(seoModel.KeywordsSeo ?? defSeoKeywords)">
+            <meta name="description" content="@(seoModel.DescriptionSeo ?? defSeoDescription)">
+            }
+            else
+            {
+                // ToDo implement default SEO Data
+            <title>Kea blog page</title>        
+            <meta name="keywords" content="Kea blog, post, article, portfolio blog">
+            <meta name="description" content="Kea blog is a blog for IT specialist">
+            }    
         }
-        else
-        {
-            // ToDo implement default SEO Data
-        <title>Kea blog page</title>        
-        <meta name="keywords" content="Kea blog, post, article, portfolio blog">
-        <meta name="description" content="Kea blog is a blog for IT specialist">
-        }    
-    }
-    <!-- Mobile viewport optimisation -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- (en) Add your meta data here -->
-    @*ToDo Create less style to footer*@
-    <style type="text/css">
-        html, body {
-            height: 100%;
-        }
+        <!-- Mobile viewport optimisation -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- (en) Add your meta data here -->
+        @*ToDo Create less style to footer*@
+        <style type="text/css">
+            html, body {
+                height: 100%;
+            }
 
-        body {
-            padding-top: 50px;
-        }
+            body {
+                padding-top: 50px;
+            }
 
-        .wrapper {
-            min-height: 100%;
-            height: auto !important;
-            height: 100%;
-            margin: 0px auto -60px;
-        }
+            .wrapper {
+                min-height: 100%;
+                height: auto !important;
+                height: 100%;
+                margin: 0px auto -60px;
+            }
 
-        .footer, .push {
-            height: 60px;
-            width: auto;
-        }
-    </style>
-    @Styles.Render("~/Content/css/fonts")
-    @Styles.Render("~/Content/css/bootstrap")
-    <!--[if lt IE 9]>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+            .footer, .push {
+                height: 60px;
+                width: auto;
+            }
+        </style>
+        @Styles.Render("~/Content/css/fonts")
+        @Styles.Render("~/Content/bootstrap/css/bootstrap.css")
+        <!--[if lt IE 9]>
+                <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
     
-    @Html.Partial("_CodeGA")
-</head>
-<body>
-    <div class="wrapper">
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href='@Url.Action("Index", "Home")'>Kea Blog</a>
-                    <div class="nav-collapse">
-                        @{ Html.RenderAction("MainMenu", "Extra"); }
+        @Html.Partial("_CodeGA")
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href='@Url.Action("Index", "Home")'>Kea Blog</a>
+                        <div class="nav-collapse">
+                            @{ Html.RenderAction("MainMenu", "Extra"); }
+                        </div>
                     </div>
                 </div>
             </div>
+            @RenderBody()
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
+            @if (Request.IsLocal)
+            {
+                <span>
+                    @MiniProfiler.RenderIncludes()
+                </span>
+            }
+            <div class="push"></div>
         </div>
-        @RenderBody()
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-        @if (Request.IsLocal)
-        {
-            <span>
-                @MiniProfiler.RenderIncludes()
-            </span>
-        }
-        <div class="push"></div>
-    </div>
-    <div class="footer well well-small">
-        @{ Html.RenderAction("Footer", "Extra"); }
-    </div>
-    @Html.Partial("_CodeYM")
-</body>
+        <div class="footer well well-small">
+            @{ Html.RenderAction("Footer", "Extra"); }
+        </div>
+        @Html.Partial("_CodeYM")
+    </body>
 </html>

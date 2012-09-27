@@ -29,14 +29,16 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <IncludeIisSettings>true</IncludeIisSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PrecompileBeforePublish>true</PrecompileBeforePublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Antlr3.Runtime, Version=3.3.1.7705, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -151,22 +153,22 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ExtraController.cs" />
-    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ProjectController.cs" />
+    <Compile Include="Areas\KeaAdmin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\ExtraController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\ProjectController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ServiceController.cs" />
-    <Compile Include="Areas\Admin\Controllers\SettingController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TagController.cs" />
-    <Compile Include="Areas\Admin\Models\BlogModels.cs" />
-    <Compile Include="Areas\Admin\Models\CategoryModels.cs" />
-    <Compile Include="Areas\Admin\Models\MenuModel.cs" />
-    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
-    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
-    <Compile Include="Areas\Admin\Models\SettingModels.cs" />
-    <Compile Include="Areas\Admin\Models\TagModels.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\SettingController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\TagController.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\BlogModels.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\CategoryModels.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\MenuModel.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\AccountController.cs" />
+    <Compile Include="Areas\KeaAdmin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\SettingModels.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\TagModels.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ExtraController.cs" />
@@ -176,7 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Admin\Models\AccountModels.cs" />
+    <Compile Include="Areas\KeaAdmin\Models\AccountModels.cs" />
     <Compile Include="Models\ColumnModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\CurrentSession.cs" />
@@ -338,6 +340,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\1gb.pubxml" />
+    <None Include="Properties\PublishProfiles\TestLocal.pubxml" />
     <None Include="Scripts\jquery-1.8.1.intellisense.js" />
     <Content Include="Scripts\BBEditor\jquery.wysibb.js" />
     <Content Include="Scripts\BBEditor\jquery.wysibb.min.js" />
@@ -366,6 +370,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Images\accent.png" />
@@ -375,26 +380,16 @@
     <Content Include="Images\findHosting.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\NuGetGallery.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Images\twitter.png" />
     <Content Include="Images\windowsLive.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\ChangePasswordSuccess.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Account\ChangePassword.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_DisqusComments.cshtml" />
@@ -430,49 +425,49 @@
     <Content Include="Views\Shared\_MINIPROFILER UPDATED Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\KeaAdmin\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_LayoutBootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayoutBootstrap.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Shared\_AdminLayoutBootstrap.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Blog\Details.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Blog\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Blog\Create.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Blog\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Blog\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Blog\Delete.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Blog\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Extra\AdminMainMenu.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Extra\AdminMainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Project\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Service\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Setting\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Setting\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Extra\MainMenu.cshtml" />
@@ -490,12 +485,12 @@
     <Content Include="Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\Shared\ValidationSummary.cshtml" />
-    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Tag\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Shared\ValidationSummary.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Tag\Index.cshtml" />
     <Content Include="Views\Extra\Column.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Extra\Footer.cshtml" />
+    <Content Include="Areas\KeaAdmin\Views\Extra\Footer.cshtml" />
     <None Include="Content\less\datepicker.less" />
     <None Include="Content\less\timepicker.less" />
     <Content Include="Views\Shared\_TwoColRightLayout.cshtml" />
@@ -524,7 +519,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>4747</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:575/</IISUrl>
+          <IISUrl>http://localhost:1575/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

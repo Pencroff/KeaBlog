@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using KeaBLL;
-using KeaBlog.Areas.Admin.Models;
+using KeaBlog.Areas.KeaAdmin.Models;
 using KeaDAL;
 using ServiceLib;
 

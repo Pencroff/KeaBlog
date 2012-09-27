@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using KeaBLL;
 using KeaBLL.General;
-using KeaBlog.Areas.Admin.Models;
+using KeaBlog.Areas.KeaAdmin.Models;
 using KeaBlog.Models;
 using ServiceLib.Interfaces;
 using System.Collections.Generic;
