@@ -232,6 +232,7 @@
     <Content Include="Content\bootstrap\css\bootstrap.css" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings-white.png" />
     <Content Include="Content\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Content\bootstrap\img\social.png" />
     <Content Include="Content\bootstrap\js\bootstrap-datepicker.js" />
     <Content Include="Content\bootstrap\js\bootstrap-timepicker.js" />
     <Content Include="Content\bootstrap\js\bootstrap.js" />
@@ -243,6 +244,7 @@
     <Content Include="Content\css\fonts.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\social.png" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\bootstrap.less" />
@@ -284,6 +286,16 @@
     <Content Include="Content\less\utilities.less" />
     <Content Include="Content\less\variables.less" />
     <Content Include="Content\less\wells.less" />
+    <Content Include="Content\less\contact.less" />
+    <None Include="Content\social\email.png" />
+    <None Include="Content\social\facebook.png" />
+    <None Include="Content\social\github.png" />
+    <None Include="Content\social\google-plus.png" />
+    <None Include="Content\social\linkedin.png" />
+    <None Include="Content\social\skype.png" />
+    <None Include="Content\social\social.css" />
+    <None Include="Content\social\social.png" />
+    <None Include="Content\social\twitter.png" />
     <Content Include="Content\theme.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -341,6 +353,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Content\less\social.less" />
     <None Include="Properties\PublishProfiles\1gb.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\TestLocal.pubxml" />
