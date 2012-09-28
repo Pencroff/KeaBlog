@@ -147,8 +147,8 @@
                 <div class="span1">
                     <label class="pull-right" for="inputUrl">Friendly Url</label>    
                 </div>
-                <div class="span6">                    
-                    @Html.TextBoxFor(model => model.PostUrl, new { @class = "span6", id = "inputUrl" })
+                <div class="span6">
+                    <input class="span6" id="inputUrl" name="PostUrl" type="text" value="@Model.PostUrl">
                     <p class="help-block">Friendly Url of article.</p>
                 </div>
                 <div class="span1">

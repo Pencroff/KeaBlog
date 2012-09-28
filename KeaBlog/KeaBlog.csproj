@@ -158,6 +158,7 @@
     <Compile Include="Areas\KeaAdmin\Controllers\ExtraController.cs" />
     <Compile Include="Areas\KeaAdmin\Controllers\HomeController.cs" />
     <Compile Include="Areas\KeaAdmin\Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Areas\KeaAdmin\Controllers\ServiceController.cs" />
     <Compile Include="Areas\KeaAdmin\Controllers\SettingController.cs" />
@@ -397,6 +398,7 @@
     <Content Include="Views\Shared\_DisqusCountComments.cshtml" />
     <Content Include="Views\Shared\_CodeYM.cshtml" />
     <Content Include="Views\Shared\_CodeGA.cshtml" />
+    <Content Include="Views\Errors\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using KeaBLL;
+using KeaBlog.Controllers;
 using StackExchange.Profiling;
 
 namespace KeaBlog
@@ -38,6 +39,17 @@ namespace KeaBlog
         protected void Application_EndRequest()
         {
             MiniProfiler.Stop();
+            if (Context.Response.StatusCode == 404)
+            {
+                Response.Clear();
+
+                var rd = new RouteData();
+                rd.Values["controller"] = "Errors";
+                rd.Values["action"] = "NotFound";
+
+                IController c = new ErrorsController();
+                c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using KeaBlog.Areas.KeaAdmin.Models;
 using KeaBlog.Services;
+using ServiceLib;
 
 namespace KeaBlog.Areas.KeaAdmin.Controllers
 {
@@ -45,6 +46,10 @@ namespace KeaBlog.Areas.KeaAdmin.Controllers
                 viewModel.DbInsert();
                 return RedirectToAction("Index");
             }
+            if (String.IsNullOrEmpty(viewModel.PostUrl))
+            {
+                viewModel.PostUrl = viewModel.Title.ToTranslit().Slugify(256);
+            }
             viewModel.FillCategoryList();
             viewModel.FillTagList();
             return View(viewModel);
@@ -70,6 +75,10 @@ namespace KeaBlog.Areas.KeaAdmin.Controllers
             {
                 viewModel.DbUpdate();
                 return RedirectToAction("Index");
+            }
+            if (String.IsNullOrEmpty(viewModel.PostUrl))
+            {
+                viewModel.PostUrl = viewModel.Title.ToTranslit().Slugify(256);
             }
             viewModel.FillCategoryList();
             viewModel.FillTagList();
