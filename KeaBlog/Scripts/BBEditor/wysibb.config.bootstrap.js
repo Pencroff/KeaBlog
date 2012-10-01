@@ -83,7 +83,8 @@ wysibb.options = (function () {
             excmd: 'bold',
             hotkey: 'ctrl+b',
             transform: {
-                '<strong>{SELTEXT}</strong>': "[b]{SELTEXT}[/b]"
+                '<strong>{SELTEXT}</strong>': "[b]{SELTEXT}[/b]",
+                '<b>{SELTEXT}</b>': "[b]{SELTEXT}[/b]"
             }
         },
         italic: {
@@ -92,7 +93,8 @@ wysibb.options = (function () {
             excmd: 'italic',
             hotkey: 'ctrl+i',
             transform: {
-                '<em>{SELTEXT}</em>': "[em]{SELTEXT}[/em]"
+                '<em>{SELTEXT}</em>': "[em]{SELTEXT}[/em]",
+                '<i>{SELTEXT}</i>': "[i]{SELTEXT}[/i]"
             }
         },
         underline: {
@@ -102,6 +104,7 @@ wysibb.options = (function () {
             hotkey: 'ctrl+u',
             transform: {
                 '<ins>{SELTEXT}</ins>': "[ins]{SELTEXT}[/ins]",
+                '<u>{SELTEXT}</u>': "[u]{SELTEXT}[/u]"
             }
         },
         strike: {

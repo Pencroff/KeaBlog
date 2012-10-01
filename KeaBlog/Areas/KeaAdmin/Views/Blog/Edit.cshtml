@@ -9,7 +9,7 @@
 }
 <br />
 <div class="row well well-small">
-    @using (Html.BeginForm("Create", "Blog", FormMethod.Post, new { @class = "" }))
+    @using (Html.BeginForm("Edit", "Blog", FormMethod.Post, new { @class = "" }))
     {
         <fieldset>
             @Html.HiddenFor(model => model.Id)

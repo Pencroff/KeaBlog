@@ -256,6 +256,8 @@
     <Content Include="Content\less\close.less" />
     <Content Include="Content\less\code.less" />
     <Content Include="Content\less\component-animations.less" />
+    <Content Include="Content\less\contact.less" />
+    <Content Include="Content\less\datepicker.less" />
     <Content Include="Content\less\dropdowns.less" />
     <Content Include="Content\less\forms.less" />
     <Content Include="Content\less\grid.less" />
@@ -278,15 +280,16 @@
     <Content Include="Content\less\responsive-utilities.less" />
     <Content Include="Content\less\responsive.less" />
     <Content Include="Content\less\scaffolding.less" />
+    <Content Include="Content\less\social.less" />
     <Content Include="Content\less\sprites.less" />
     <Content Include="Content\less\tables.less" />
     <Content Include="Content\less\thumbnails.less" />
+    <Content Include="Content\less\timepicker.less" />
     <Content Include="Content\less\tooltip.less" />
     <Content Include="Content\less\type.less" />
     <Content Include="Content\less\utilities.less" />
     <Content Include="Content\less\variables.less" />
     <Content Include="Content\less\wells.less" />
-    <Content Include="Content\less\contact.less" />
     <None Include="Content\social\email.png" />
     <None Include="Content\social\facebook.png" />
     <None Include="Content\social\github.png" />
@@ -353,7 +356,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\less\social.less" />
     <None Include="Properties\PublishProfiles\1gb.pubxml" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Properties\PublishProfiles\TestLocal.pubxml" />
@@ -507,8 +509,6 @@
     <Content Include="Views\Extra\Column.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Areas\KeaAdmin\Views\Extra\Footer.cshtml" />
-    <None Include="Content\less\datepicker.less" />
-    <None Include="Content\less\timepicker.less" />
     <Content Include="Views\Shared\_TwoColRightLayout.cshtml" />
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="Views\Extra\Footer.cshtml" />
