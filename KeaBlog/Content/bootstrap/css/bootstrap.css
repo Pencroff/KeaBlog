@@ -5678,19 +5678,19 @@ a.badge:hover {
 .contact-header {
   font: 40px Monaco, Menlo, Consolas, "Courier New", monospace;
   color: #222;
-  text-shadow: 0px 1px 1px #4d4d4d;
+  text-shadow: 0px 1px 1px #ccc;
 }
 .contact-line {
   font: 28px 'Droid Serif';
   line-height: 28px !important;
-  color: #222;
-  text-shadow: 0px 1px 1px #4d4d4d;
-  padding: 15px 20px!important;
+  color: #444;
+  text-shadow: 0px 1px 1px #ddd;
+  padding: 20px 20px!important;
 }
 .contact-about {
   font-family: 'Droid Serif';
   font-size: 19.599999999999998px;
   line-height: 22.400000000000002px !important;
-  color: #555;
-  text-shadow: 0px 1px 1px #4d4d4d;
+  color: #444;
+  text-shadow: 0px 1px 1px #ddd;
 }
