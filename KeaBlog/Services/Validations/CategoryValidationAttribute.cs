@@ -1,6 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using KeaBLL;
+using KeaBlog.Areas.KeaAdmin.Models;
+using KeaDAL;
 
 namespace KeaBlog.Services.Validations
 {
@@ -8,13 +10,15 @@ namespace KeaBlog.Services.Validations
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            string category = value != null ? value.ToString() : String.Empty;
+            string categoryName = value != null ? value.ToString() : String.Empty;
+            CategoryViewModel viewModel = (CategoryViewModel)validationContext.ObjectInstance;
             if (String.IsNullOrEmpty(ErrorMessage))
             {
                 // ToDo Resource
                 ErrorMessage = "Wrong category name. It is not unique.";
             }
-            if (CategoryManager.GetCategoryByName(category) != null)
+            Category category = CategoryManager.GetCategoryByName(categoryName);
+            if (category != null && viewModel.Id != category.Id)
             {
                 return new ValidationResult(ErrorMessage);
             }
