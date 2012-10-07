@@ -34,14 +34,34 @@
     <div class="span9 contentBB">@Model.GetCutContent()</div>
 </div>
 <div class="row">
-    <div class="span3">
-        <div class="well-small">
-            <a href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})#disqus_thread'></a>                
+    @if(Model.HasLink())
+    {
+        <div class="span5">
+            <div class="well-small">
+                <a href="@Model.LinkToOriginal" target="_blank"><span class="label label-success"><i class="icon-share icon-white"></i></span>&nbsp;<small>@Model.OriginalTitle</small></a>
+            </div>
         </div>
-    </div>
-    <div class="offset4 span2">
-        <a class="btn btn-success pull-right" href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})'>Read post fully &rarr;</a>
-    </div>
+        <div class="span2">
+            <div class="well-small">
+                <a href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})#disqus_thread'></a>                
+            </div>
+        </div>
+        <div class="span2">
+            <a class="btn btn-success pull-right" href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})'>Read post fully &rarr;</a>  
+        </div>
+    }
+    else
+    {
+        <div class="offset5 span2">
+            <div class="well-small">
+                <a href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})#disqus_thread'></a>                
+            </div>
+        </div>
+        <div class="span2">
+            <a class="btn btn-success pull-right" href='@Url.Action("Post", "Blog", new { date = Model.GetModifiedDateUrl(), url = Model.PostUrl})'>Read post fully &rarr;</a>
+        </div>
+            }
+    
 </div>
 
 

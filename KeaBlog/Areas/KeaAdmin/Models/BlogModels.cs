@@ -163,6 +163,12 @@ namespace KeaBlog.Areas.KeaAdmin.Models
             result = Modified.ToString("yyyy-MM-dd");
             return result;
         }
+
+        public bool HasLink()
+        {
+            bool result = false || (this.LinkToOriginal.HasData() && this.OriginalTitle.HasData());
+            return result;
+        }
     }
 
     public class PostListViewModel : BasicModel

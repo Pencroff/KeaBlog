@@ -11,24 +11,28 @@
     <div class="span9 contentBB">@Model.GetFullContent()</div>
 </div>
 <div class="row">
-    <div class="span9 well-small">
-        <div class="row">
-            <div class="span7">
-                @if(Model.SelectedTags.Count!=0)
-                {
-                    <span class="label label-success"><i class="icon-tag icon-white"></i></span>
-                    foreach (var tag in Model.Tags)
-                    {
-                        <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
-                    }
-                }    
-            </div>
-            <div class="span2 pagination-right">
-                <strong>@Model.GetModifiedDate()</strong>
-            </div>
-        </div>
+    <div class="span7">
+        @if(Model.SelectedTags.Count!=0)
+        {
+            <span class="label label-success"><i class="icon-tag icon-white"></i></span>
+            foreach (var tag in Model.Tags)
+            {
+                <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
+            }
+        }    
+    </div>
+    <div class="span2 pagination-right">
+        <span class="label label-success"><i class="icon-calendar icon-white"></i>&nbsp;<strong>@Model.GetModifiedDate()</strong></span>
     </div>
 </div>
+@if(Model.HasLink())
+{
+    <div class="row">
+        <div class="span5">
+            <span class="label label-success"><i class="icon-share icon-white"></i></span>&nbsp;<a href="@Model.LinkToOriginal" target="_blank"><small>@Model.OriginalTitle</small></a>
+        </div>
+    </div>
+}
 <div class="row">
     <div class="span9">
         @Html.Partial("_DisqusComments")

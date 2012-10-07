@@ -108,6 +108,11 @@ namespace ServiceLib
             return result;
         }
 
+        public static bool HasData(this string phrase)
+        {
+            bool result = !String.IsNullOrEmpty(phrase);
+            return result;
+        }
 
 
         static StringOperations()
