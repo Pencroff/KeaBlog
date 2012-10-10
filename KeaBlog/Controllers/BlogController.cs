@@ -20,7 +20,7 @@ namespace KeaBlog.Controllers
         {
             PostViewModel viewModel = new PostViewModel();
             viewModel.FillByUrl(url);
-            if (!viewModel.Visible)
+            if (!viewModel.Visible || viewModel.WrongModel)
             {
                 Response.StatusCode = 404;
                 Response.Clear();
@@ -31,17 +31,39 @@ namespace KeaBlog.Controllers
 
         public ActionResult Tag(int? id, int page = 1)
         {
-            if (id == null) return RedirectToAction("Index", "Blog", new {page = page});
+            if (id == null)
+            {
+                Response.StatusCode = 404;
+                Response.Clear();
+                return View("../Errors/NotFound"); ;
+            }
             PostListViewModel viewModel = new PostListViewModel();
             viewModel.FillByTagPagePublic(id.GetValueOrDefault(), page);
+            if (viewModel.WrongModel)
+            {
+                Response.StatusCode = 404;
+                Response.Clear();
+                return View("../Errors/NotFound"); ;
+            }
             return View("Index", viewModel);
         }
 
         public ActionResult Category(int? id, int page = 1)
         {
-            if (id == null) return RedirectToAction("Index", "Blog", new { page = page });
+            if (id == null)
+            {
+                Response.StatusCode = 404;
+                Response.Clear();
+                return View("../Errors/NotFound"); ;
+            }
             PostListViewModel viewModel = new PostListViewModel();
             viewModel.FillByCategoryPagePublic(id.GetValueOrDefault(), page);
+            if (viewModel.WrongModel)
+            {
+                Response.StatusCode = 404;
+                Response.Clear();
+                return View("../Errors/NotFound"); ;
+            }
             return View("Index", viewModel);
         }
 

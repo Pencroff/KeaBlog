@@ -43,6 +43,8 @@ namespace KeaBlog.Areas.KeaAdmin.Models
             set { _selectedTags = value; }
         }
 
+        public bool WrongModel { get; set; }
+
         #region Implementation of ISeoModel
 
         public string TitleSeo { get { return Title; } set {} }
@@ -53,18 +55,26 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public void FillById (int postId)
         {
+            WrongModel = false;
             PostFull post = PostManager.GetPostById(postId);
-            ModelMapping.ModelToViewModel(post, this);
-            Modified = post.Modified.ToLocalTime();
-            if (post.TagsJson != null)
+            if (post != null)
             {
-                Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
-                SelectedTags = Tags.Select(item => item.Id).ToList();
+                ModelMapping.ModelToViewModel(post, this);
+                Modified = post.Modified.ToLocalTime();
+                if (post.TagsJson != null)
+                {
+                    Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
+                    SelectedTags = Tags.Select(item => item.Id).ToList();
+                }
+                else
+                {
+                    Tags = new List<Tag>();
+                    SelectedTags = new List<int>();
+                }   
             }
             else
             {
-                Tags = new List<Tag>();
-                SelectedTags = new List<int>();
+                WrongModel = true;
             }
         }
 
@@ -142,18 +152,26 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public void FillByUrl(string url)
         {
+            WrongModel = false;
             PostFull post = PostManager.GetPostByUrl(url);
-            ModelMapping.ModelToViewModel(post, this);
-            Modified = post.Modified.ToLocalTime();
-            if (post.TagsJson != null)
+            if (post!=null)
             {
-                Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
-                SelectedTags = Tags.Select(item => item.Id).ToList();
+                ModelMapping.ModelToViewModel(post, this);
+                Modified = post.Modified.ToLocalTime();
+                if (post.TagsJson != null)
+                {
+                    Tags = JsonConvert.DeserializeObject<List<Tag>>(post.TagsJson);
+                    SelectedTags = Tags.Select(item => item.Id).ToList();
+                }
+                else
+                {
+                    Tags = new List<Tag>();
+                    SelectedTags = new List<int>();
+                }   
             }
             else
             {
-                Tags = new List<Tag>();
-                SelectedTags = new List<int>();
+                WrongModel = false;
             }
         }
 
@@ -178,6 +196,8 @@ namespace KeaBlog.Areas.KeaAdmin.Models
         public Tag Tag { get; set; }
         public Category Category { get; set; }
         public string Query { get; set; }
+
+        public bool WrongModel { get; set; }
 
         public void FillByPageAll (int page)
         {
@@ -264,11 +284,12 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public void FillByTagPagePublic(int tagId, int page)
         {
+            WrongModel = false;
             Tag = TagManager.GetTagById(tagId);
             Category = null;
             if (Tag == null)
             {
-                FillByPagePublic(page);
+                WrongModel = true;
             }
             else
             {
@@ -302,11 +323,12 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public void FillByCategoryPagePublic(int categoryId, int page)
         {
+            WrongModel = false;
             Tag = null;
             Category = CategoryManager.GetCategoryById(categoryId);
             if (Category == null)
             {
-                FillByPagePublic(page);
+                WrongModel = true;
             }
             else
             {
