@@ -414,6 +414,7 @@
     <Content Include="Views\Shared\_CodeYM.cshtml" />
     <Content Include="Views\Shared\_CodeGA.cshtml" />
     <Content Include="Views\Errors\NotFound.cshtml" />
+    <Content Include="Views\Home\Robots.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

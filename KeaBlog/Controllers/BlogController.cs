@@ -20,6 +20,12 @@ namespace KeaBlog.Controllers
         {
             PostViewModel viewModel = new PostViewModel();
             viewModel.FillByUrl(url);
+            if (!viewModel.Visible)
+            {
+                Response.StatusCode = 404;
+                Response.Clear();
+                return View("../Errors/NotFound"); ;
+            }
             return View(viewModel);
         }
 

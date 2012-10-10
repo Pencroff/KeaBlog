@@ -12,5 +12,13 @@ namespace KeaBlog.Controllers
         {
             return RedirectToAction("Index", "Blog");
         }
+
+        #region -- Robots() Method --
+        public ActionResult Robots()
+        {
+            Response.ContentType = "text/plain";
+            return View();
+        }
+        #endregion
     }
 }

@@ -14,6 +14,12 @@ namespace KeaBlog
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Robots.txt",
+                "robots.txt",
+                new { controller = "Home", action = "Robots" },
+                namespaces: new string[] { "KeaBlog.Controllers" }
+            );
+
             routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

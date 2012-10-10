@@ -13,10 +13,7 @@ namespace KeaBlog.Controllers
 
         public ActionResult NotFound()
         {
-            ActionResult result;
-            object model = Request.Url.PathAndQuery;
-            result = View(model);
-            return result;
+            return View();
         }
 
     }
