@@ -171,7 +171,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
             }
             else
             {
-                WrongModel = false;
+                WrongModel = true;
             }
         }
 

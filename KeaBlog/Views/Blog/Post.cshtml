@@ -1,4 +1,5 @@
-﻿@model KeaBlog.Areas.KeaAdmin.Models.PostViewModel
+﻿@using ServiceLib
+@model KeaBlog.Areas.KeaAdmin.Models.PostViewModel
 
 @{
     Layout = "~/Views/Shared/_TwoColRightLayout.cshtml";
@@ -17,7 +18,7 @@
             <span class="label label-success"><i class="icon-tag icon-white"></i></span>
             foreach (var tag in Model.Tags)
             {
-                <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name })' class="btn btn-mini btn-success">@tag.Name</a>
+               <a href='@Url.Action("Tag", "Blog", new { tag = tag.Name.ToTranslit().Slugify(), id = tag.Id })' class="btn btn-mini btn-success">@tag.Name</a>
             }
         }    
     </div>

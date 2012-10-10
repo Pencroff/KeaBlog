@@ -39,16 +39,28 @@ namespace KeaBlog
         protected void Application_EndRequest()
         {
             MiniProfiler.Stop();
-            if (Context.Response.StatusCode == 404)
-            {
-                Response.Clear();
+        }
 
+        protected void Application_Error()
+        {
+            var exception = Server.GetLastError();
+            var httpException = exception as HttpException;
+            Response.Clear();
+            Server.ClearError();
+            Response.StatusCode = httpException.GetHttpCode();
+            if (Response.StatusCode == 404)
+            {
+                Response.TrySkipIisCustomErrors = true;
+                IController errorController = null;
                 var rd = new RouteData();
                 rd.Values["controller"] = "Errors";
                 rd.Values["action"] = "NotFound";
 
-                IController c = new ErrorsController();
-                c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
+                errorController = new ErrorsController();
+                
+                HttpContextWrapper wrapper = new HttpContextWrapper(Context);
+                var rc = new RequestContext(wrapper, rd);
+                errorController.Execute(rc);
             }
         }
     }

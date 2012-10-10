@@ -50,7 +50,7 @@ namespace KeaBlog
             routes.MapRoute(
                 "BlogPostRoute",
                 "Post/{date}/{*url}",
-                new { Controller = "Blog", action = "Post" },
+                new { Controller = "Blog", action = "Post", date = UrlParameter.Optional, url = UrlParameter.Optional },
                 namespaces: new string[] { "KeaBlog.Controllers" }
             );
 
@@ -58,6 +58,13 @@ namespace KeaBlog
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "KeaBlog.Controllers" }
+            );
+
+            routes.MapRoute(
+                name: "All",
+                url: "{*pathInfo}",
+                defaults: new { controller = "Home", action = "NotFound" },
                 namespaces: new string[] { "KeaBlog.Controllers" }
             );
         }
