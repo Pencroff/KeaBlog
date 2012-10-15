@@ -17,8 +17,7 @@ namespace KeaBlog.Controllers
         {
             string file = Server.MapPath("~/Content/Shared/" + fileName);
             if (System.IO.File.Exists(file))
-
-                return File("~/Content/Resources/" + fileName, "application/pdf", fileName);
+                return File("~/Content/Shared/" + fileName, "application/pdf", fileName);
             else
                 return RedirectToAction("Index");
         }
