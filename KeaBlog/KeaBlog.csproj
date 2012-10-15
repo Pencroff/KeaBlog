@@ -242,7 +242,8 @@
     <Content Include="Content\bootstrap\js\locales\bootstrap-datepicker.ru.js" />
     <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
-    <Content Include="Content\images\cv-resume.png" />
+    <Content Include="Content\images\cv-resume-256.png" />
+    <Content Include="Content\images\cv-resume-64.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\social.png" />
