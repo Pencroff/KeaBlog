@@ -13,6 +13,16 @@ namespace KeaBlog.Controllers
             return RedirectToAction("Index", "Blog");
         }
 
+        public ActionResult Download(string fileName)
+        {
+            string file = Server.MapPath("~/Content/Shared/" + fileName);
+            if (System.IO.File.Exists(file))
+
+                return File("~/Content/Resources/" + fileName, "application/pdf", fileName);
+            else
+                return RedirectToAction("Index");
+        }
+
         #region -- Robots() Method --
         public ActionResult Robots()
         {

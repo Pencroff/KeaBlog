@@ -26,6 +26,12 @@ namespace KeaBlog
                 defaults: new { id = RouteParameter.Optional }
             );
 
+            routes.MapRoute("DownloadRoute",
+                "Download/{*fileName}",
+                new { controller = "Home", action = "Download", fileName = UrlParameter.Optional },
+                namespaces: new string[] { "KeaBlog.Controllers" }
+            );
+
             routes.MapRoute(
                 "BlogTagRoute",
                 "Tags/{id}/{*tag}",

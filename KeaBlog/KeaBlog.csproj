@@ -242,6 +242,7 @@
     <Content Include="Content\bootstrap\js\locales\bootstrap-datepicker.ru.js" />
     <Content Include="Content\css\extra.css" />
     <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\images\cv-resume.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\social.png" />
@@ -290,6 +291,7 @@
     <Content Include="Content\less\utilities.less" />
     <Content Include="Content\less\variables.less" />
     <Content Include="Content\less\wells.less" />
+    <Content Include="Content\Shared\danilov-sergei-resume.docx" />
     <None Include="Content\social\email.png" />
     <None Include="Content\social\facebook.png" />
     <None Include="Content\social\github.png" />

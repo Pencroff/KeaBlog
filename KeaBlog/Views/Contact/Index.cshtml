@@ -10,7 +10,21 @@
 </div>
 <div class="row">
     <div class="span3 pagination-centered">
-        <img class="img-polaroid" height="200" width="200" alt="Danilov Sergei" title="My photo." src="http://www.gravatar.com/avatar/fd08d1add523c9554941ed12c9690397?s=200"/>       
+        <ul class="thumbnails">
+            <li class="span3">
+                <img class="img-polaroid" height="200" width="200" alt="Danilov Sergei" title="My photo." src="http://www.gravatar.com/avatar/fd08d1add523c9554941ed12c9690397?s=200"/>
+            </li>
+            <li class="span3">
+                <a href="@Url.Action("Download", "Home", new{fileName="danilov-sergei-resume.docx"})">
+                    <img src="/Content/images/cv-resume-64.png" alt="Danilov Sergei resume" title="My resume">
+                </a>
+                <p class="contact-about pagination-centered">
+                    <a href="@Url.Action("Download", "Home", new{fileName="danilov-sergei-resume.docx"})">
+                        My resume
+                    </a>
+                </p>
+            </li>
+        </ul>
     </div>
     <div class="span9">
         @*<p class="contact-about">
