@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Web.Mvc;
 using KeaBLL;
 using KeaBlog.Services.Validations;
 using KeaDAL;
@@ -27,6 +28,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
         public string PostUrl { get; set; }
         public System.Guid AuthorId { get; set; }
         public string AuthorName { get; set; }
+        [AllowHtml]
         public string FullContent { get; set; }
         public bool Visible { get; set; }
         public System.DateTime Modified { get; set; }
