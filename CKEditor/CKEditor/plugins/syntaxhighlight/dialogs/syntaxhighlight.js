@@ -134,9 +134,9 @@ CKEDITOR.dialog.add("syntaxhighlight",function(c){
 					  type:"select",
 					  labelLayout:"horizontal",
 					  label:c.lang.syntaxhighlight.langLbl,
-					  "default":"php",
+					  "default":"jscript",
 					  widths:["25%","75%"],
-					  items:[["Bash (Shell)","bash"],["CSS","css"],["HTML/XML","xml"],["Javascript","jscript"],["PHP","php"],["Plain (Text)","plain"],["SQL","sql"]],
+					  items:[["C#","csharp"],["CSS","css"],["HTML/XML","xml"],["Javascript","jscript"],["Python","python"],["Plain (Text)","plain"],["SQL","sql"]],
 					  setup:function(f){if(f.lang){this.setValue(f.lang)}},
 					  commit:function(f){f.lang=this.getValue()}}]
 				},

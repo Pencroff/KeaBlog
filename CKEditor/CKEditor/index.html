@@ -4,10 +4,16 @@
     <title>Example CKEditor</title>
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
     <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css"/>
-    <script src=" syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript" ></script>
     <link href="syntaxhighlighter_3.0.83/styles/shCore.css" rel="stylesheet" type="text/css"/>
     <link href="syntaxhighlighter_3.0.83/styles/shThemeDefault.css" rel="stylesheet" type="text/css"/>
-    <script src=" syntaxhighlighter_3.0.83/scripts/shBrushJScript.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushCSharp.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushCss.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushJScript.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushPython.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushPlain.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushSql.js" type="text/javascript" ></script>
+    <script src="syntaxhighlighter_3.0.83/scripts/shBrushXml.js" type="text/javascript" ></script>
     <script type="text/javascript" src="ckeditor.js"></script>
 </head>
 <body>
@@ -21,7 +27,7 @@
         </div>
         <div class="row">
             <div class="span12">
-                <textarea id="ckeditor-area" class="span12"></textarea>
+                <textarea id="ckeditor-area" class="span9">Writing a parser for a structured binary format such as a 3D model is extremely annoying. You have first to declare your file structure, and then go over every structure again and make a proper code to parse it. This is mainly caused because the lack of introspection of C/C++ and for performance reasons.</textarea>
                 <script type="text/javascript">
                     //<![CDATA[
                     CKEDITOR.replace( 'ckeditor-area', {
@@ -34,52 +40,104 @@
         <br>
         <div class="row">
             <div class="span12">
-                <pre class="brush:jscript;toolbar:false;" title="source code">
-function ($, _, Backbone, MainModel, ShadowCollection, MainParamView, ShadowParamView, ExampleView, template, Common) {
-    &#39;use strict&#39;;
-    var MainView = Backbone.View.extend({
-        el: &#39;#shadowView&#39;,
-        template: _.template(template),
-        events: {
-            &#39;click .add-row&#39;:	&#39;addShadowRow&#39;
-        },
-        initialize: function () {
-            var collection = this.model.get(&#39;collection&#39;);
-            this.mainView = new MainParamView({el: &#39;#main-param&#39;, model: this.model});
-            this.mainView.render();
-            this.exampleView = new ExampleView({el: &#39;#example&#39;, model: this.model});
-            this.exampleView.render();
-            collection.on(&#39;add&#39;, this.showNewShadowRow, this);
-            collection.on(&#39;change&#39;, this.model.refreshStyle, this.model);
-            this.model.on(&#39;change&#39;, this.render, this);
-            TimeResult();
-        },
-        render: function () {
-            this.exampleView.render();
-        },
-        newSimpleAttributes: function () {
-            return {
-                hShadow: 0,
-                vShadow: 0,
-                blur: 0,
-                color: &#39;000&#39;,
-                fullColor: &#39;&#39;,
-                opacity: &#39;1.0&#39;
-            };
-        },
-        addShadowRow: function () {
-            TimeStart();
-            var collection = this.model.get(&#39;collection&#39;);
-            collection.create(this.newSimpleAttributes());
-        },
-        showNewShadowRow: function (simpleShadow) {
-            var view = new ShadowParamView({ model: simpleShadow });
-            view.render();
-            $(&#39;#shadow-param-collection&#39;).append(view.el);
-            TimeResult();
-        }
-    });
-    return MainView;</pre>
+                <pre class="brush:python;toolbar:false;" title="source code">
+#!/usr/bin/python
+"""
+xml2html: Convert XML to HTML
+
+*** SUPERSEDED by pyslt ***
+
+Uses SAX (event-based parsing).
+
+***LICENSE***
+"""
+
+_ID = '$Id: xml2html-1.01-1.py,v 1.1.1.1 2000/01/15 14:37:46 ecoaccess Exp $'
+
+import sys, copy
+from xml.sax.drivers.drv_xmlproc_val import *
+
+class myParser(SAX_XPValParser):
+    """XML parser."""
+
+    psl = None
+
+    def handle_doctype(self, rootname, pub_id, sys_id):
+        self.dtd_handler.doctypeDecl(rootname, pub_id, sys_id, self.psl)
+
+
+class docHandler:
+    """XML Document events handler."""
+
+    def characters(self, ch, start, length):
+        """Handle a character data event.
+        The data are contained in the substring of ch
+        starting at position start and of length length."""
+
+        print ch[start:start+length],
+
+    def endDocument(self):
+        """Handle an event for the end of a document."""
+
+        pass
+
+    def endElement(self, name):
+        """Handle an event for the end of an element."""
+
+        print self.translation_table[name].end()
+
+    def ignorableWhitespace(self, ch, start, length):
+        """Handle an event for ignorable whitespace in element content.
+        The data are contained in the substring of ch
+        starting at position start and of length length."""
+
+        pass
+
+    def processingInstruction(self, target, data):
+        """Handle a processing instruction event."""
+
+        pass
+
+    def setDocumentLocator(self, locator):
+        """Receive an object for locating the origin of SAX document events.
+        locator is an object of type Locator."""
+
+        pass
+
+    def startDocument(self):
+        """Handle an event for the beginning of a document."""
+
+        pass
+
+    def startElement(self, name, atts):
+        """Handle an event for the beginning of an element.
+        atts is an object of type AttributeList."""
+
+        print self.translation_table[name].start(atts),
+
+class dtdHandler:
+    """Document Type Definition events handler."""
+
+    def notationDecl(self, name, publicId, systemId):
+        """Handle a notation declaration event."""
+
+        pass
+
+    def unparsedEntityDecl(self, name, publicId, systemId, ndata):
+        """Handle an unparsed entity declaration event."""
+
+        pass
+
+    def doctypeDecl(self, rootname, pub_id, sys_id, psl=None):
+        """Handle a Doctype Declaration event."""
+
+        #print "Document type: %s" % rootname
+
+        # Here is where I would need to load in the appropriate translation
+        # table.
+
+        if psl:
+            x = {'kludge': {}}</pre>
             </div>
         </div>
     </div>
