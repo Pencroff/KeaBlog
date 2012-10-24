@@ -94,6 +94,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
         public void DbUpdate()
         {
             Post post = new Post();
+            FullContent = WebUtility.HtmlEncode(FullContent);
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
@@ -105,6 +106,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
         {
             int id;
             Post post = new Post();
+            FullContent = WebUtility.HtmlEncode(FullContent);
             ModelMapping.ViewModelToModel(this, post);
             post.Modified = Modified.ToUniversalTime();
             post.PostUrl = PostUrl.ToTranslit().Slugify(256);
@@ -149,11 +151,15 @@ namespace KeaBlog.Areas.KeaAdmin.Models
         public string GetFullContent()
         {
             string result = WebUtility.HtmlDecode(FullContent);
-            int len = result.Length;
             int startIndex = result.IndexOf("<div id=\"cut\">", StringComparison.InvariantCulture);
-            int endindex = result.IndexOf("</div>", startIndex, StringComparison.InvariantCulture) + 6;
-            result = result.Substring(0, startIndex) + result.Substring(endindex);
-            //result = result.Replace("<div id=\"cut\">\r\n\t </div>", "");
+            if (startIndex != -1)
+            {
+                int endindex = result.IndexOf("</div>", startIndex, StringComparison.InvariantCulture);
+                if (endindex != -1)
+                {
+                    result = result.Substring(0, startIndex) + result.Substring(endindex+6);    
+                }
+            }
             return result;
         }
 
