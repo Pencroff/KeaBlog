@@ -9,7 +9,7 @@
     <h1>@Model.Title  @if(Model.CategoryId!=0){<small>@Model.CategoryName</small>}</h1>
 </div>
 <div class="row">
-    <div class="span9 contentBB">@Model.GetFullContent()</div>
+    <div class="span9">@Html.Raw(Model.GetFullContent())</div>
 </div>
 <div class="row">
     <div class="span7">
@@ -34,6 +34,7 @@
         </div>
     </div>
 }
+<br/>
 <div class="row">
     <div class="span9">
         @Html.Partial("_DisqusComments")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using KeaBLL;
 using KeaBlog.Services.Validations;
@@ -136,8 +137,8 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public string GetCutContent()
         {
-            string result = FullContent;
-            int cutIndex = result.IndexOf("[cut]", StringComparison.InvariantCulture);
+            string result = WebUtility.HtmlDecode(FullContent);
+            int cutIndex = result.IndexOf("<div id=\"cut\">", StringComparison.InvariantCulture);
             if (cutIndex != -1)
             {
                 result = result.Substring(0, cutIndex) + "...";
@@ -147,8 +148,12 @@ namespace KeaBlog.Areas.KeaAdmin.Models
 
         public string GetFullContent()
         {
-            string result = FullContent;
-            result = result.Replace("[cut]", "");
+            string result = WebUtility.HtmlDecode(FullContent);
+            int len = result.Length;
+            int startIndex = result.IndexOf("<div id=\"cut\">", StringComparison.InvariantCulture);
+            int endindex = result.IndexOf("</div>", startIndex, StringComparison.InvariantCulture) + 6;
+            result = result.Substring(0, startIndex) + result.Substring(endindex);
+            //result = result.Replace("<div id=\"cut\">\r\n\t </div>", "");
             return result;
         }
 
