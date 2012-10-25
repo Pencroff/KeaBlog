@@ -30,9 +30,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12">
+    <div class="span9">
         <h4>Content</h4>
-        <div class="well well-small contentBB">@Html.DisplayFor(model => model.FullContent)</div>
+        <div class="well well-small">@Html.Raw(Model.GetFullContent())</div>
+    </div>
+    <div class="span3">
+        <h4>Right panel</h4>
+        <div class="well well-large"></div>
     </div>
 </div>
 <div class="row">
@@ -116,7 +120,7 @@
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/bbeditor.render")
+    @*@Scripts.Render("~/bundles/bbeditor.render")
     <script>
         $(document).ready(function () {
             var viewElement = $('.contentBB'),
@@ -127,5 +131,6 @@
             viewElement.html(html);
             $('body').append(wysibb.helpers.wbbStringFormat('<link rel="stylesheet" type="text/css" media="all" href="{themePrefix}/{themeName}/theme.css" />', wysibb.options))
         });
-    </script>
+    </script>*@
 }
+@Html.Partial("_SyntaxHighlighter")

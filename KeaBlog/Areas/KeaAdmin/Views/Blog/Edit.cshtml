@@ -64,10 +64,10 @@
             </div>
             <div class="row">
                 <div class="span1">
-                    <label class="pull-right" for="inputContent">Content</label>
+                    <label class="pull-right" for="FullContent">Content</label>
                 </div>
                 <div class="span11">
-                    <textarea class = "span11 textarea" id = "inputContent" style = "min-height: 450px;">@Html.Raw(Model.FullContent)</textarea>
+                    <textarea class = "span11 textarea" id = "FullContent" name="FullContent" style = "min-height: 450px;">@Html.Raw(Model.FullContent)</textarea>
                     <p class="help-block">Content of article</p>
                 </div>
             </div>
@@ -165,7 +165,7 @@
             $('#BtnVisible').click(toogleVisible);
             //wysibb.options.themePrefix = '/Content/BBEditor/';
             //$('#inputContent').wysibb();
-            CKEDITOR.replace('inputContent');
+            CKEDITOR.replace('FullContent');
             $('#PublishTime').timepicker({
                 defaultTime: 'value',
                 minuteStep: 15,
