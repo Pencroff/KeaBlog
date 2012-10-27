@@ -3,7 +3,7 @@
     public enum MainMenu
     {
         Blog,
-        //Service,
+        Service,
         //Project,
         Contact
     }

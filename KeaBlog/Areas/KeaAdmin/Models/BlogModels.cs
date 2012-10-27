@@ -261,6 +261,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
             TitleSeo = "Articles kea blog";
+            DescriptionSeo = "List of articles. Page: " + page;
         }
 
         public void FillByQueryPagePublic(string query, int page)
@@ -293,6 +294,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
             }
             Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
             TitleSeo = "Searched articles by query: '"+ query +"'";
+            DescriptionSeo = "Search in blog by query: '"+ query +"'";
         }
 
         public void FillByTagPagePublic(int tagId, int page)
@@ -331,6 +333,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
                 TitleSeo = "Selected articles by tag: '" + Tag.Name + "'";
+                DescriptionSeo = "List of articles by tag:'" + Tag.Name + "'";
             }
         }
 
@@ -370,6 +373,7 @@ namespace KeaBlog.Areas.KeaAdmin.Models
                 }
                 Posts = new PagedList<PostViewModel>(postList, page, pageSize, count);
                 TitleSeo = "Selected articles by category: '" + Category.Name + "'";
+                DescriptionSeo = "List of articles by category:'" + Category.Name + "'";
             }
         }
     }

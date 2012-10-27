@@ -10,7 +10,8 @@ namespace KeaBlog.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Blog");
+            //return RedirectToAction("Index", "Blog");
+            return View();
         }
 
         public ActionResult Download(string fileName)
