@@ -578,7 +578,15 @@
     <Content Include="Content\images\cv-resume-64.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\HomePage\BBEditor.min.png" />
+    <Content Include="Content\images\HomePage\BBEditor.png" />
+    <Content Include="Content\images\HomePage\KeaBlog.min.png" />
+    <Content Include="Content\images\HomePage\KeaBlog.png" />
+    <Content Include="Content\images\HomePage\TextShadow-SPA.min.png" />
+    <Content Include="Content\images\HomePage\TextShadow-SPA.png" />
     <Content Include="Content\images\social.png" />
+    <Content Include="Content\images\HomePage\web-development.min.png" />
+    <Content Include="Content\images\HomePage\web-development.png" />
     <Content Include="Content\less\accordion.less" />
     <Content Include="Content\less\alerts.less" />
     <Content Include="Content\less\bootstrap.less" />

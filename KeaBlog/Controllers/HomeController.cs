@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ServiceLib;
 
 namespace KeaBlog.Controllers
 {
@@ -10,8 +11,11 @@ namespace KeaBlog.Controllers
     {
         public ActionResult Index()
         {
-            //return RedirectToAction("Index", "Blog");
-            return View();
+            var viewModel = new BasicModel();
+            viewModel.DescriptionSeo = "Pencroff.blog. This is Sergey Danilov's blog. Blog about web development and best prictice of HTM5, CSS3, JavaScript and server side app on ASP.NET MVC.";
+            viewModel.KeywordsSeo = "Pencroff, ASP.NET MVC, C#, Csharp, HTML, HTML5, CSS, CSS3, JavaScript, web-development, web-service, startup";
+            viewModel.TitleSeo = "Pencroff.blog";
+            return View(viewModel);
         }
 
         public ActionResult Download(string fileName)

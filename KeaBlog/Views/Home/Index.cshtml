@@ -2,17 +2,55 @@
     Layout = "~/Views/Shared/_ContentAloneLayout.cshtml";
 }
 
-<h2 class="contact-header pull-right">Pencroff.com</h2>
-<br/>
 <div class="row">
-    <div class="span12 clearfix">
+    <div class="span8">
+        <img height="120" width="650" alt="Web-development by Pencroff.blog" title="Web development by Pencroff.com" src="~/Content/images/HomePage/web-development.min.png"/>
+    </div>
+    <div class="span4">
+        <h1 class="contact-header pull-right" style="height: 100px; line-height: 100px;">Pencroff.blog</h1>    
+    </div>
+</div>
+<br/>
+<div class="row clearfix">
+    <div class="span5">
         <p class="contact-about" style="font-size: 1.55em; text-align: justify;">
             <strong>[RU]</strong><br/>
             Привет! Это блог о программировании, о граблях в программировании, о новых и интересных технологиях для Web-сайтов и Web-сервисов. Этот блог является моим портфолио разработок, а так же сборником всего того что я Сам искал и обобщал для понимания той или иной задачи - шпаргалка для себя и по совместительству для Вас.
         </p>
+    </div>
+    <div class="span5 offset2">
         <p class="contact-about" style="text-align: justify;">
             <strong>[EN]</strong><br/>
-            Hi! This is blog about programming, about some trouble in programming, about new and interesting technologies for Web-sites or Web-services. This blog is portfolio of my code, also it is a collection of code snippets used in my practice. You can read articles about my solved issues or you can use this site as a cheat of knowledge.
+            Hi! This is a blog about web-development, some trouble in programming, and new interesting technologies for Web-services. This blog is a portfolio of my work, also it is a collection of code snippets used in my practice. You can read articles about my solved issues or you can use this site as a cheat of knowledge.
         </p>        
     </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="span12">
+        <ul class="thumbnails">
+            <li class="span4">
+                <div class="thumbnail">
+                  <a href="http://github.com/Pencroff/KeaBlog" target="_blank"><img src="~/Content/images/HomePage/KeaBlog.min.png" alt="Kea Blog" title="Kea Blog" height="215" width="290"></a>
+                  <h3 class="contact-line">Kea blog</h3>
+                  <p>Легкий и  удобный движок блога на ASP.NET MVC4.</p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                  <a href="@Url.Action("Index", "Service")"><img src="~/Content/images/HomePage/TextShadow-SPA.png" alt="CSS3 Text shadow generator" title="CSS3 Text shadow generator" height="215" width="290"></a>
+                  <h3 class="contact-line">Text shadow gen</h3>
+                  <p>Генератор CSS3 теней для текста на JavaScript</p>
+                </div>
+            </li>
+            <li class="span4">
+                <div class="thumbnail">
+                  <a href="http://pencroff.github.com/BBEditor/index-bootstrap-fatcow.html" target="_blank"><img src="~/Content/images/HomePage/BBEditor.min.png" alt="Editor for BBCode content" title="BBEditor" height="215" width="290"></a>
+                  <h3 class="contact-line">BBEditor</h3>
+                  <p>JavaScript генератор и рендер для BBCode контента</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
 </div>
