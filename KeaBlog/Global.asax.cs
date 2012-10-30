@@ -25,6 +25,7 @@ namespace KeaBlog
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             MiniProfilerEF.Initialize();
+            MvcHandler.DisableMvcResponseHeader = true;
         }
 
         protected void Application_BeginRequest()
