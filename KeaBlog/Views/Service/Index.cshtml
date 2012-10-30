@@ -17,51 +17,61 @@
             TimeStart();
     </script>
 
-    <div class="row">
-        <div class="span10 offset1">
-            <div class="page-header pagination-centered">
-                <h1 class="contact-header">CSS3 text shadow generator <small>*SPA</small></h1>
-            </div>
+<div class="row">
+    <div class="span10 offset1">
+        <div class="page-header pagination-centered">
+            <h1 class="contact-header">CSS3 text shadow generator <small>*SPA</small></h1>
         </div>
     </div>
-    <div class="row" id="shadowView">
-        <div class="span7">
+</div>
+<div class="row">
+    <div class="span8 offset2">
+        <div class="contact-about">This is a single page app. It created using Backbone.js. This app change CSS3 property 'text-shadow'. You can create collection of the text shadow values.</div>
+    </div>
+</div>
+<hr/>
+<div class="row" id="shadowView">
+    <div class="span7">
+        <div class="well well-small">
+            <h4>Example</h4>
+        </div>
+        <div id="example">
+            Some text
+        </div>
+        <div id="info-message"></div>
+    </div>
+    <div class="span5">
+        <form>
             <div class="well well-small">
-                <h4>Example</h4>
+                <legend>Main parameters</legend>
+                <div id="main-param">Some parameters</div>
             </div>
-            <div id="example">
-                Some text
+            <div class="well well-small">
+                <legend><div class="row">
+                    <div class="span4">Shadows collections</div>
+                    <div class="pull-right">
+                        <button class="btn btn-success add-row" type="button"><i class="icon-plus"></i></button>
+                    </div>
+                </div></legend>
+                <table class="table table-condensed">
+                    <thead>
+                    <th class="input-mini">H-shift</th>
+                    <th class="input-mini">V-shift</th>
+                    <th class="input-mini">Blur</th>
+                    <th class="input-mini">Color</th>
+                    <th class="input-mini">Opacity</th>
+                    <th></th>
+                    </thead>
+                    <tbody id="shadow-param-collection">
+                    </tbody>
+                </table>
             </div>
-        </div>
-        <div class="span5">
-            <form>
-                <div class="well well-small">
-                    <legend>Main parameters</legend>
-                    <div id="main-param">Some parameters</div>
-                </div>
-                <div class="well well-small">
-                    <legend><div class="row">
-                        <div class="span4">Shadows collections</div>
-                        <div class="pull-right">
-                            <button class="btn btn-success add-row" type="button"><i class="icon-plus"></i></button>
-                        </div>
-                    </div></legend>
-                    <table class="table table-condensed">
-                        <thead>
-                        <th class="input-mini">H-shift</th>
-                        <th class="input-mini">V-shift</th>
-                        <th class="input-mini">Blur</th>
-                        <th class="input-mini">Color</th>
-                        <th class="input-mini">Opacity</th>
-                        <th></th>
-                        </thead>
-                        <tbody id="shadow-param-collection">
-                        </tbody>
-                    </table>
-                </div>
-            </form>
-        </div>
+        </form>
     </div>
-    <div class="row">
-        <div class="span12" id="info-message"></div>
+</div>
+<br/>
+<div class="row">
+    <div class="span12">
+        @Html.Partial("_DisqusComments")
     </div>
+</div>
