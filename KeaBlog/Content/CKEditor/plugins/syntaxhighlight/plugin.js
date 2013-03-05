@@ -1,25 +1,31 @@
-﻿/*********************************************************************************************************/
-/**
- * syntaxhighlight plugin for CKEditor 3.x for SyntaxHighlighter 3.0.83
- * Released: On 2011-06-24
- * Download: http://www.harrisonhills.org/techresources
- * Original plugin written by Lajox found at http://code.google.com/p/lajox
- */
-/*********************************************************************************************************/
+﻿CKEDITOR.plugins.add( 'syntaxhighlight', {
+	requires : 'dialog',
+	lang : 'en,de,fr', // %REMOVE_LINE_CORE%
+	icons : 'syntaxhighlight', // %REMOVE_LINE_CORE%
+	init : function( editor ) {
+		editor.addCommand( 'syntaxhighlightDialog', new CKEDITOR.dialogCommand( 'syntaxhighlightDialog' ) );
+		editor.ui.addButton && editor.ui.addButton( 'Syntaxhighlight',
+		{
+			label : editor.lang.syntaxhighlight.title,
+			command : 'syntaxhighlightDialog',
+			toolbar : 'insert,98'
+		} );
 
-CKEDITOR.plugins.add('syntaxhighlight',   
-  {    
-    requires: ['dialog'],
-	lang : ['en'], 
-    init:function(a) { 
-	var b="syntaxhighlight";
-	var c=a.addCommand(b,new CKEDITOR.dialogCommand(b));
-		c.modes={wysiwyg:1,source:0};
-		c.canUndo=false;
-	a.ui.addButton("syntaxhighlight",{
-					label:a.lang.syntaxhighlight.title,
-					command:b,
-					icon:this.path+"images/syntaxhighlight.gif"
-	});
-	CKEDITOR.dialog.add(b,this.path+"dialogs/syntaxhighlight.js")}
+		if ( editor.contextMenu ) {
+			editor.addMenuGroup( 'syntaxhighlightGroup' );
+			editor.addMenuItem( 'syntaxhighlightItem', {
+				label: editor.lang.syntaxhighlight.contextTitle,
+				icon: this.path + 'icons/syntaxhighlight.png',
+				command: 'syntaxhighlightDialog',
+				group: 'syntaxhighlightGroup'
+			});
+			editor.contextMenu.addListener( function( element ) {
+				if ( element.getAscendant( 'pre', true ) ) {
+					return { syntaxhighlightItem: CKEDITOR.TRISTATE_OFF };
+				}
+			});
+		}
+
+		CKEDITOR.dialog.add( 'syntaxhighlightDialog', this.path + 'dialogs/syntaxhighlight.js' );
+	}
 });

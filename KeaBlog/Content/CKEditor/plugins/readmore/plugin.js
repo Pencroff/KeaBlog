@@ -1,7 +1,7 @@
 CKEDITOR.plugins.add('readmore', {
-    requires: ['fakeobjects', 'htmldataprocessor'],
+    requires: ['fakeobjects'],
     init: function(editor) {
-        editor.addCss('#cut' + '{' + 'background-color: #ebcccc; background-image: url(' + CKEDITOR.getUrl(this.path + 'images/readmore.png') + ');' + 'background-position: center center;' + 'background-repeat: no-repeat;' + 'clear: both;' + 'display: block;' + 'float: none;' + 'width: 100%;' + 'border-top: #FF0000 1px dashed;' + 'border-bottom: #FF0000 1px dashed;' + 'height: 5px;' + '}');
+        CKEDITOR.addCss('#cut' + '{' + 'background-color: #ebcccc; background-image: url(' + CKEDITOR.getUrl(this.path + 'images/readmore.png') + ');' + 'background-position: center center;' + 'background-repeat: no-repeat;' + 'clear: both;' + 'display: block;' + 'float: none;' + 'width: 100%;' + 'border-top: #FF0000 1px dashed;' + 'border-bottom: #FF0000 1px dashed;' + 'height: 5px;' + '}');
         // Register the toolbar buttons.
         editor.ui.addButton('ReadMore', {
             label: 'Insert Readmore',
