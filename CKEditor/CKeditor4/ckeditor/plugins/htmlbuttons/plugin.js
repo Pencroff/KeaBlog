@@ -50,24 +50,24 @@ CKEDITOR.plugins.add( 'htmlbuttons',
  * Default configuration with some sample buttons:
  */
 CKEDITOR.config.htmlbuttons =  [
-	{
-		name:'button1',
-		icon:'icon1.png',
-		html:'<a href="http://www.google.com">Search something</a>',
-		title:'A link to Google'
-	},
-	{
-		name:'button2',
-		icon:'icon2.png',
-		html:'<table style="min-width:200px"><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>',
-		title:'A simple table'
-	},
-	{
-		name:'button3',
-		icon:'icon3.png',
-		html:'<ol><li>Item 1 <ol><li>Sub item 1</li><li>Sub item 2</li></ol></li></ol>',
-		title:'A nested list'
-	},
+//	{
+//		name:'button1',
+//		icon:'icon1.png',
+//		html:'<a href="http://www.google.com">Search something</a>',
+//		title:'A link to Google'
+//	},
+//	{
+//		name:'button2',
+//		icon:'icon2.png',
+//		html:'<table style="min-width:200px"><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table>',
+//		title:'A simple table'
+//	},
+//	{
+//		name:'button3',
+//		icon:'icon3.png',
+//		html:'<ol><li>Item 1 <ol><li>Sub item 1</li><li>Sub item 2</li></ol></li></ol>',
+//		title:'A nested list'
+//	},
 	{
 		name:'button4',
 		icon:'bullet_code_red.png',

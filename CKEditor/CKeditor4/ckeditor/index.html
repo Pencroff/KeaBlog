@@ -17,14 +17,42 @@
         </div>
         <div class="row">
             <div class="span12">
-                <textarea id="ckeditor-area" class="span9"><p><img alt="IEnumerable VS IList VS IQueryable" src="http://2.bp.blogspot.com/-U3n32jg27U8/URQXX4qguaI/AAAAAAAABf8/dwLzYBwStKQ/s1600/ICollection.png" style="width: 404px; height: 297px; margin: 10px; float: left;" /><span style="font-size:18px;"><span style="font-family:georgia,serif;">Yes, both will give you deferred execution. The difference is that IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> is the interface that allows LINQ-to-SQL (LINQ.-to-anything really) to work. So if you further refine your query on an IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;">, that query will be executed in the database, if possible. For the IEnumerable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> case, it will be LINQ-to-object, meaning that all objects matching the original query will have to be loaded into memory from the database. In code: IQueryable</span></span><customer><span style="font-size:18px;"><span style="font-family:georgia,serif;"> custs = ...; // Later on... var goldCustomers = custs.Where(c =&gt; c.IsGold);</span></span> </customer></t></t></t></p>
+                <textarea id="ckeditor-area" class="span9"><p>
+                    <span style="font-size:22px;"><span style="font-family:georgia,serif;"><img alt="Много слойная архитектура" src="http://1.bp.blogspot.com/-HlqHZA6_oNY/URQXXsZQnmI/AAAAAAAABf0/Hu0QkJnsgMw/s1600/3-layars.png" style="width: 404px; height: 374px; float: left; margin: 10px;" /><span style="font-size:18px;">Разрабатывая новый проект я столкнулся с задачей проектирования многослойной архитектуры с учетом последующего расширения функционала и частого изменения бизнес логики приложения. Моей отправной точкой был&nbsp;<a href="http://stackoverflow.com" target="_blank">stackoverflow.com</a>&nbsp;так же рекомендую&nbsp;Мартина Фаулера - Архитектура корпоративных программных приложений. Это настольная книга при формировании скелета бизнес приложения. Но сейчас я хотел бы осветить несколько вопросов с которыми встретится хотябы раз любой разработчик при проектировании бизнес системы с использованием&nbsp;</span></span></span><span style="font-size: 18px; font-family: georgia, serif;">Entity Framework</span><span style="font-size: 18px; font-family: georgia, serif;">.&nbsp;</span></p>
+                    <div id="cut">
+                        &nbsp;</div>
+                    <ol>
+                        <li>
+		<span style="font-size:18px;"><span style="font-family:georgia,serif;"><a href="http://stackoverflow.com/questions/5128303/how-to-add-validation-to-my-pocotemplate-classes" target="_blank">Ссылка на оригинал - How to add validation to my POCO(template) classes</a><br />
+		<strong>Вопрос:</strong>&nbsp;Я использовал T4 для генерации POCO, поэтому я не могу производить ручные изменения из-за их постоянной &laquo;регенерации&raquo;. Как я могу добавить атрибут <code>[Required]</code> или любые другие к сгенерированным файлам?<br />
+		<strong>Ответ:</strong>&nbsp;Вы не можите добавить их напрямую (конечно можно откорректировать шаблон T4 для себя), но Вы можете попробовать использовать трюк предложенный в ASP.NET dynamic data. Все POCO классы объявленны как частичные, поэтому Вы можети использовать следующее объявление:</span></span>
+		<pre class="brush:csharp;gutter:false;toolbar:false;" title="">
+using System.ComponentModel.DataAnnotations;
 
-<div id="cut">&nbsp;</div>
+[MetadataType(typeof(MyClassMetadata))]
+public partial class MyClass
+{
+  private class MyClassMetadata
+  {
+     [Required]
+     public object Id;
 
-<p><span style="font-size:18px;"><span style="font-family:georgia,serif;">That code will execute SQL to only select gold customers. The following code, on the other hand, will execute the original query in the database, then filtering out the non-gold customers in the memory: IEnumerable</span></span><customer><span style="font-size:18px;"><span style="font-family:georgia,serif;"> custs = ...; // Later on... var goldCustomers = custs.Where(c =&gt; c.IsGold); This is quite an important difference, and working on IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> can in many cases save you from returning too many rows from the database. Another prime example is doing paging: If you use Take and Skip on IQueryable, you will only get the number of rows requested; doing that on an IEnumerable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> will cause all of your rows to be loaded in memory.</span></span></t></t></customer></p>
-
-<div>
-<p>&nbsp;</p>
+     [Required]
+     [StringLength(100)]
+     public object Name;
+  }
+}</pre>
+                            <span style="font-size:18px;"><span style="font-family:georgia,serif;">Класс метаданных, специальный тип содержащий только метаданные - никогда не используется. Имена полей должны совпадать с соответствующими полями в исходном (сгенерированном) классе, при этом тип полей не имеет значения и Вы можете применять тип <code>Object</code>. В любом случае для ASP.NET MVC Вы должны использовать специализированный класс View-модель для кажого представления и проверять необходимые данные с помощью атрибутов валидации, размещенных во view-модели. </span></span></li>
+                        <br />
+                        <li>
+		<span style="font-size:18px;"><span style="font-family:georgia,serif;"><a href="http://stackoverflow.com/questions/191143/entity-framework-validation" target="_blank">Ссылка на оригинал - Entity Framework Validation</a><br />
+		<strong>Вопрос:</strong>&nbsp;Я готовлюсь начать новый проект и рассматриваю&nbsp;Entity Framework как&nbsp;&laquo;Слой доступа к данным&raquo;. Подскажите как лучше всего производить валидацию данных в бизнес сущностях? Работая над другим проектом для валидации я использовал атрибуты, но скорее всего это не верное применение Entity Framework. Или может быть нужно использовать частичные методы для сеттеров свойств?<br />
+		<strong>Ответ:</strong>&nbsp;Я практически не использовал Entity Framework до этого, но быстрый поиск дает следующие ответы:&nbsp;<br />
+		1) Производите валидацию данных в другом слое приложения.&nbsp;<br />
+		2) Подписка на событие Entity Framework <code>OnChanged</code> скорее всего сделает валидацию &nbsp;хрупкой, может привести к ошибочным ситуациям и снижению производительности, если в каждой сущности может изменятся множество различных ствойств.<br />
+		3) Реализуйте частичные методы для валидации изменений свойства. </span></span></li>
+                        <br />
+                    </ol>
 </textarea>
                 <script type="text/javascript">
                     //<![CDATA[
@@ -38,16 +66,42 @@
         <br>
         <div class="row">
             <div class="span12">
-                <p><img alt="IEnumerable VS IList VS IQueryable" src="http://2.bp.blogspot.com/-U3n32jg27U8/URQXX4qguaI/AAAAAAAABf8/dwLzYBwStKQ/s1600/ICollection.png" style="width: 404px; height: 297px; margin: 10px; float: left;" /><span style="font-size:18px;"><span style="font-family:georgia,serif;">Yes, both will give you deferred execution. The difference is that IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> is the interface that allows LINQ-to-SQL (LINQ.-to-anything really) to work. So if you further refine your query on an IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;">, that query will be executed in the database, if possible. For the IEnumerable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> case, it will be LINQ-to-object, meaning that all objects matching the original query will have to be loaded into memory from the database. In code: IQueryable</span></span><customer><span style="font-size:18px;"><span style="font-family:georgia,serif;"> custs = ...; // Later on... var goldCustomers = custs.Where(c =&gt; c.IsGold);</span></span> </customer></t></t></t></p>
+                <p>
+                    <span style="font-size:22px;"><span style="font-family:georgia,serif;"><img alt="Много слойная архитектура" src="http://1.bp.blogspot.com/-HlqHZA6_oNY/URQXXsZQnmI/AAAAAAAABf0/Hu0QkJnsgMw/s1600/3-layars.png" style="width: 404px; height: 374px; float: left; margin: 10px;" /><span style="font-size:18px;">Разрабатывая новый проект я столкнулся с задачей проектирования многослойной архитектуры с учетом последующего расширения функционала и частого изменения бизнес логики приложения. Моей отправной точкой был&nbsp;<a href="http://stackoverflow.com" target="_blank">stackoverflow.com</a>&nbsp;так же рекомендую&nbsp;Мартина Фаулера - Архитектура корпоративных программных приложений. Это настольная книга при формировании скелета бизнес приложения. Но сейчас я хотел бы осветить несколько вопросов с которыми встретится хотябы раз любой разработчик при проектировании бизнес системы с использованием&nbsp;</span></span></span><span style="font-size: 18px; font-family: georgia, serif;">Entity Framework</span><span style="font-size: 18px; font-family: georgia, serif;">.&nbsp;</span></p>
+                <div id="cut">
+                    &nbsp;</div>
+                <ol>
+                    <li>
+		<span style="font-size:18px;"><span style="font-family:georgia,serif;"><a href="http://stackoverflow.com/questions/5128303/how-to-add-validation-to-my-pocotemplate-classes" target="_blank">Ссылка на оригинал - How to add validation to my POCO(template) classes</a><br />
+		<strong>Вопрос:</strong>&nbsp;Я использовал T4 для генерации POCO, поэтому я не могу производить ручные изменения из-за их постоянной &laquo;регенерации&raquo;. Как я могу добавить атрибут <code>[Required]</code> или любые другие к сгенерированным файлам?<br />
+		<strong>Ответ:</strong>&nbsp;Вы не можите добавить их напрямую (конечно можно откорректировать шаблон T4 для себя), но Вы можете попробовать использовать трюк предложенный в ASP.NET dynamic data. Все POCO классы объявленны как частичные, поэтому Вы можети использовать следующее объявление:</span></span>
+		<pre class="brush:csharp;gutter:false;toolbar:false;" title="">
+using System.ComponentModel.DataAnnotations;
 
-<div id="cut">&nbsp;</div>
+[MetadataType(typeof(MyClassMetadata))]
+public partial class MyClass
+{
+  private class MyClassMetadata
+  {
+     [Required]
+     public object Id;
 
-<p><span style="font-size:18px;"><span style="font-family:georgia,serif;">That code will execute SQL to only select gold customers. The following code, on the other hand, will execute the original query in the database, then filtering out the non-gold customers in the memory: IEnumerable</span></span><customer><span style="font-size:18px;"><span style="font-family:georgia,serif;"> custs = ...; // Later on... var goldCustomers = custs.Where(c =&gt; c.IsGold); This is quite an important difference, and working on IQueryable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> can in many cases save you from returning too many rows from the database. Another prime example is doing paging: If you use Take and Skip on IQueryable, you will only get the number of rows requested; doing that on an IEnumerable</span></span><t><span style="font-size:18px;"><span style="font-family:georgia,serif;"> will cause all of your rows to be loaded in memory.</span></span></t></t></customer></p>
-
-<div>
-<p>&nbsp;</p>
-
-
+     [Required]
+     [StringLength(100)]
+     public object Name;
+  }
+}</pre>
+                        <span style="font-size:18px;"><span style="font-family:georgia,serif;">Класс метаданных, специальный тип содержащий только метаданные - никогда не используется. Имена полей должны совпадать с соответствующими полями в исходном (сгенерированном) классе, при этом тип полей не имеет значения и Вы можете применять тип <code>Object</code>. В любом случае для ASP.NET MVC Вы должны использовать специализированный класс View-модель для кажого представления и проверять необходимые данные с помощью атрибутов валидации, размещенных во view-модели. </span></span></li>
+                    <br />
+                    <li>
+		<span style="font-size:18px;"><span style="font-family:georgia,serif;"><a href="http://stackoverflow.com/questions/191143/entity-framework-validation" target="_blank">Ссылка на оригинал - Entity Framework Validation</a><br />
+		<strong>Вопрос:</strong>&nbsp;Я готовлюсь начать новый проект и рассматриваю&nbsp;Entity Framework как&nbsp;&laquo;Слой доступа к данным&raquo;. Подскажите как лучше всего производить валидацию данных в бизнес сущностях? Работая над другим проектом для валидации я использовал атрибуты, но скорее всего это не верное применение Entity Framework. Или может быть нужно использовать частичные методы для сеттеров свойств?<br />
+		<strong>Ответ:</strong>&nbsp;Я практически не использовал Entity Framework до этого, но быстрый поиск дает следующие ответы:&nbsp;<br />
+		1) Производите валидацию данных в другом слое приложения.&nbsp;<br />
+		2) Подписка на событие Entity Framework <code>OnChanged</code> скорее всего сделает валидацию &nbsp;хрупкой, может привести к ошибочным ситуациям и снижению производительности, если в каждой сущности может изменятся множество различных ствойств.<br />
+		3) Реализуйте частичные методы для валидации изменений свойства. </span></span></li>
+                    <br />
+                </ol>
             </div>
         </div>
     </div>
